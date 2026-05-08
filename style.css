@@ -50,7 +50,7 @@ img {
 .header-inner { display:flex; justify-content:space-between; align-items:center; width:100%; }
 
 .logo { display: flex; align-items: center; text-decoration: none; }
-.logo-svg { height: 35px; width: auto; transition: transform 0.4s var(--ease); }
+.logo-svg { height: 32px; width: auto; transition: transform 0.4s var(--ease); }
 .logo-svg:hover { transform: scale(1.05); }
 
 .nav-desktop { display:flex; gap:40px; }
@@ -425,7 +425,7 @@ select option { background:#050725; color:var(--text); }
 
 @media (max-width:480px) {
   .container { padding:0 20px; }
-  .logo-svg { height: 28px; }
+  .logo-svg { height: 24px; }
   .title-line { font-size:clamp(32px,10vw,50px); }
   .stats-grid { grid-template-columns:1fr 1fr; gap:30px; }
   .stat-num { font-size:32px; }
