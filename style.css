@@ -175,6 +175,12 @@ img {
   .section-header.text-center .section-title { white-space: nowrap; }
 }
 
+/* Brand Intro Section */
+.brand-intro { padding: 120px 0 20px; }
+.brand-intro-card { text-align: center; }
+.brand-intro-img { width: 100%; max-width: 800px; height: auto; border-radius: 10px; border: 0.5px solid var(--accent); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4); margin-bottom: 40px; }
+.brand-intro-text p { font-size: 20px; line-height: 1.6; color: var(--text-muted); max-width: 700px; margin: 0 auto; font-weight: 300; }
+
 /* Services */
 .services { padding:140px 0; background: transparent; }
 .services-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:30px; }
@@ -420,6 +426,8 @@ select option { background:#050725; color:var(--text); }
   .footer-grid { grid-template-columns:1fr; gap:40px; }
   .section-title { font-size:clamp(28px,7vw,42px); }
   .service-card { padding:35px 25px; }
+  .brand-intro { padding: 60px 0 10px; }
+  .brand-intro-text p { font-size: 16px; }
 }
 
 
