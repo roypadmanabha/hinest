@@ -131,6 +131,7 @@ img {
 /* Buttons */
 .btn { display:inline-block; font-family:var(--font-h); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:3px; padding:18px 45px; transition:all 0.5s var(--ease); cursor:pointer; border:none; text-align:center; border-radius: 10px; }
 .btn-primary { background:var(--accent); color:#000; }
+.btn-primary .mobile-text, .btn-primary .desktop-text { color: #000; }
 .btn-primary:hover { background:var(--accent-hover); transform:translateY(-3px); box-shadow:0 15px 40px rgba(74,144,217,0.25); }
 .btn-outline { background:transparent; border:1px solid rgba(255,255,255,0.3); color:var(--text); }
 .btn-outline:hover { border-color:var(--accent); color:var(--accent); }
