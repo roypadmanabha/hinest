@@ -137,15 +137,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = link.closest('.service-card');
             const isExpanded = card.classList.contains('expanded');
             
-            // Optional: Close other expanded cards
+            // Close other expanded cards and reset their text
             document.querySelectorAll('.service-card').forEach(c => {
-                if (c !== card) c.classList.remove('expanded');
+                if (c !== card) {
+                    c.classList.remove('expanded');
+                    const otherLink = c.querySelector('.service-link');
+                    if (otherLink) otherLink.innerHTML = 'Read More';
+                }
             });
 
             card.classList.toggle('expanded');
-            link.innerHTML = card.classList.contains('expanded') ? 
-                `Read Less` : 
-                `Read More`;
+            link.innerHTML = card.classList.contains('expanded') ? 'Read Less' : 'Read More';
         });
     });
 });
