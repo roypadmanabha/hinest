@@ -112,4 +112,20 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('dragstart', e => {
         if (e.target.tagName === 'IMG') e.preventDefault();
     });
+
+    // 10. Process Accordion (Mobile)
+    const processHeaders = document.querySelectorAll('.process-step-header');
+    processHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            if (window.innerWidth > 1024) return;
+            const step = header.parentElement;
+            const isActive = step.classList.contains('active');
+            
+            // Close all others
+            document.querySelectorAll('.process-step').forEach(s => s.classList.remove('active'));
+            
+            // Toggle current
+            if (!isActive) step.classList.add('active');
+        });
+    });
 });
