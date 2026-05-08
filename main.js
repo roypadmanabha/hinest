@@ -104,4 +104,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (target) window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
         });
     });
+
+    // 9. Image Protection
+    document.addEventListener('contextmenu', e => {
+        if (e.target.tagName === 'IMG') e.preventDefault();
+    });
+    document.addEventListener('dragstart', e => {
+        if (e.target.tagName === 'IMG') e.preventDefault();
+    });
 });

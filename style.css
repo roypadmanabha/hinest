@@ -26,7 +26,13 @@ body {
 }
 ul { list-style:none; }
 a { text-decoration:none; color:inherit; transition:all 0.4s var(--ease); }
-img { max-width:100%; display:block; }
+img { 
+  max-width:100%; 
+  display:block; 
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
 
 .container { max-width:1300px; margin:0 auto; padding:0 40px; }
 
