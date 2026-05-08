@@ -240,9 +240,24 @@ img {
         transition: all 0.4s var(--ease);
     }
     .process-step.active {
-        background: rgba(255, 255, 255, 0.07);
-        border-color: rgba(255, 215, 0, 0.3);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(30px);
+        -webkit-backdrop-filter: blur(30px);
+        border-color: var(--accent);
+        box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 15px 40px rgba(0,0,0,0.5);
+        overflow: hidden;
+    }
+    .process-step.active::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -150%;
+        width: 150%;
+        height: 100%;
+        background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        animation: shineGloss 10s infinite linear;
+        pointer-events: none;
+        z-index: 0;
     }
     .process-step-header { 
         flex-direction: row; 
@@ -434,7 +449,8 @@ select option { background:#050725; color:var(--text); }
   .section-title { font-size:clamp(28px,7vw,42px); }
   .service-card { padding:35px 25px; }
   .brand-intro { padding: 60px 0 10px; }
-  .brand-intro-text p { font-size: 3.2vw; line-height: 1.6; white-space: nowrap; max-width: 100%; margin: 0 auto; }
+  .brand-intro-text p { font-size: 16px; }
+  .desktop-break { display: none; }
 }
 
 
@@ -449,7 +465,6 @@ select option { background:#050725; color:var(--text); }
   .whatsapp-float { bottom:20px; right:20px; width:48px; height:48px; font-size:24px; }
   .desktop-text { display: none; }
   .mobile-text { display: inline; }
-  .brand-intro-text p { font-size: 3.5vw; white-space: nowrap; }
 }
 
 /* Separator Image */
