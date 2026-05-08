@@ -144,8 +144,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             card.classList.toggle('expanded');
             link.innerHTML = card.classList.contains('expanded') ? 
-                `Read Less <i class="fas fa-arrow-right"></i>` : 
-                `Read More <i class="fas fa-arrow-right"></i>`;
+                `Read Less` : 
+                `Read More`;
         });
     });
 });

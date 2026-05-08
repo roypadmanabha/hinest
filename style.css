@@ -410,7 +410,8 @@ select option { background:#050725; color:var(--text); }
   .service-name { font-size: 14px; margin-bottom: 10px; }
   .service-icon { font-size: 24px; margin-bottom: 15px; }
   .service-num { font-size: 11px; margin-bottom: 10px; }
-  .service-link { font-size: 11px; }
+  .service-link { font-size: 11px; color: var(--accent); text-decoration: none; font-weight: 700; display: block; margin: 10px auto 0; }
+  .service-link i { display: none; }
   .process-grid { grid-template-columns:1fr; gap:40px; }
   .process-grid::after { display:none; }
   .projects-mosaic { grid-template-columns:1fr; }
