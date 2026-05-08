@@ -128,4 +128,24 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!isActive) step.classList.add('active');
         });
     });
+
+    // 11. Service Card Expansion (Mobile)
+    document.querySelectorAll('.service-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            if (window.innerWidth > 1024) return; // Only on mobile
+            e.preventDefault();
+            const card = link.closest('.service-card');
+            const isExpanded = card.classList.contains('expanded');
+            
+            // Optional: Close other expanded cards
+            document.querySelectorAll('.service-card').forEach(c => {
+                if (c !== card) c.classList.remove('expanded');
+            });
+
+            card.classList.toggle('expanded');
+            link.innerHTML = card.classList.contains('expanded') ? 
+                `Read Less <i class="fas fa-arrow-right"></i>` : 
+                `Read More <i class="fas fa-arrow-right"></i>`;
+        });
+    });
 });

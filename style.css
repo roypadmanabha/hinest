@@ -403,8 +403,10 @@ select option { background:#050725; color:var(--text); }
   .btn-header-quote { display:none; }
   .book-wrapper, .quote-wrapper, .contact-wrapper { grid-template-columns:1fr; gap:50px; }
   .services-grid { grid-template-columns:repeat(2,1fr); gap:15px; }
-  .service-card { padding:25px 15px; text-align: center; }
-  .service-desc { display: none; }
+  .service-card { padding:25px 15px; text-align: center; height: fit-content; transition: background 0.5s var(--ease), border-color 0.5s var(--ease); }
+  .service-desc { display: none; font-size: 13px; line-height: 1.5; margin-top: 15px; text-align: center; }
+  .service-card.expanded .service-desc { display: block; }
+  .service-card.expanded .service-link i { transform: rotate(90deg); }
   .service-name { font-size: 14px; margin-bottom: 10px; }
   .service-icon { font-size: 24px; margin-bottom: 15px; }
   .service-num { font-size: 11px; margin-bottom: 10px; }
