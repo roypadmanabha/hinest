@@ -394,7 +394,8 @@ select option { background:#050725; color:var(--text); }
 @media (max-width:768px) {
   .container { padding:0 25px; }
   .hero { min-height:100vh; }
-  .hero-btns { flex-direction:column; width:100%; }
+  .hero-btns { flex-direction:column; align-items:center; width:100%; }
+  .hero-btns .btn { width:auto; min-width:180px; padding:15px 40px; }
   .btn { width:100%; text-align:center; }
   .form-row { grid-template-columns:1fr; }
   .footer-grid { grid-template-columns:1fr; gap:40px; }
