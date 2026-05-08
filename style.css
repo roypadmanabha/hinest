@@ -87,7 +87,7 @@ img {
   overflow-y:auto; 
 }
 .mobile-menu.active { left:0; }
-.mobile-menu-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px; padding-top: 10px; }
+.mobile-menu-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 25px; padding-top: 5px; }
 
 .mobile-nav { display: flex; flex-direction: column; gap: 8px; }
 .mobile-link { 
@@ -371,6 +371,7 @@ select option { background:#050725; color:var(--text); }
 
 @media (max-width:1024px) {
   .header {
+    height: 70px; /* Minimized height for mobile */
     background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
