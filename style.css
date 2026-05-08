@@ -379,6 +379,16 @@ select option { background:#050725; color:var(--text); }
 .footer-social-icons a:hover { color: var(--accent); transform: translateY(-5px); }
 
 .footer-bottom-new { padding: 30px 0; text-align: center; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
+.footer-copyright-logo { display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap; }
+.footer-logo-svg { height: 18px; width: auto; }
+.divider { opacity: 0.3; font-weight: 300; }
+.vignette-branding { display: flex; align-items: center; gap: 5px; }
+.vignette-logo { font-weight: 800; color: #fff; letter-spacing: 0.5px; }
+
+@media (max-width: 768px) {
+    .footer-copyright-logo { flex-direction: column; gap: 10px; }
+    .footer-copyright-logo .divider { display: none; }
+}
 
 @media (max-width: 1024px) {
     .footer-new-grid { grid-template-columns: 1fr 1fr; row-gap: 50px; padding: 40px 0; }
