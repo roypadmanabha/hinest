@@ -50,8 +50,8 @@ img {
 .header-inner { display:flex; justify-content:space-between; align-items:center; width:100%; }
 
 .logo { display: flex; align-items: center; text-decoration: none; }
-.logo-img { height: 35px; width: auto; transition: transform 0.4s var(--ease); }
-.logo-img:hover { transform: scale(1.05); }
+.logo-svg { height: 35px; width: auto; transition: transform 0.4s var(--ease); }
+.logo-svg:hover { transform: scale(1.05); }
 
 .nav-desktop { display:flex; gap:40px; }
 .nav-link { font-family:var(--font-h); font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:2px; color:var(--text-muted); position:relative; }
@@ -425,7 +425,7 @@ select option { background:#050725; color:var(--text); }
 
 @media (max-width:480px) {
   .container { padding:0 20px; }
-  .logo-img { height: 28px; }
+  .logo-svg { height: 28px; }
   .title-line { font-size:clamp(32px,10vw,50px); }
   .stats-grid { grid-template-columns:1fr 1fr; gap:30px; }
   .stat-num { font-size:32px; }
