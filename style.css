@@ -243,10 +243,10 @@ select option { background:var(--bg-card); color:var(--text); }
 }
 
 @media (max-width: 768px) {
-    .footer-new-grid { grid-template-columns: 1fr; text-align: center; row-gap: 40px; }
+    .footer-new-grid { grid-template-columns: 1fr; text-align: left; row-gap: 40px; }
     .footer-new-col { border-left: none !important; padding: 0; }
-    .footer-new-brand { justify-content: center; margin-bottom: 10px; }
-    .footer-address { justify-content: center; text-align: center; }
+    .footer-new-brand { justify-content: flex-start; margin-bottom: 10px; }
+    .footer-address { justify-content: flex-start; text-align: left; }
     .footer-social-icons { gap: 30px; }
 }
 
