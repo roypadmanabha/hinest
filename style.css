@@ -258,6 +258,8 @@ select option { background:var(--bg-card); color:var(--text); }
   .projects-mosaic { grid-template-columns:1fr; }
   .project-wide { grid-column:span 1; }
   .stats-grid { grid-template-columns:repeat(2,1fr); gap:40px; }
+  .book-info, .quote-left, .contact-info { text-align: center; }
+  .section-tag { justify-content: center; }
 }
 
 @media (max-width:768px) {
@@ -279,7 +281,11 @@ select option { background:var(--bg-card); color:var(--text); }
   .stat-num { font-size:32px; }
   .mobile-link { font-size:28px; }
   .whatsapp-float { bottom:20px; right:20px; width:48px; height:48px; font-size:24px; }
+  .desktop-text { display: none; }
+  .mobile-text { display: inline; }
 }
+
+.mobile-text { display: none; }
 
 /* Separator Image */
 .image-separator { padding: 40px 0; text-align: center; position: relative; z-index: 1; overflow: hidden; }

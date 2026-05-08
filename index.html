@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Hinest Interiors | Luxury Architecture & Interior Design</title>
     <meta name="description" content="Hinest Interiors — Bespoke architectural planning and luxury interior design for new buildings. Transform your vision into reality.">
 
@@ -246,7 +246,7 @@
             <div class="container">
                 <div class="book-wrapper">
                     <div class="book-info reveal">
-                        <span class="section-tag"><span class="tag-line"></span>Consultation</span>
+                        <span class="section-tag"><span class="tag-line"></span>Consultation<span class="tag-line"></span></span>
                         <h2 class="section-title">Book Your<br>Consultation</h2>
                         <p class="book-desc">Schedule a private session with our lead architects. We'll discuss your project scope, design aspirations, and create a preliminary roadmap for your space.</p>
                         <div class="book-features">
@@ -303,7 +303,7 @@
             <div class="container">
                 <div class="quote-wrapper reveal">
                     <div class="quote-left">
-                        <span class="section-tag"><span class="tag-line"></span>Estimate</span>
+                        <span class="section-tag"><span class="tag-line"></span>Estimate<span class="tag-line"></span></span>
                         <h2 class="section-title">Get a Quick<br>Quote</h2>
                         <p>Receive an instant preliminary estimate for your project based on area and type.</p>
                     </div>
@@ -320,7 +320,10 @@
                             <label>Area (Sq Ft)</label>
                             <input type="number" id="q-area" placeholder="e.g. 2500">
                         </div>
-                        <button class="btn btn-primary btn-full" id="q-calc">Calculate Estimate</button>
+                        <button class="btn btn-primary btn-full" id="q-calc">
+                            <span class="desktop-text">Calculate Estimate</span>
+                            <span class="mobile-text">Calculate</span>
+                        </button>
                         <div class="quote-result" id="quote-result">
                             <span class="quote-result-label">Estimated Cost</span>
                             <span class="quote-result-value" id="quote-value">₹0</span>
