@@ -21,17 +21,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. Mobile Menu
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobile-menu');
+    const closeMenu = () => {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+    };
     hamburger.addEventListener('click', () => {
         hamburger.classList.toggle('active');
         mobileMenu.classList.toggle('active');
         document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        if (mobileMenu.classList.contains('active')) {
+            gsap.from('.mobile-link', { x: -30, opacity: 0, stagger: 0.07, duration: 0.5, ease: 'power2.out' });
+        }
     });
+    const mobileClose = document.getElementById('mobile-close');
+    if (mobileClose) mobileClose.addEventListener('click', closeMenu);
     document.querySelectorAll('.mobile-link').forEach(link => {
-        link.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            mobileMenu.classList.remove('active');
-            document.body.style.overflow = '';
-        });
+        link.addEventListener('click', closeMenu);
     });
 
     // 4. Active nav on scroll
