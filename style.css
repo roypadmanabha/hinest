@@ -402,7 +402,13 @@ select option { background:#050725; color:var(--text); }
   .hamburger { display:flex; flex-direction:column; }
   .btn-header-quote { display:none; }
   .book-wrapper, .quote-wrapper, .contact-wrapper { grid-template-columns:1fr; gap:50px; }
-  .services-grid { grid-template-columns:1fr; }
+  .services-grid { grid-template-columns:repeat(2,1fr); gap:15px; }
+  .service-card { padding:25px 15px; text-align: center; }
+  .service-desc { display: none; }
+  .service-name { font-size: 14px; margin-bottom: 10px; }
+  .service-icon { font-size: 24px; margin-bottom: 15px; }
+  .service-num { font-size: 11px; margin-bottom: 10px; }
+  .service-link { font-size: 11px; }
   .process-grid { grid-template-columns:1fr; gap:40px; }
   .process-grid::after { display:none; }
   .projects-mosaic { grid-template-columns:1fr; }
