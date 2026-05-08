@@ -150,4 +150,31 @@ document.addEventListener('DOMContentLoaded', () => {
             link.innerHTML = card.classList.contains('expanded') ? 'Read Less' : 'Read More';
         });
     });
+
+    // 12. Explore Modal
+    const exploreModal = document.getElementById('explore-modal');
+    const exploreTriggers = document.querySelectorAll('.explore-trigger');
+    const exploreCloseBtn = document.getElementById('explore-modal-close');
+    const exploreOverlay = document.getElementById('explore-modal-overlay');
+
+    const openExplore = () => {
+        exploreModal.style.display = 'flex';
+        setTimeout(() => exploreModal.classList.add('active'), 10);
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closeExplore = () => {
+        exploreModal.classList.remove('active');
+        setTimeout(() => {
+            exploreModal.style.display = 'none';
+            document.body.style.overflow = '';
+        }, 500);
+    };
+
+    exploreTriggers.forEach(trigger => {
+        trigger.addEventListener('click', openExplore);
+    });
+
+    if(exploreCloseBtn) exploreCloseBtn.addEventListener('click', closeExplore);
+    if(exploreOverlay) exploreOverlay.addEventListener('click', closeExplore);
 });
