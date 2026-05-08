@@ -427,6 +427,7 @@ select option { background:#050725; color:var(--text); }
   .service-card { padding:35px 25px; }
   .brand-intro { padding: 60px 0 10px; }
   .brand-intro-text p { font-size: 16px; }
+  .desktop-break { display: none; }
 }
 
 
