@@ -221,20 +221,31 @@ img {
 .step-desc { color:var(--text-muted); font-size:15px; text-align: justify; }
 
 @media (max-width: 1024px) {
-    .process-grid { grid-template-columns: 1fr; gap: 0; }
+    .process-grid { grid-template-columns: 1fr; gap: 15px; }
     .process-grid::before { display: none; }
-    .process-step { border-bottom: 1px solid var(--border); padding: 0; }
-    .process-step:first-child { border-top: 1px solid var(--border); }
+    .process-step { 
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        padding: 0 20px;
+        transition: all 0.4s var(--ease);
+    }
+    .process-step:first-child { border-top: 1px solid rgba(255, 255, 255, 0.08); }
+    .process-step.active {
+        background: rgba(255, 255, 255, 0.07);
+        border-color: rgba(255, 215, 0, 0.3);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
     .process-step-header { 
         flex-direction: row; 
         align-items: center; 
         justify-content: space-between; 
-        padding: 30px 0; 
+        padding: 22px 0; 
         cursor: pointer; 
     }
-    .step-number { margin-bottom: 0; font-size: 32px; min-width: 50px; }
-    .step-title { margin-bottom: 0; margin-left: 15px; font-size: 16px; flex-grow: 1; }
-    .accordion-icon { display: flex; width: 28px; height: 28px; border: 1px solid var(--accent); border-radius: 50%; align-items: center; justify-content: center; font-size: 10px; color: var(--accent); transition: all 0.4s var(--ease); }
+    .step-number { margin-bottom: 0; font-size: 24px; min-width: 40px; color: var(--accent); opacity: 0.8; }
+    .step-title { margin-bottom: 0; margin-left: 10px; font-size: 15px; flex-grow: 1; font-weight: 700; letter-spacing: 0.5px; }
+    .accordion-icon { display: flex; width: 24px; height: 24px; border: none; border-radius: 0; align-items: center; justify-content: center; font-size: 14px; color: var(--text-muted); transition: all 0.4s var(--ease); }
     
     .process-step-content {
         max-height: 0;
@@ -244,14 +255,14 @@ img {
     }
     .process-step.active .process-step-content {
         max-height: 250px;
-        padding-bottom: 30px;
+        padding-bottom: 25px;
         opacity: 1;
     }
     .process-step.active .accordion-icon {
-        background: var(--accent);
-        color: #000;
+        color: var(--accent);
         transform: rotate(45deg);
     }
+    .process-step.active .step-title { color: var(--accent); }
 }
 
 /* Testimonial */
