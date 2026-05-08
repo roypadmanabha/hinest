@@ -33,10 +33,10 @@ img { max-width:100%; display:block; }
 
 /* Header */
 .header { position:fixed; top:0; left:0; width:100%; height:90px; z-index:1000; transition:all 0.5s var(--ease); display:flex; align-items:center; }
-.header.scrolled { background:rgba(10,10,10,0.95); backdrop-filter:blur(15px); height:75px; border-bottom:1px solid var(--border); }
-.header-inner { display:flex; justify-content:space-between; align-items:center; width:100%; }
+.header.scrolled { background:rgba(10,10,10,0.95); backdrop-filter:blur(15px); height:70px; border-bottom:1px solid var(--border); }
+.header-inner { display:flex; justify-content:space-between; align-items:center; width:100%; gap:15px; }
 
-.logo { font-family:var(--font-h); font-size:22px; letter-spacing:3px; }
+.logo { font-family:var(--font-h); font-size:22px; letter-spacing:3px; white-space:nowrap; }
 .logo-bold { font-weight:800; }
 .logo-thin { font-weight:300; color:var(--accent); margin-left:2px; }
 
@@ -242,6 +242,9 @@ select option { background:var(--bg-card); color:var(--text); }
   .nav-desktop { display:none; }
   .hamburger { display:flex; flex-direction:column; }
   .btn-header-quote { display:none; }
+  .header { height:75px; }
+  .header.scrolled { height:65px; }
+  .logo { font-size:19px; letter-spacing:2px; }
   .book-wrapper, .quote-wrapper, .contact-wrapper { grid-template-columns:1fr; gap:50px; }
   .services-grid { grid-template-columns:1fr; }
   .process-grid { grid-template-columns:1fr; gap:40px; }
@@ -252,22 +255,34 @@ select option { background:var(--bg-card); color:var(--text); }
 }
 
 @media (max-width:768px) {
-  .container { padding:0 25px; }
+  .container { padding:0 20px; }
+  .header { height:65px; }
+  .header.scrolled { height:60px; }
+  .logo { font-size:17px; letter-spacing:1.5px; }
+  .mobile-header .logo { font-size:16px; }
+  .mobile-link { font-size:15px; padding:15px 0; }
+  .mobile-icon { width:34px; height:34px; border-radius:8px; font-size:12px; }
+  .mobile-header { padding:18px 0; }
   .hero { min-height:100vh; }
   .hero-btns { flex-direction:column; width:100%; }
-  .btn { width:100%; text-align:center; }
+  .btn { width:100%; text-align:center; padding:15px 30px; font-size:12px; }
   .form-row { grid-template-columns:1fr; }
   .footer-grid { grid-template-columns:1fr; gap:40px; }
-  .section-title { font-size:clamp(28px,7vw,42px); }
+  .section-title { font-size:clamp(26px,7vw,38px); }
   .service-card { padding:35px 25px; }
 }
 
 @media (max-width:480px) {
-  .container { padding:0 20px; }
-  .logo { font-size:18px; letter-spacing:2px; }
-  .title-line { font-size:clamp(32px,10vw,50px); }
-  .stats-grid { grid-template-columns:1fr 1fr; gap:30px; }
-  .stat-num { font-size:32px; }
-  .mobile-link { font-size:28px; }
+  .container { padding:0 16px; }
+  .header { height:60px; }
+  .logo { font-size:15px; letter-spacing:1px; }
+  .mobile-header .logo { font-size:14px; }
+  .mobile-menu-inner { padding:0 20px 25px; }
+  .mobile-link { font-size:14px; padding:14px 0; gap:12px; }
+  .mobile-icon { width:30px; height:30px; border-radius:7px; font-size:11px; }
+  .mobile-close { font-size:20px; width:36px; height:36px; }
+  .title-line { font-size:clamp(28px,9vw,44px); }
+  .stats-grid { grid-template-columns:1fr 1fr; gap:25px; }
+  .stat-num { font-size:28px; }
   .whatsapp-float { bottom:20px; right:20px; width:48px; height:48px; font-size:24px; }
 }
