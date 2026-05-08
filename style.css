@@ -434,8 +434,7 @@ select option { background:#050725; color:var(--text); }
   .section-title { font-size:clamp(28px,7vw,42px); }
   .service-card { padding:35px 25px; }
   .brand-intro { padding: 60px 0 10px; }
-  .brand-intro-text p { font-size: 16px; }
-  .desktop-break { display: none; }
+  .brand-intro-text p { font-size: 3.2vw; line-height: 1.6; white-space: nowrap; max-width: 100%; margin: 0 auto; }
 }
 
 
@@ -450,6 +449,7 @@ select option { background:#050725; color:var(--text); }
   .whatsapp-float { bottom:20px; right:20px; width:48px; height:48px; font-size:24px; }
   .desktop-text { display: none; }
   .mobile-text { display: inline; }
+  .brand-intro-text p { font-size: 3.5vw; white-space: nowrap; }
 }
 
 /* Separator Image */
