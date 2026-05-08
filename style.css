@@ -193,11 +193,28 @@ img {
 .form-row { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
 .form-group { margin-bottom:25px; }
 .form-group label { display:block; font-family:var(--font-h); font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:2px; color:var(--accent); margin-bottom:12px; }
-input, textarea, select { width:100%; background:transparent; border:none; border-bottom:1px solid var(--border); padding:14px 0; color:var(--text); font-family:var(--font-b); font-size:15px; transition:border-color 0.3s; }
-input:focus, textarea:focus, select:focus { outline:none; border-color:var(--accent); }
+input, textarea, select { 
+  width:100%; 
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 14px 20px; 
+  color:var(--text); 
+  font-family:var(--font-b); 
+  font-size:15px; 
+  transition: all 0.4s var(--ease); 
+}
+input:focus, textarea:focus, select:focus { 
+  outline:none; 
+  background: rgba(255, 255, 255, 0.08);
+  border-color:var(--accent); 
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+}
 select { cursor:pointer; }
 textarea { resize:vertical; min-height:80px; }
-select option { background:var(--bg-card); color:var(--text); }
+select option { background:#050725; color:var(--text); }
 
 /* Quote */
 .quote-section { padding:140px 0; background: transparent; }
