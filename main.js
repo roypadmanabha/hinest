@@ -157,19 +157,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const openExplore = (e) => {
         if (e) e.preventDefault();
         
-        // Detect mobile for large 94MB PDF stability
-        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+        // Ensure mobile menu closes
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (hamburger) hamburger.classList.remove('active');
+        if (mobileMenu) mobileMenu.classList.remove('active');
 
-        if (isMobile) {
-            // On mobile, open in new tab to use native high-performance PDF viewer
-            window.open('assets/explore.pdf', '_blank');
-            return;
-        }
-
-        // On desktop, use the premium modal
+        // Force Google Docs Viewer for all screens
         const iframe = exploreModal.querySelector('iframe');
         if (iframe && (iframe.src === '' || iframe.src.includes('about:blank'))) {
-            iframe.src = 'assets/explore.pdf#toolbar=0&view=FitH';
+            const pdfUrl = 'https://roypadmanabha.github.io/hinest/assets/explore.pdf';
+            iframe.src = `https://docs.google.com/viewer?url=${pdfUrl}&embedded=true`;
         }
 
         exploreModal.style.display = 'flex';
