@@ -303,30 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         };
 
-        const sendFinalEstimateEmail = async (formData, calcData, finalTotal) => {
-            const tableHtml = `
-                <table style="width:100%; border-collapse: collapse; font-family: sans-serif; border: 1px solid #ddd;">
-                    <tr style="background-color: #f2f2f2;"><th colspan="2" style="padding: 12px; text-align: left;">Contact Details</th></tr>
-                    <tr><td style="padding: 8px; border: 1px solid #ddd;">Name</td><td style="padding: 8px; border: 1px solid #ddd;">${formData.get('firstname')} ${formData.get('lastname')}</td></tr>
-                    <tr><td style="padding: 8px; border: 1px solid #ddd;">Mobile</td><td style="padding: 8px; border: 1px solid #ddd;">${formData.get('mobile')}</td></tr>
-                    <tr><td style="padding: 8px; border: 1px solid #ddd;">Email</td><td style="padding: 8px; border: 1px solid #ddd;">${formData.get('email')}</td></tr>
-                    <tr><td style="padding: 8px; border: 1px solid #ddd;">Location</td><td style="padding: 8px; border: 1px solid #ddd;">${formData.get('city')}, ${formData.get('state')}</td></tr>
-                    <tr style="background-color: #f2f2f2;"><th colspan="2" style="padding: 12px; text-align: left;">Project Estimate</th></tr>
-                    <tr><td style="padding: 8px; border: 1px solid #ddd;">Flat Size</td><td style="padding: 8px; border: 1px solid #ddd;">${calcData.size} sq ft</td></tr>
-                    <tr><td style="padding: 8px; border: 1px solid #ddd;">Config</td><td style="padding: 8px; border: 1px solid #ddd;">${JSON.stringify(calcData.rooms)}</td></tr>
-                    <tr><td style="padding: 8px; border: 1px solid #ddd;">Add-ons</td><td style="padding: 8px; border: 1px solid #ddd;">${calcData.addons.length} items</td></tr>
-                    <tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">TOTAL ESTIMATE</td><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold; color: #FFD700;">₹${finalTotal.toLocaleString('en-IN')}</td></tr>
-                </table>
-            `;
 
-            return emailjs.send("service_9sw7y1f", "template_zn5tk8b", {
-                to_email: "info.hinestinteriors@gmail.com",
-                email: "info.hinestinteriors@gmail.com",
-                from_name: `${formData.get('firstname')} ${formData.get('lastname')}`,
-                message_html: tableHtml,
-                subject: `New Estimate Verified - ₹${finalTotal.toLocaleString('en-IN')}`
-            });
-        };
 
         // Submission Logic
         form.addEventListener('submit', async (e) => {
@@ -401,11 +378,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const finalTotal = Math.round((sizeBase + roomsTotal + addonsTotal) * statusMultiplier);
 
             if (formId === 'calc-final-form') {
-                try {
-                    await sendFinalEstimateEmail(new FormData(form), calcData, finalTotal);
-                } catch (err) {
-                    console.error("EmailJS Final Error:", err);
-                }
+                const hiddenSize = document.getElementById('hidden-size');
+                const hiddenTotal = document.getElementById('hidden-total');
+                const hiddenRooms = document.getElementById('hidden-rooms');
+                const hiddenAddons = document.getElementById('hidden-addons');
+
+                if (hiddenSize) hiddenSize.value = `${calcData.size} sq ft`;
+                if (hiddenTotal) hiddenTotal.value = `₹${finalTotal.toLocaleString('en-IN')}`;
+                if (hiddenRooms) hiddenRooms.value = JSON.stringify(calcData.rooms);
+                if (hiddenAddons) hiddenAddons.value = `${calcData.addons.length} addons selected`;
             }
 
             fetch(form.action, {
