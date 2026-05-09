@@ -203,157 +203,114 @@ document.addEventListener('DOMContentLoaded', () => {
     const descTextarea = document.getElementById('c-desc');
     const charCount = document.getElementById('char-count');
 
-    // Auto-Capitalization & Real-time Validation
-    const setupField = (id, type) => {
-        const input = document.getElementById(id);
-        if (!input) return;
+    // Function to setup any Consultation Form (Modal or Static)
+    const setupConsultationForm = (formId, successMsgId, charCountId) => {
+        const form = document.getElementById(formId);
+        if (!form) return;
 
-        const group = input.closest('.form-group');
-        const error = group ? group.querySelector('.field-error') : null;
+        const descTextarea = form.querySelector('textarea');
+        const charCount = document.getElementById(charCountId);
 
-        input.addEventListener('input', (e) => {
-            let val = e.target.value;
-            let original = val;
+        // Auto-Capitalization & Real-time Validation for this specific form
+        const setupField = (inputSelector, type) => {
+            const input = form.querySelector(inputSelector);
+            if (!input) return;
 
-            if (type === 'alpha') {
-                // Remove numbers/symbols
-                val = val.replace(/[^A-Za-z\s]/g, '');
-                // Auto-Capitalize
-                if (val.length > 0) {
-                    val = val.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+            const group = input.closest('.form-group');
+            const error = group ? group.querySelector('.field-error') : null;
+
+            input.addEventListener('input', (e) => {
+                let val = e.target.value;
+                let original = val;
+
+                if (type === 'alpha') {
+                    val = val.replace(/[^A-Za-z\s]/g, '');
+                    if (val.length > 0) {
+                        val = val.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+                    }
+                } else if (type === 'num') {
+                    val = val.replace(/[^0-9]/g, '');
                 }
-            } else if (type === 'num') {
-                // Remove non-numbers
-                val = val.replace(/[^0-9]/g, '');
-            }
 
-            e.target.value = val;
+                e.target.value = val;
 
-            // Show error if user tried to type something forbidden
-            if (original !== val && error) {
-                group.classList.add('has-error');
-                setTimeout(() => group.classList.remove('has-error'), 2000);
-            }
-
-            // Real-time pattern check for mobile
-            if (type === 'num' && id === 'c-mobile' && error) {
-                const invalidPatterns = [
-                    "1234567890", "0123456789", "9876543210", "0987654321",
-                    "1111111111", "2222222222", "3333333333", "4444444444", 
-                    "5555555555", "6666666666", "7777777777", "8888888888", "9999999999", "0000000000"
-                ];
-                if (val.length > 0 && val.length < 10) {
+                if (original !== val && error) {
                     group.classList.add('has-error');
-                    error.textContent = "10 digits required";
-                } else if (val.length === 10 && invalidPatterns.includes(val)) {
+                    setTimeout(() => group.classList.remove('has-error'), 2000);
+                }
+
+                if (type === 'num' && input.type === 'tel' && error) {
+                    const invalidPatterns = [
+                        "1234567890", "0123456789", "9876543210", "0987654321",
+                        "1111111111", "2222222222", "3333333333", "4444444444", 
+                        "5555555555", "6666666666", "7777777777", "8888888888", "9999999999", "0000000000"
+                    ];
+                    if (val.length > 0 && val.length < 10) {
+                        group.classList.add('has-error');
+                        error.textContent = "10 digits required";
+                    } else if (val.length === 10 && invalidPatterns.includes(val)) {
+                        group.classList.add('has-error');
+                        error.textContent = "Invalid number pattern";
+                    } else {
+                        group.classList.remove('has-error');
+                    }
+                }
+            });
+        };
+
+        setupField('input[name="firstname"]', 'alpha');
+        setupField('input[name="lastname"]', 'alpha');
+        setupField('input[name="city"]', 'alpha');
+        setupField('input[name="mobile"]', 'num');
+
+        // Character Counter
+        if(descTextarea && charCount) {
+            descTextarea.addEventListener('input', () => {
+                const val = descTextarea.value;
+                const remaining = 200 - val.length;
+                const group = descTextarea.closest('.form-group');
+                charCount.textContent = remaining;
+                charCount.style.color = remaining < 20 ? '#ff4d4d' : 'var(--accent)';
+                if (val.length > 0 && val.length < 20) {
                     group.classList.add('has-error');
-                    error.textContent = "Invalid number pattern";
                 } else {
                     group.classList.remove('has-error');
                 }
-            }
-        });
-    };
-
-    setupField('c-fname', 'alpha');
-    setupField('c-lname', 'alpha');
-    setupField('c-city', 'alpha');
-    setupField('c-mobile', 'num');
-
-    const openConsult = (e) => {
-        if (e) e.preventDefault();
-
-        // Ensure mobile menu closes if open
-        const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobile-menu');
-        if (hamburger) hamburger.classList.remove('active');
-        if (mobileMenu) mobileMenu.classList.remove('active');
-
-        if (consultModal) {
-            consultModal.style.display = 'flex';
-            setTimeout(() => consultModal.classList.add('active'), 10);
-            document.body.style.overflow = 'hidden';
+            });
         }
-    };
 
-    const closeConsult = () => {
-        if (consultModal) {
-            consultModal.classList.remove('active');
-            setTimeout(() => {
-                consultModal.style.display = 'none';
-                document.body.style.overflow = '';
-                // Reset form if submitted
-                if (consultForm) {
-                    consultForm.reset();
-                    consultForm.style.display = 'block';
-                    // Clear errors
-                    document.querySelectorAll('.form-group').forEach(g => g.classList.remove('has-error'));
-                }
-                const successMsg = document.getElementById('form-success');
-                if (successMsg) successMsg.style.display = 'none';
-                if (charCount) charCount.textContent = '200';
-            }, 500);
-        }
-    };
-
-    consultTriggers.forEach(t => t.addEventListener('click', openConsult));
-    if(consultCloseBtn) consultCloseBtn.addEventListener('click', closeConsult);
-    if(consultOverlay) consultOverlay.addEventListener('click', closeConsult);
-
-    // Character Counter
-    if(descTextarea) {
-        descTextarea.addEventListener('input', () => {
-            const val = descTextarea.value;
-            const remaining = 200 - val.length;
-            const group = descTextarea.closest('.form-group');
-            
-            charCount.textContent = remaining;
-            charCount.style.color = remaining < 20 ? '#ff4d4d' : 'var(--accent)';
-
-            if (val.length > 0 && val.length < 20) {
-                group.classList.add('has-error');
-            } else {
-                group.classList.remove('has-error');
-            }
-        });
-    }
-
-    // Form Submission
-    if(consultForm) {
-        consultForm.addEventListener('submit', (e) => {
+        // Submission Logic
+        form.addEventListener('submit', (e) => {
             e.preventDefault();
-            
-            // Final check
-            if (document.querySelectorAll('.form-group.has-error').length > 0) {
+            if (form.querySelectorAll('.form-group.has-error').length > 0) {
                 alert("Please correct the errors in the form before submitting.");
                 return;
             }
 
-            const submitBtn = consultForm.querySelector('button[type="submit"]');
-            const mobileInput = document.getElementById('c-mobile');
+            const mobileInput = form.querySelector('input[name="mobile"]');
             if (mobileInput.value.length < 10) {
                 alert("Please enter a valid 10-digit mobile number.");
                 return;
             }
-            
+
+            const submitBtn = form.querySelector('button[type="submit"]');
             const originalText = submitBtn.textContent;
             submitBtn.textContent = 'Sending...';
             submitBtn.disabled = true;
 
-            const formData = new FormData(consultForm);
-
-            fetch(consultForm.action, {
+            fetch(form.action, {
                 method: 'POST',
-                body: formData,
+                body: new FormData(form),
                 headers: { 'Accept': 'application/json' }
             })
             .then(response => {
-                // Premium transition to success message
-                gsap.to(consultForm, { opacity: 0, y: -20, duration: 0.5, onComplete: () => {
-                    consultForm.style.display = 'none';
-                    const successMsg = document.getElementById('form-success');
-                    successMsg.style.display = 'block';
-                    gsap.fromTo(successMsg, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.5 });
+                gsap.to(form, { opacity: 0, y: -20, duration: 0.5, onComplete: () => {
+                    form.style.display = 'none';
+                    const successMsg = document.getElementById(successMsgId);
+                    if (successMsg) {
+                        successMsg.style.display = 'block';
+                        gsap.fromTo(successMsg, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.5 });
+                    }
                 }});
             })
             .catch(error => {
@@ -363,5 +320,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('Oops! There was a problem submitting your form. Please try again.');
             });
         });
-    }
+    };
+
+    // Initialize both forms
+    setupConsultationForm('consultation-form', 'form-success', 'char-count');
+    setupConsultationForm('book-form-static', 'form-success-static', 'b-char-count');
 });

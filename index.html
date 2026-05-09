@@ -346,44 +346,105 @@
                             <div class="book-feature"><i class="fas fa-check-circle"></i> 3D visualization preview</div>
                         </div>
                     </div>
-                    <div class="book-form-wrap reveal">
-                        <form class="book-form" id="book-form">
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label>Full Name</label>
-                                    <input type="text" placeholder="Your name" required>
+                    <div class="book-form-wrap reveal blue-glow-form" style="padding: 40px;">
+                        <div class="consult-form-container">
+                            <h2 class="form-title">Consult with Us</h2>
+                            <p class="form-subtitle">Let's build your dream space together</p>
+                            <form id="book-form-static" class="consult-form" action="https://formsubmit.co/info.hinestinteriors@gmail.com" method="POST">
+                                <input type="hidden" name="_subject" value="New Consultation Inquiry - Hinest Interiors (Section)">
+                                <input type="hidden" name="_template" value="table">
+                                <input type="hidden" name="_captcha" value="false">
+                                <input type="hidden" name="_honey" style="display:none">
+                                
+                                <div class="form-row name-row">
+                                    <div class="form-group first-name">
+                                        <label for="b-fname">First Name*</label>
+                                        <input type="text" id="b-fname" name="firstname" placeholder="Your Name" required>
+                                        <span class="field-error" id="err-bfname">Only alphabets allowed</span>
+                                    </div>
+                                    <div class="form-group last-name">
+                                        <label for="b-lname">Last Name*</label>
+                                        <input type="text" id="b-lname" name="lastname" placeholder="Surname" required>
+                                        <span class="field-error" id="err-blname">Only alphabets allowed</span>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="b-mobile">Mobile Number*</label>
+                                        <div class="mobile-input-group">
+                                            <span class="country-code-fixed">+91</span>
+                                            <input type="tel" id="b-mobile" name="mobile" placeholder="9876543210" required maxlength="10">
+                                        </div>
+                                        <span class="field-error" id="err-bmobile">10-digit valid number required</span>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Email</label>
-                                    <input type="email" placeholder="Email address" required>
+                                    <label for="b-email">Mail ID*</label>
+                                    <input type="email" id="b-email" name="email" placeholder="raam@gmail.com" required>
+                                    <span class="field-error" id="err-bemail">Please enter a valid email</span>
                                 </div>
-                            </div>
-                            <div class="form-row">
+                                <div class="form-row location-row">
+                                    <div class="form-group">
+                                        <label for="b-state">State / UT*</label>
+                                        <select id="b-state" name="state" required>
+                                            <option value="" disabled selected>Select State / UT</option>
+                                            <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                            <option value="Assam">Assam</option>
+                                            <option value="Bihar">Bihar</option>
+                                            <option value="Chandigarh">Chandigarh</option>
+                                            <option value="Chhattisgarh">Chhattisgarh</option>
+                                            <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
+                                            <option value="Delhi">Delhi</option>
+                                            <option value="Goa">Goa</option>
+                                            <option value="Gujarat">Gujarat</option>
+                                            <option value="Haryana">Haryana</option>
+                                            <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                            <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                            <option value="Jharkhand">Jharkhand</option>
+                                            <option value="Karnataka">Karnataka</option>
+                                            <option value="Kerala">Kerala</option>
+                                            <option value="Ladakh">Ladakh</option>
+                                            <option value="Lakshadweep">Lakshadweep</option>
+                                            <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                            <option value="Maharashtra">Maharashtra</option>
+                                            <option value="Manipur">Manipur</option>
+                                            <option value="Meghalaya">Meghalaya</option>
+                                            <option value="Mizoram">Mizoram</option>
+                                            <option value="Nagaland">Nagaland</option>
+                                            <option value="Odisha">Odisha</option>
+                                            <option value="Puducherry">Puducherry</option>
+                                            <option value="Punjab">Punjab</option>
+                                            <option value="Rajasthan">Rajasthan</option>
+                                            <option value="Sikkim">Sikkim</option>
+                                            <option value="Tamil Nadu">Tamil Nadu</option>
+                                            <option value="Telangana">Telangana</option>
+                                            <option value="Tripura">Tripura</option>
+                                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                            <option value="Uttarakhand">Uttarakhand</option>
+                                            <option value="West Bengal">West Bengal</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="b-city">City*</label>
+                                        <input type="text" id="b-city" name="city" placeholder="Enter City" required>
+                                        <span class="field-error" id="err-bcity">Only alphabets allowed</span>
+                                    </div>
+                                </div>
                                 <div class="form-group">
-                                    <label>Phone</label>
-                                    <input type="tel" placeholder="Phone number">
+                                    <label for="b-desc">Describe your requirements* (<span id="b-char-count">200</span> remaining)</label>
+                                    <textarea id="b-desc" name="requirements" placeholder="Tell us about your project..." required minlength="20" maxlength="200"></textarea>
+                                    <span class="field-error" id="err-bdesc">Minimum 20 characters required</span>
                                 </div>
-                                <div class="form-group">
-                                    <label>Preferred Date</label>
-                                    <input type="date" required>
-                                </div>
+                                <button type="submit" class="btn btn-primary btn-full">SUBMIT</button>
+                            </form>
+                            <div id="form-success-static" class="form-success-msg">
+                                <i class="fas fa-check-circle"></i>
+                                <h3>Thank You!</h3>
+                                <p>Our team will contact you shortly to discuss your project.</p>
                             </div>
-                            <div class="form-group">
-                                <label>Project Type</label>
-                                <select required>
-                                    <option value="" disabled selected>Select type</option>
-                                    <option>Residential</option>
-                                    <option>Commercial</option>
-                                    <option>Villa / Bungalow</option>
-                                    <option>Renovation</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Tell us about your vision</label>
-                                <textarea rows="4" placeholder="Describe your dream space..."></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-full">Book Now</button>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -502,7 +563,7 @@
     <!-- Consult Modal -->
     <div class="explore-modal" id="consult-modal">
         <div class="explore-modal-overlay" id="consult-modal-overlay"></div>
-        <div class="explore-modal-content consult-modal-content">
+        <div class="explore-modal-content consult-modal-content blue-glow-form">
             <button class="explore-modal-close" id="consult-modal-close">&times;</button>
             <div class="consult-form-container">
                 <h2 class="form-title">Consult with Us</h2>
