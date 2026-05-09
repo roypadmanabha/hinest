@@ -592,7 +592,8 @@
                     </div>
                     <div class="form-group">
                         <label for="c-desc">Describe your requirements* (<span id="char-count">200</span> remaining)</label>
-                        <textarea id="c-desc" name="requirements" placeholder="Tell us about your project..." required maxlength="200"></textarea>
+                        <textarea id="c-desc" name="requirements" placeholder="Tell us about your project..." required minlength="20" maxlength="200"></textarea>
+                        <span class="field-error" id="err-desc">Minimum 20 characters required</span>
                     </div>
                     <button type="submit" class="btn btn-primary btn-full">Submit Request</button>
                 </form>

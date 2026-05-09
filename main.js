@@ -303,9 +303,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // Character Counter
     if(descTextarea) {
         descTextarea.addEventListener('input', () => {
-            const remaining = 200 - descTextarea.value.length;
+            const val = descTextarea.value;
+            const remaining = 200 - val.length;
+            const group = descTextarea.closest('.form-group');
+            
             charCount.textContent = remaining;
             charCount.style.color = remaining < 20 ? '#ff4d4d' : 'var(--accent)';
+
+            if (val.length > 0 && val.length < 20) {
+                group.classList.add('has-error');
+            } else {
+                group.classList.remove('has-error');
+            }
         });
     }
 
