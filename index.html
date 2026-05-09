@@ -725,8 +725,15 @@
                             </div>
                             <div class="form-group" id="calc-otp-group" style="display:none; margin-top:20px;">
                                 <label for="calc-otp">Verification Code (Sent to Email)*</label>
-                                <div class="otp-input-wrapper">
-                                    <input type="text" id="calc-otp" placeholder="Enter 6-digit OTP" maxlength="6">
+                                <div class="otp-boxes-wrapper">
+                                    <div class="otp-inputs">
+                                        <input type="text" class="otp-box" maxlength="1" data-index="0">
+                                        <input type="text" class="otp-box" maxlength="1" data-index="1">
+                                        <input type="text" class="otp-box" maxlength="1" data-index="2">
+                                        <input type="text" class="otp-box" maxlength="1" data-index="3">
+                                        <input type="text" class="otp-box" maxlength="1" data-index="4">
+                                        <input type="text" class="otp-box" maxlength="1" data-index="5">
+                                    </div>
                                     <button type="button" id="resend-calc-otp" class="btn-resend">Resend</button>
                                 </div>
                                 <span class="field-error" id="err-calc-otp">Invalid OTP</span>
@@ -742,10 +749,12 @@
                         </form>
 
                         <div id="calc-result-box" class="final-result" style="display:none;">
-                            <h2 class="calc-title">Estimated Project Cost</h2>
-                            <div class="result-amount" id="calc-total">₹0</div>
-                            <p class="calc-subtitle">Based on your selections and premium material standards.</p>
-                            <p class="result-disclaimer">*This is a preliminary estimate. Our architects will provide a detailed quote after site visit and requirement finalization.</p>
+                            <i class="fas fa-check-circle" style="font-size: 60px; color: var(--accent); margin-bottom: 20px;"></i>
+                            <h2 class="calc-title">Request Submitted!</h2>
+                            <p class="calc-subtitle">Thank you for your interest. Your requirements have been recorded.</p>
+                            <div class="success-card">
+                                <p>Our interior design experts will analyze your project details and get back to you with a personalized quotation and moodboard within 24 hours.</p>
+                            </div>
                             <button class="btn btn-primary" onclick="window.location.reload()" style="margin-top:30px;">Restart Calculator</button>
                         </div>
                     </div>

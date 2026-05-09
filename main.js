@@ -253,6 +253,24 @@ document.addEventListener('DOMContentLoaded', () => {
         setupField('input[name="city"]', 'alpha');
         setupField('input[name="mobile"]', 'num');
 
+        // 6-Box OTP Logic
+        if (formId === 'calc-final-form') {
+            const boxes = form.querySelectorAll('.otp-box');
+            boxes.forEach((box, idx) => {
+                box.addEventListener('input', (e) => {
+                    const val = e.target.value;
+                    if (val && idx < boxes.length - 1) {
+                        boxes[idx + 1].focus();
+                    }
+                });
+                box.addEventListener('keydown', (e) => {
+                    if (e.key === 'Backspace' && !e.target.value && idx > 0) {
+                        boxes[idx - 1].focus();
+                    }
+                });
+            });
+        }
+
         // Character Counter
         if(descTextarea && charCount) {
             descTextarea.addEventListener('input', () => {
@@ -343,9 +361,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         console.log("OTP Sent Successfully:", res);
                         isOtpSent = true;
                         document.getElementById('calc-otp-group').style.display = 'block';
-                        submitBtn.textContent = 'VERIFY & CALCULATE';
+                        submitBtn.textContent = 'VERIFY';
                         submitBtn.disabled = false;
                         alert("A verification code has been sent to " + emailInput.value);
+                        // Focus first box
+                        const firstBox = form.querySelector('.otp-box');
+                        if (firstBox) firstBox.focus();
                     } catch (err) {
                         console.error("OTP Error Detail:", err);
                         submitBtn.textContent = originalText;
@@ -354,7 +375,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                     return;
                 } else {
-                    const enteredOtp = document.getElementById('calc-otp').value;
+                    const boxes = form.querySelectorAll('.otp-box');
+                    let enteredOtp = "";
+                    boxes.forEach(box => enteredOtp += box.value);
+                    
                     if (enteredOtp !== generatedOtp.toString()) {
                         document.getElementById('calc-otp-group').classList.add('has-error');
                         alert("Invalid OTP code. Please try again.");
@@ -379,8 +403,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (formId === 'calc-final-form') {
                 try {
                     await sendFinalEstimateEmail(new FormData(form), calcData, finalTotal);
-                    const totalDisplay = document.getElementById('calc-total');
-                    if (totalDisplay) totalDisplay.textContent = '₹' + finalTotal.toLocaleString('en-IN');
                 } catch (err) {
                     console.error("EmailJS Final Error:", err);
                 }
