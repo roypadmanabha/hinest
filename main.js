@@ -250,15 +250,34 @@ document.addEventListener('DOMContentLoaded', () => {
     if(consultForm) {
         consultForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            // Basic validation check (Name alphabets only is already handled by pattern attribute)
             
-            // Premium transition to success message
-            gsap.to(consultForm, { opacity: 0, y: -20, duration: 0.5, onComplete: () => {
-                consultForm.style.display = 'none';
-                const successMsg = document.getElementById('form-success');
-                successMsg.style.display = 'block';
-                gsap.fromTo(successMsg, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.5 });
-            }});
+            const submitBtn = consultForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+
+            const formData = new FormData(consultForm);
+
+            fetch(consultForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            })
+            .then(response => {
+                // Premium transition to success message
+                gsap.to(consultForm, { opacity: 0, y: -20, duration: 0.5, onComplete: () => {
+                    consultForm.style.display = 'none';
+                    const successMsg = document.getElementById('form-success');
+                    successMsg.style.display = 'block';
+                    gsap.fromTo(successMsg, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.5 });
+                }});
+            })
+            .catch(error => {
+                console.error('FormSubmit Error:', error);
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                alert('Oops! There was a problem submitting your form. Please try again.');
+            });
         });
     }
 });
