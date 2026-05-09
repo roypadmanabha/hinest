@@ -330,17 +330,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     generatedOtp = Math.floor(100000 + Math.random() * 900000);
                     
                     try {
-                        await sendOtpEmail(emailInput.value, generatedOtp);
+                        const res = await sendOtpEmail(emailInput.value, generatedOtp);
+                        console.log("OTP Sent Successfully:", res);
                         isOtpSent = true;
                         document.getElementById('calc-otp-group').style.display = 'block';
                         submitBtn.textContent = 'VERIFY & CALCULATE';
                         submitBtn.disabled = false;
                         alert("A verification code has been sent to " + emailInput.value);
                     } catch (err) {
-                        console.error("OTP Error:", err);
+                        console.error("OTP Error Detail:", err);
                         submitBtn.textContent = originalText;
                         submitBtn.disabled = false;
-                        alert("Failed to send OTP. Please check your email and try again.");
+                        alert("Failed to send OTP: " + (err.text || err.message || "Unknown Error") + ". Please check your EmailJS configuration.");
                     }
                     return;
                 } else {
