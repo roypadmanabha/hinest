@@ -277,7 +277,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 to_email: userEmail,
                 email: userEmail,
                 reply_to: userEmail,
-                otp_code: otpCode,
+                passcode: otpCode,
+                time: new Date(Date.now() + 15 * 60000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
                 message: `Your verification code for Hinest Interiors estimate is: ${otpCode}`
             });
         };
