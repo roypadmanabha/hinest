@@ -83,18 +83,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 7. Quote Calculator
-    document.getElementById('q-calc').addEventListener('click', () => {
-        const area = +document.getElementById('q-area').value;
-        const type = document.getElementById('q-type').value;
-        if (!area || area <= 0) return;
-        const rates = { residential: 1800, commercial: 2200, villa: 2500 };
-        const cost = area * (rates[type] || 1800);
-        document.getElementById('quote-value').textContent = '₹' + cost.toLocaleString('en-IN');
-        const result = document.getElementById('quote-result');
-        result.classList.add('show');
-        gsap.from(result, { opacity: 0, x: -20, duration: 0.6 });
-    });
+    // 7. Scroll Reveal - Re-initialized for all dynamic content
+    initScrollAnimations();
 
     // 8. Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(a => {
