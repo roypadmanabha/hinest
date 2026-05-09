@@ -154,19 +154,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // 12. Explore Modal
     const exploreModal = document.getElementById('explore-modal');
     const exploreTriggers = document.querySelectorAll('.explore-trigger');
-    const exploreCloseBtn = document.getElementById('explore-modal-close');
-    const exploreOverlay = document.getElementById('explore-modal-overlay');
-
     const openExplore = (e) => {
         if (e) e.preventDefault();
         
-        // Ensure mobile menu closes
-        const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobile-menu');
-        if (hamburger) hamburger.classList.remove('active');
-        if (mobileMenu) mobileMenu.classList.remove('active');
+        // Detect mobile for large 94MB PDF stability
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
 
-        // Dynamic PDF loading for better mobile stability
+        if (isMobile) {
+            // On mobile, open in new tab to use native high-performance PDF viewer
+            window.open('assets/explore.pdf', '_blank');
+            return;
+        }
+
+        // On desktop, use the premium modal
         const iframe = exploreModal.querySelector('iframe');
         if (iframe && (iframe.src === '' || iframe.src.includes('about:blank'))) {
             iframe.src = 'assets/explore.pdf#toolbar=0&view=FitH';
