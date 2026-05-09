@@ -67,17 +67,32 @@
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
 @media (max-width: 768px) {
-    .calc-container { padding: 30px 20px; border-radius: 15px; border: 1px solid var(--accent); margin: 0 15px; width: auto; }
-    .calc-steps { margin-bottom: 30px; }
-    .step-item { width: 60px; }
+    .calc-container { padding: 30px 15px; border-radius: 15px; border: 1px solid var(--accent); margin: 0 10px; width: auto; }
+    .calc-steps { margin-bottom: 30px; gap: 5px; }
+    .step-item { width: 55px; }
     .step-num { width: 30px; height: 30px; font-size: 12px; }
-    .step-label { font-size: 8px; }
-    .package-grid { grid-template-columns: 1fr; }
-    .addons-grid { grid-template-columns: 1fr; }
-    .status-options { flex-direction: column; }
+    .step-label { font-size: 7px; letter-spacing: 0.5px; }
+    .package-grid, .addons-grid { grid-template-columns: 1fr; gap: 15px; }
+    .status-options { flex-direction: column; gap: 10px; }
+    .status-btn { width: 100%; padding: 15px; justify-content: center; font-size: 13px; }
+    .room-item { padding: 12px 15px; }
+    .room-name { font-size: 13px; }
+    .room-controls { gap: 12px; }
+    .control-btn { width: 30px; height: 30px; font-size: 14px; }
     .result-amount { font-size: 38px; }
-    .calc-steps::before { left: 20px; right: 20px; }
-    .btn-calc { padding: 12px 20px; font-size: 13px; }
+    .calc-nav { margin-top: 30px; padding-top: 20px; flex-direction: column; gap: 15px; }
+    .btn-calc { width: 100%; padding: 15px; font-size: 14px; }
+    
+    /* Center the only visible button on mobile */
+    .calc-nav { justify-content: center; align-items: center; }
+    #calc-prev[style*="visibility: hidden"] { display: none; }
+}
+
+@media (max-width: 360px) {
+    .calc-container { padding: 25px 12px; margin: 0 5px; }
+    .step-label { display: none; }
+    .step-item { width: 40px; }
+    .calc-steps::before { left: 15px; right: 15px; }
 }
 
 /* OTP Specific Styles */
