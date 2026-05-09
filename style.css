@@ -561,4 +561,5 @@ select option { background:#050725; color:var(--text); }
     .location-row { grid-template-columns: 1fr; gap: 0; }
     .name-row .first-name, .name-row .last-name { flex: none; width: 100%; }
     .form-title { font-size: 22px; }
+    .hide-mobile { display: none; }
 }
