@@ -22,7 +22,8 @@ body {
   font-family:var(--font-b); 
   line-height:1.7; 
   -webkit-font-smoothing:antialiased; 
-  overflow-x:hidden; 
+  overflow-x:hidden;
+  width: 100%;
 }
 ul { list-style:none; }
 a { text-decoration:none; color:inherit; transition:all 0.4s var(--ease); }
@@ -460,7 +461,7 @@ select option { background:#050725; color:var(--text); }
 
 
 @media (max-width:480px) {
-  .container { padding:0 20px; }
+  .container { padding:0 15px; }
   .logo-svg { height: 24px; }
   .title-line { font-size:clamp(32px,10vw,50px); }
   .stats-grid { grid-template-columns:1fr 1fr; gap:30px; }
