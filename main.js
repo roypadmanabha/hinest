@@ -509,8 +509,20 @@ document.addEventListener('DOMContentLoaded', () => {
             if (navBtns) navBtns.style.display = 'none';
         } else {
             if (navBtns) navBtns.style.display = 'flex';
-            if (nextBtn) nextBtn.textContent = currentStep === totalSteps - 1 ? 'Go to Final Details' : 'Next Step';
+            if (nextBtn) nextBtn.textContent = 'Proceed';
         }
+    };
+
+    const showCalcMessage = (text, type = 'error') => {
+        const globalStatus = document.getElementById('calc-global-status');
+        if (!globalStatus) return;
+        globalStatus.textContent = text;
+        globalStatus.className = `form-status-msg ${type}`;
+        globalStatus.style.display = 'block';
+        gsap.fromTo(globalStatus, { opacity: 0, y: 5 }, { opacity: 1, y: 0, duration: 0.3 });
+        setTimeout(() => {
+            gsap.to(globalStatus, { opacity: 0, duration: 0.3, onComplete: () => globalStatus.style.display = 'none' });
+        }, 5000);
     };
 
     // Size Selection
@@ -584,19 +596,19 @@ document.addEventListener('DOMContentLoaded', () => {
             if (currentStep === 1) {
                 const sizeVal = document.getElementById('calc-size').value;
                 if (!sizeVal) {
-                    alert("Please select your flat size first.");
+                    showCalcMessage("Please select your flat size first.");
                     return;
                 }
                 calcData.size = parseInt(sizeVal);
             } else if (currentStep === 2) {
                 const totalRooms = Object.values(calcData.rooms).reduce((a, b) => a + b, 0);
                 if (totalRooms === 0) {
-                    alert("Please select at least one room to design.");
+                    showCalcMessage("Please select at least one room to design.");
                     return;
                 }
             } else if (currentStep === 3) {
                 if (calcData.addons.length === 0) {
-                    alert("Please select at least one add-on feature.");
+                    showCalcMessage("Please select at least one add-on feature.");
                     return;
                 }
             }
