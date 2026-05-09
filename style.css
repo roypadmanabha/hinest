@@ -479,8 +479,8 @@ select option { background:#050725; color:var(--text); }
 
 /* Separator Image */
 .image-separator { padding: 40px 0; text-align: center; position: relative; z-index: 1; overflow: hidden; }
-.separator-img { width: 100%; max-width: 1100px; height: auto; opacity: 0.8; filter: grayscale(100%) brightness(1.2); transition: all 0.6s ease; margin: 0 auto; display: block; animation: floatLive 8s infinite ease-in-out; }
-.image-separator:hover .separator-img { opacity: 1; filter: grayscale(0%) brightness(1); transform: scale(1.02); }
+.separator-img { width: 100%; max-width: 1100px; height: auto; opacity: 1; filter: none; transition: transform 0.5s ease; margin: 0 auto; display: block; animation: floatLive 8s infinite ease-in-out; }
+/* Removed hover effect as requested */
 
 @keyframes floatLive {
   0%, 100% { transform: translateY(0) rotate(0deg); }
@@ -643,9 +643,9 @@ select option { background:#050725; color:var(--text); }
     flex-direction: column; 
 }
 .legal-title { 
-    font-family: var(--font-b); 
+    font-family: var(--font-h); 
     font-size: 28px; 
-    font-weight: 600; 
+    font-weight: 800; 
     color: var(--accent); 
     margin-bottom: 25px; 
     text-align: center; 
@@ -657,8 +657,7 @@ select option { background:#050725; color:var(--text); }
     overflow-y: auto; 
     padding-right: 15px; 
     text-align: justify; 
-    font-family: var(--font-h); 
-    font-weight: 600;
+    font-family: 'Raleway', sans-serif; 
     color: rgba(255, 255, 255, 0.85); 
     line-height: 1.8; 
 }
@@ -670,9 +669,9 @@ select option { background:#050725; color:var(--text); }
 .legal-intro { font-weight: 600; margin-bottom: 30px; color: #fff; border-left: 3px solid var(--accent); padding-left: 15px; }
 .legal-section { margin-bottom: 30px; }
 .legal-section h3 { 
-    font-family: var(--font-b); 
+    font-family: var(--font-h); 
     font-size: 16px; 
-    font-weight: 600; 
+    font-weight: 700; 
     color: #fff; 
     margin-bottom: 12px; 
     text-transform: uppercase; 
