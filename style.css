@@ -700,6 +700,8 @@ a, a:hover, a:active, a:focus,
   background: none !important;
   box-shadow: none !important;
   filter: none !important;
+  cursor: default !important;
+  -webkit-tap-highlight-color: transparent !important;
 }
 
 /* Ensure active state links (like nav) still show color if explicitly set, but no hover shift */
