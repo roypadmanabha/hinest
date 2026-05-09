@@ -129,7 +129,7 @@
                 <p class="hero-desc">We create timeless, bespoke interiors and architectural spaces for new buildings
                     that elevate the way you live and work.</p>
                 <div class="hero-btns">
-                    <a href="#book" class="btn btn-primary">Consult</a>
+                    <a href="javascript:void(0)" class="btn btn-primary consult-trigger">Consult</a>
                 </div>
             </div>
 
@@ -491,10 +491,77 @@
     <!-- Explore Modal -->
     <div class="explore-modal" id="explore-modal">
         <div class="explore-modal-overlay" id="explore-modal-overlay"></div>
-        <button class="explore-modal-close" id="explore-modal-close">&times;</button>
         <div class="explore-modal-content">
+            <button class="explore-modal-close" id="explore-modal-close">&times;</button>
             <div class="explore-modal-body">
                 <iframe src="about:blank" width="100%" height="100%" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Consult Modal -->
+    <div class="explore-modal" id="consult-modal">
+        <div class="explore-modal-overlay" id="consult-modal-overlay"></div>
+        <div class="explore-modal-content consult-modal-content">
+            <button class="explore-modal-close" id="consult-modal-close">&times;</button>
+            <div class="consult-form-container">
+                <h2 class="form-title">Consult with Us</h2>
+                <p class="form-subtitle">Let's build your dream space together</p>
+                <form id="consultation-form" class="consult-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="c-name">Full Name*</label>
+                            <input type="text" id="c-name" name="name" placeholder="John Doe" required pattern="[A-Za-z\s]+" title="Only alphabets allowed (First and Last name)">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="c-mobile">Mobile Number*</label>
+                            <div class="mobile-input-group">
+                                <select id="c-country" name="country" class="country-code">
+                                    <option value="+91">+91 (IN)</option>
+                                    <option value="+1">+1 (US)</option>
+                                    <option value="+44">+44 (UK)</option>
+                                    <option value="+971">+971 (UAE)</option>
+                                </select>
+                                <input type="tel" id="c-mobile" name="mobile" placeholder="9876543210" required pattern="[0-9]{10}" title="Please enter a valid 10-digit mobile number">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="c-email">Mail ID*</label>
+                        <input type="email" id="c-email" name="email" placeholder="john@example.com" required>
+                    </div>
+                    <div class="form-row location-row">
+                        <div class="form-group">
+                            <label for="c-state">State*</label>
+                            <select id="c-state" name="state" required>
+                                <option value="" disabled selected>Select State</option>
+                                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Karnataka">Karnataka</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Tamil Nadu">Tamil Nadu</option>
+                                <option value="West Bengal">West Bengal</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="c-city">City*</label>
+                            <input type="text" id="c-city" name="city" placeholder="Enter City" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="c-desc">Describe your requirements* (<span id="char-count">200</span> remaining)</label>
+                        <textarea id="c-desc" name="requirements" placeholder="Tell us about your project..." required maxlength="200"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Submit Request</button>
+                </form>
+                <div id="form-success" class="form-success-msg">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Thank You!</h3>
+                    <p>Our team will contact you shortly.</p>
+                </div>
             </div>
         </div>
     </div>

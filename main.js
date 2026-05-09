@@ -188,4 +188,60 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if(exploreCloseBtn) exploreCloseBtn.addEventListener('click', closeExplore);
     if(exploreOverlay) exploreOverlay.addEventListener('click', closeExplore);
+
+    // 13. Consult Modal Logic
+    const consultModal = document.getElementById('consult-modal');
+    const consultTriggers = document.querySelectorAll('.consult-trigger');
+    const consultCloseBtn = document.getElementById('consult-modal-close');
+    const consultOverlay = document.getElementById('consult-modal-overlay');
+    const consultForm = document.getElementById('consultation-form');
+    const descTextarea = document.getElementById('c-desc');
+    const charCount = document.getElementById('char-count');
+
+    const openConsult = (e) => {
+        if (e) e.preventDefault();
+        consultModal.style.display = 'flex';
+        setTimeout(() => consultModal.classList.add('active'), 10);
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closeConsult = () => {
+        consultModal.classList.remove('active');
+        setTimeout(() => {
+            consultModal.style.display = 'none';
+            document.body.style.overflow = '';
+            // Reset form if submitted
+            consultForm.style.display = 'block';
+            document.getElementById('form-success').style.display = 'none';
+        }, 500);
+    };
+
+    consultTriggers.forEach(t => t.addEventListener('click', openConsult));
+    if(consultCloseBtn) consultCloseBtn.addEventListener('click', closeConsult);
+    if(consultOverlay) consultOverlay.addEventListener('click', closeConsult);
+
+    // Character Counter
+    if(descTextarea) {
+        descTextarea.addEventListener('input', () => {
+            const remaining = 200 - descTextarea.value.length;
+            charCount.textContent = remaining;
+            charCount.style.color = remaining < 20 ? '#ff4d4d' : 'var(--accent)';
+        });
+    }
+
+    // Form Submission
+    if(consultForm) {
+        consultForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Basic validation check (Name alphabets only is already handled by pattern attribute)
+            
+            // Premium transition to success message
+            gsap.to(consultForm, { opacity: 0, y: -20, duration: 0.5, onComplete: () => {
+                consultForm.style.display = 'none';
+                const successMsg = document.getElementById('form-success');
+                successMsg.style.display = 'block';
+                gsap.fromTo(successMsg, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.5 });
+            }});
+        });
+    }
 });
