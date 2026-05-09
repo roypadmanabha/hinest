@@ -304,7 +304,7 @@ img {
 
 /* Book & Forms */
 .book-section { padding:60px 0 140px; position:relative; overflow:hidden; }
-.book-wrapper { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; position:relative; z-index:1; }
+.book-wrapper { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; position:relative; z-index:1; }
 .book-desc { color:var(--text-muted); margin:25px 0 30px; font-size:16px; text-align: justify; }
 .book-features { display:flex; flex-direction:column; gap:15px; }
 .book-feature { display:flex; align-items:center; gap:12px; font-size:15px; color:var(--text-muted); }
