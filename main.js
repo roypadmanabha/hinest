@@ -154,6 +154,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // 12. Explore Modal
     const exploreModal = document.getElementById('explore-modal');
     const exploreTriggers = document.querySelectorAll('.explore-trigger');
+    const exploreCloseBtn = document.getElementById('explore-modal-close');
+    const exploreOverlay = document.getElementById('explore-modal-overlay');
+
     const openExplore = (e) => {
         if (e) e.preventDefault();
         
