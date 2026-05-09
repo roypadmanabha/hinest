@@ -157,7 +157,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const exploreCloseBtn = document.getElementById('explore-modal-close');
     const exploreOverlay = document.getElementById('explore-modal-overlay');
 
-    const openExplore = () => {
+    const openExplore = (e) => {
+        if (e) e.preventDefault();
+        
+        // Ensure mobile menu closes
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (hamburger) hamburger.classList.remove('active');
+        if (mobileMenu) mobileMenu.classList.remove('active');
+
+        // Dynamic PDF loading for better mobile stability
+        const iframe = exploreModal.querySelector('iframe');
+        if (iframe && (iframe.src === '' || iframe.src.includes('about:blank'))) {
+            iframe.src = 'assets/explore.pdf#toolbar=0&view=FitH';
+        }
+
         exploreModal.style.display = 'flex';
         setTimeout(() => exploreModal.classList.add('active'), 10);
         document.body.style.overflow = 'hidden';
