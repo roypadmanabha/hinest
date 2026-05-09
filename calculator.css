@@ -99,3 +99,7 @@
     .otp-boxes-wrapper { flex-direction: column; gap: 20px; }
     .otp-box { width: 40px; height: 45px; font-size: 18px; }
 }
+
+.form-status-msg { padding: 12px 15px; border-radius: 10px; font-size: 12px; font-weight: 600; text-align: center; font-family: var(--font-p); }
+.form-status-msg.success { background: rgba(0, 200, 83, 0.1); border: 1px solid rgba(0, 200, 83, 0.3); color: #00c853; }
+.form-status-msg.error { background: rgba(255, 77, 77, 0.1); border: 1px solid rgba(255, 77, 77, 0.3); color: #ff4d4d; }

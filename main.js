@@ -198,6 +198,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const form = document.getElementById(formId);
         if (!form) return;
 
+        const statusMsg = form.querySelector('.form-status-msg');
+
+        const showMessage = (text, type = 'success') => {
+            if (!statusMsg) {
+                alert(text);
+                return;
+            }
+            statusMsg.textContent = text;
+            statusMsg.className = `form-status-msg ${type}`;
+            statusMsg.style.display = 'block';
+            gsap.fromTo(statusMsg, { opacity: 0, y: 5 }, { opacity: 1, y: 0, duration: 0.3 });
+            if (type === 'error') {
+                setTimeout(() => {
+                    gsap.to(statusMsg, { opacity: 0, duration: 0.3, onComplete: () => statusMsg.style.display = 'none' });
+                }, 5000);
+            }
+        };
+
         const descTextarea = form.querySelector('textarea');
         const charCount = document.getElementById(charCountId);
 
@@ -309,14 +327,14 @@ document.addEventListener('DOMContentLoaded', () => {
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             if (form.querySelectorAll('.form-group.has-error').length > 0) {
-                alert("Please correct the errors in the form before submitting.");
+                showMessage("Please correct the errors in the form.", "error");
                 return;
             }
 
             const mobileInput = form.querySelector('input[name="mobile"]');
             const emailInput = form.querySelector('input[name="email"]');
             if (mobileInput.value.length < 10) {
-                alert("Please enter a valid 10-digit mobile number.");
+                showMessage("Please enter a valid 10-digit mobile number.", "error");
                 return;
             }
 
@@ -340,7 +358,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         document.getElementById('calc-otp-group').style.display = 'block';
                         submitBtn.textContent = 'VERIFY';
                         submitBtn.disabled = false;
-                        alert("A verification code has been sent to " + emailInput.value);
+                        showMessage(`Verification code sent to ${emailInput.value}`, "success");
                         // Focus first box
                         const firstBox = form.querySelector('.otp-box');
                         if (firstBox) firstBox.focus();
@@ -348,7 +366,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         console.error("OTP Error Detail:", err);
                         submitBtn.textContent = originalText;
                         submitBtn.disabled = false;
-                        alert("Failed to send OTP: " + (err.text || err.message || "Unknown Error") + ". Please check your EmailJS configuration.");
+                        showMessage("Failed to send OTP. Please try again.", "error");
                     }
                     return;
                 } else {
@@ -358,7 +376,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     if (enteredOtp !== generatedOtp.toString()) {
                         document.getElementById('calc-otp-group').classList.add('has-error');
-                        alert("Invalid OTP code. Please try again.");
+                        showMessage("Invalid OTP code. Please try again.", "error");
                         return;
                     }
                 }
@@ -408,7 +426,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('FormSubmit Error:', error);
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
-                alert('Oops! There was a problem submitting your form. Please try again.');
+                showMessage("Submission failed. Please try again.", "error");
             });
         });
     };

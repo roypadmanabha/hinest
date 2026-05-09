@@ -745,6 +745,8 @@
                             <input type="hidden" name="rooms_config" id="hidden-rooms">
                             <input type="hidden" name="addons_selected" id="hidden-addons">
 
+                            <div id="calc-form-status" class="form-status-msg" style="display:none; margin-top:20px;"></div>
+
                             <button type="submit" id="calc-submit-btn" class="btn-calc btn-next" style="width:100%; margin-top:20px;">SEND OTP</button>
                         </form>
 
@@ -941,6 +943,7 @@
                             minlength="20" maxlength="200"></textarea>
                         <span class="field-error" id="err-desc">Minimum 20 characters required</span>
                     </div>
+                    <div id="consult-form-status" class="form-status-msg" style="display:none; margin-bottom:15px;"></div>
                     <button type="submit" class="btn btn-primary btn-full">SUBMIT</button>
                 </form>
                 <div id="form-success" class="form-success-msg">
