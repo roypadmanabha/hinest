@@ -159,9 +159,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Use PDF.js Viewer (Mozilla) for maximum stability on mobile and large 94MB files
         const iframe = exploreModal.querySelector('iframe');
         if (iframe && (iframe.src === '' || iframe.src.includes('about:blank'))) {
-            const pdfUrl = encodeURIComponent('https://roypadmanabha.github.io/hinest/assets/explore.pdf');
-            // Using a hosted PDF.js viewer that renders via canvas (bypassing native mobile issues)
-            iframe.src = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${pdfUrl}#pagemode=none&toolbar=0&view=FitH`;
+            // Using Google Drive Preview link for high-stability and cross-device compatibility
+            iframe.src = `https://drive.google.com/file/d/1rdcTvUjjd7KASs3S6nMB8dAOLa_eCSUa/preview`;
         }
 
         exploreModal.style.display = 'flex';
