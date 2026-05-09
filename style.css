@@ -685,23 +685,50 @@ select option { background:#050725; color:var(--text); }
 }
 
 /* GLOBAL NO-HOVER OVERRIDE */
-a, a:hover, a:active, a:focus,
-.nav-link, .nav-link:hover, .nav-link:active, .nav-link:focus,
-.btn-header-quote, .btn-header-quote:hover,
-.mobile-link, .mobile-link:hover,
-.footer-social-icons a, .footer-social-icons a:hover,
-.service-link, .service-link:hover,
-.btn-primary:hover, .btn-outline:hover,
-.logo:hover, .logo-svg:hover {
+a {
   text-decoration: none !important;
-  color: inherit !important;
-  transform: none !important;
-  transition: none !important;
-  background: none !important;
-  box-shadow: none !important;
-  filter: none !important;
   cursor: default !important;
   -webkit-tap-highlight-color: transparent !important;
+}
+
+a:hover, a:active, a:focus,
+.nav-link:hover, .nav-link:active, .nav-link:focus,
+.btn-header-quote:hover, .btn-header-quote:active,
+.mobile-link:hover, .mobile-link:active,
+.footer-social-icons a:hover,
+.service-link:hover,
+.logo:hover, .logo-svg:hover {
+  text-decoration: none !important;
+  transform: none !important;
+  transition: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+/* Ensure buttons keep their base background even on hover */
+.btn-primary:hover, .btn-primary:active {
+  background-color: var(--accent) !important;
+  color: #000 !important;
+  transform: none !important;
+}
+
+.btn-outline:hover, .btn-outline:active {
+  background-color: transparent !important;
+  color: var(--text) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  transform: none !important;
+}
+
+.whatsapp-float:hover, .whatsapp-float:active {
+  background-color: #25d366 !important;
+  transform: none !important;
+}
+
+.nav-link:hover {
+  color: var(--text-muted) !important;
+}
+.nav-link.active:hover {
+  color: var(--text) !important;
 }
 
 /* Ensure active state links (like nav) still show color if explicitly set, but no hover shift */
