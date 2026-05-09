@@ -200,20 +200,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const openConsult = (e) => {
         if (e) e.preventDefault();
-        consultModal.style.display = 'flex';
-        setTimeout(() => consultModal.classList.add('active'), 10);
-        document.body.style.overflow = 'hidden';
+
+        // Ensure mobile menu closes if open
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (hamburger) hamburger.classList.remove('active');
+        if (mobileMenu) mobileMenu.classList.remove('active');
+
+        if (consultModal) {
+            consultModal.style.display = 'flex';
+            setTimeout(() => consultModal.classList.add('active'), 10);
+            document.body.style.overflow = 'hidden';
+        }
     };
 
     const closeConsult = () => {
-        consultModal.classList.remove('active');
-        setTimeout(() => {
-            consultModal.style.display = 'none';
-            document.body.style.overflow = '';
-            // Reset form if submitted
-            consultForm.style.display = 'block';
-            document.getElementById('form-success').style.display = 'none';
-        }, 500);
+        if (consultModal) {
+            consultModal.classList.remove('active');
+            setTimeout(() => {
+                consultModal.style.display = 'none';
+                document.body.style.overflow = '';
+                // Reset form if submitted
+                if (consultForm) consultForm.style.display = 'block';
+                const successMsg = document.getElementById('form-success');
+                if (successMsg) successMsg.style.display = 'none';
+            }, 500);
+        }
     };
 
     consultTriggers.forEach(t => t.addEventListener('click', openConsult));
