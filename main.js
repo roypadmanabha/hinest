@@ -272,11 +272,13 @@ document.addEventListener('DOMContentLoaded', () => {
         let isOtpSent = false;
         let generatedOtp = null;
 
-        const sendOtpEmail = async (userEmail, otpCode) => {
+        const sendOtpEmail = async (userEmail, otpCode, firstName, lastName) => {
             return emailjs.send("service_9sw7y1f", "template_zn5tk8b", {
                 to_email: userEmail,
                 email: userEmail,
                 reply_to: userEmail,
+                first_name: firstName,
+                last_name: lastName,
                 passcode: otpCode,
                 time: new Date(Date.now() + 15 * 60000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
                 message: `Your verification code for Hinest Interiors estimate is: ${otpCode}`
@@ -333,8 +335,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     submitBtn.disabled = true;
                     generatedOtp = Math.floor(100000 + Math.random() * 900000);
                     
+                    const firstName = form.querySelector('input[name="firstname"]').value;
+                    const lastName = form.querySelector('input[name="lastname"]').value;
+
                     try {
-                        const res = await sendOtpEmail(emailInput.value, generatedOtp);
+                        const res = await sendOtpEmail(emailInput.value, generatedOtp, firstName, lastName);
                         console.log("OTP Sent Successfully:", res);
                         isOtpSent = true;
                         document.getElementById('calc-otp-group').style.display = 'block';
