@@ -203,22 +203,62 @@ document.addEventListener('DOMContentLoaded', () => {
     const descTextarea = document.getElementById('c-desc');
     const charCount = document.getElementById('char-count');
 
-    // Auto-Capitalization & Input cleaning
-    const autoCap = (input) => {
+    // Auto-Capitalization & Real-time Validation
+    const setupField = (id, type) => {
+        const input = document.getElementById(id);
+        if (!input) return;
+
+        const group = input.closest('.form-group');
+        const error = group ? group.querySelector('.field-error') : null;
+
         input.addEventListener('input', (e) => {
             let val = e.target.value;
-            if (val.length > 0) {
-                e.target.value = val.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+            let original = val;
+
+            if (type === 'alpha') {
+                // Remove numbers/symbols
+                val = val.replace(/[^A-Za-z\s]/g, '');
+                // Auto-Capitalize
+                if (val.length > 0) {
+                    val = val.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+                }
+            } else if (type === 'num') {
+                // Remove non-numbers
+                val = val.replace(/[^0-9]/g, '');
+            }
+
+            e.target.value = val;
+
+            // Show error if user tried to type something forbidden
+            if (original !== val && error) {
+                group.classList.add('has-error');
+                setTimeout(() => group.classList.remove('has-error'), 2000);
+            }
+
+            // Real-time pattern check for mobile
+            if (type === 'num' && id === 'c-mobile' && error) {
+                const invalidPatterns = [
+                    "1234567890", "0123456789", "9876543210", "0987654321",
+                    "1111111111", "2222222222", "3333333333", "4444444444", 
+                    "5555555555", "6666666666", "7777777777", "8888888888", "9999999999", "0000000000"
+                ];
+                if (val.length > 0 && val.length < 10) {
+                    group.classList.add('has-error');
+                    error.textContent = "10 digits required";
+                } else if (val.length === 10 && invalidPatterns.includes(val)) {
+                    group.classList.add('has-error');
+                    error.textContent = "Invalid number pattern";
+                } else {
+                    group.classList.remove('has-error');
+                }
             }
         });
     };
 
-    const fnameInput = document.getElementById('c-fname');
-    const lnameInput = document.getElementById('c-lname');
-    const cityInput = document.getElementById('c-city');
-    if(fnameInput) autoCap(fnameInput);
-    if(lnameInput) autoCap(lnameInput);
-    if(cityInput) autoCap(cityInput);
+    setupField('c-fname', 'alpha');
+    setupField('c-lname', 'alpha');
+    setupField('c-city', 'alpha');
+    setupField('c-mobile', 'num');
 
     const openConsult = (e) => {
         if (e) e.preventDefault();
@@ -246,6 +286,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (consultForm) {
                     consultForm.reset();
                     consultForm.style.display = 'block';
+                    // Clear errors
+                    document.querySelectorAll('.form-group').forEach(g => g.classList.remove('has-error'));
                 }
                 const successMsg = document.getElementById('form-success');
                 if (successMsg) successMsg.style.display = 'none';
@@ -272,20 +314,16 @@ document.addEventListener('DOMContentLoaded', () => {
         consultForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
+            // Final check
+            if (document.querySelectorAll('.form-group.has-error').length > 0) {
+                alert("Please correct the errors in the form before submitting.");
+                return;
+            }
+
             const submitBtn = consultForm.querySelector('button[type="submit"]');
             const mobileInput = document.getElementById('c-mobile');
-            const mobileVal = mobileInput.value;
-
-            // Strict Mobile Validation
-            const invalidPatterns = [
-                "1234567890", "0123456789", "9876543210", "0987654321",
-                "1111111111", "2222222222", "3333333333", "4444444444", 
-                "5555555555", "6666666666", "7777777777", "8888888888", "9999999999", "0000000000"
-            ];
-
-            if (invalidPatterns.includes(mobileVal)) {
-                alert("Please enter a valid mobile number. Sequential or repeating digits are not allowed.");
-                mobileInput.focus();
+            if (mobileInput.value.length < 10) {
+                alert("Please enter a valid 10-digit mobile number.");
                 return;
             }
             
