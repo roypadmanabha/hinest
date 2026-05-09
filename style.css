@@ -479,8 +479,8 @@ select option { background:#050725; color:var(--text); }
 
 /* Separator Image */
 .image-separator { padding: 40px 0; text-align: center; position: relative; z-index: 1; overflow: hidden; }
-.separator-img { width: 100%; max-width: 1100px; height: auto; opacity: 0.8; filter: grayscale(100%) brightness(1.2); transition: all 0.6s ease; margin: 0 auto; display: block; animation: floatLive 8s infinite ease-in-out; }
-.image-separator:hover .separator-img { opacity: 1; filter: grayscale(0%) brightness(1); transform: scale(1.02); }
+.separator-img { width: 100%; max-width: 1100px; height: auto; opacity: 1; filter: none; transition: none; margin: 0 auto; display: block; animation: floatLive 8s infinite ease-in-out; }
+.image-separator:hover .separator-img { opacity: 1; filter: none; transform: none; }
 
 @keyframes floatLive {
   0%, 100% { transform: translateY(0) rotate(0deg); }
