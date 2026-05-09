@@ -275,6 +275,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const sendOtpEmail = async (userEmail, otpCode) => {
             return emailjs.send("service_9sw7y1f", "template_zn5tk8b", {
                 to_email: userEmail,
+                email: userEmail,
+                reply_to: userEmail,
                 otp_code: otpCode,
                 message: `Your verification code for Hinest Interiors estimate is: ${otpCode}`
             });
@@ -298,6 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             return emailjs.send("service_9sw7y1f", "template_zn5tk8b", {
                 to_email: "info.hinestinteriors@gmail.com",
+                email: "info.hinestinteriors@gmail.com",
                 from_name: `${formData.get('firstname')} ${formData.get('lastname')}`,
                 message_html: tableHtml,
                 subject: `New Estimate Verified - ₹${finalTotal.toLocaleString('en-IN')}`
