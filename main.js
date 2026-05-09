@@ -288,6 +288,26 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.textContent = 'Sending...';
             submitBtn.disabled = true;
 
+            if (formId === 'calc-final-form') {
+                const baseRate = 1200;
+                const roomRate = 85000;
+                let roomsTotal = Object.values(calcData.rooms).reduce((a, b) => a + b, 0) * roomRate;
+                let addonsTotal = calcData.addons.reduce((a, b) => a + b, 0);
+                let sizeBase = calcData.size * baseRate * calcData.multiplier;
+                let statusMultiplier = 1;
+                if (calcData.status === 'under-const') statusMultiplier = 1.1;
+                if (calcData.status === 'ready') statusMultiplier = 1.05;
+                const finalTotal = Math.round((sizeBase + roomsTotal + addonsTotal) * statusMultiplier);
+
+                document.getElementById('hidden-size').value = calcData.size + ' sq ft';
+                document.getElementById('hidden-total').value = '₹' + finalTotal.toLocaleString('en-IN');
+                document.getElementById('hidden-rooms').value = JSON.stringify(calcData.rooms);
+                document.getElementById('hidden-addons').value = calcData.addons.length + ' selected';
+                
+                const totalDisplay = document.getElementById('calc-total');
+                if (totalDisplay) totalDisplay.textContent = '₹' + finalTotal.toLocaleString('en-IN');
+            }
+
             fetch(form.action, {
                 method: 'POST',
                 body: new FormData(form),
@@ -315,6 +335,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize both forms
     setupConsultationForm('consultation-form', 'form-success', 'char-count');
     setupConsultationForm('book-form-static', 'form-success-static', 'b-char-count');
+    setupConsultationForm('calc-final-form', 'calc-result-box', null);
 
     const openConsult = (e) => {
         if (e) e.preventDefault();
@@ -500,40 +521,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Final Calculation
-    const calcFinalForm = document.getElementById('calc-final-form');
-    if (calcFinalForm) {
-        calcFinalForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const mobileInput = document.getElementById('calc-mobile');
-            if (mobileInput && mobileInput.value.length < 10) {
-                alert("Please enter a valid 10-digit mobile number.");
-                return;
-            }
-
-            const baseRate = 1200; // Per sft base
-            const roomRate = 85000; // Fixed per room design base
-            
-            let roomsTotal = Object.values(calcData.rooms).reduce((a, b) => a + b, 0) * roomRate;
-            let addonsTotal = calcData.addons.reduce((a, b) => a + b, 0);
-            let sizeBase = calcData.size * baseRate * calcData.multiplier;
-
-            let statusMultiplier = 1;
-            if (calcData.status === 'under-const') statusMultiplier = 1.1;
-            if (calcData.status === 'ready') statusMultiplier = 1.05;
-
-            const finalTotal = Math.round((sizeBase + roomsTotal + addonsTotal) * statusMultiplier);
-
-            const totalDisplay = document.getElementById('calc-total');
-            if (totalDisplay) totalDisplay.textContent = '₹' + finalTotal.toLocaleString('en-IN');
-            
-            calcFinalForm.style.display = 'none';
-            const resultBox = document.getElementById('calc-result-box');
-            if (resultBox) {
-                resultBox.style.display = 'block';
-                gsap.from(resultBox, { opacity: 0, scale: 0.9, duration: 0.5 });
-            }
-        });
-    }
 });

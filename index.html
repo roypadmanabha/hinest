@@ -639,23 +639,96 @@
                     <div class="calc-step-content" id="step-5">
                         <h2 class="calc-title">Get your estimate</h2>
                         <p class="calc-subtitle">Please provide your details to see the final calculation.</p>
-                        <form id="calc-final-form" class="consult-form">
-                            <div class="form-group">
-                                <label>Full Name*</label>
-                                <input type="text" id="calc-name" placeholder="Your Name" required>
+                        <form id="calc-final-form" class="consult-form" action="https://formsubmit.co/info.hinestinteriors@gmail.com" method="POST">
+                            <!-- FormSubmit Configuration -->
+                            <input type="hidden" name="_subject" value="New Estimate Inquiry - Hinest Interiors">
+                            <input type="hidden" name="_template" value="table">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="_honey" style="display:none">
+
+                            <div class="form-row name-row">
+                                <div class="form-group first-name">
+                                    <label for="calc-fname">First Name*</label>
+                                    <input type="text" id="calc-fname" name="firstname" placeholder="Your Name" required>
+                                    <span class="field-error">Only alphabets allowed</span>
+                                </div>
+                                <div class="form-group last-name">
+                                    <label for="calc-lname">Last Name*</label>
+                                    <input type="text" id="calc-lname" name="lastname" placeholder="Surname" required>
+                                    <span class="field-error">Only alphabets allowed</span>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label>Mobile Number*</label>
-                                <div class="mobile-input-group">
-                                    <span class="country-code-fixed">+91</span>
-                                    <input type="tel" id="calc-mobile" placeholder="9876543210" required maxlength="10">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="calc-mobile">Mobile Number*</label>
+                                    <div class="mobile-input-group">
+                                        <span class="country-code-fixed">+91</span>
+                                        <input type="tel" id="calc-mobile" name="mobile" placeholder="9876543210" required maxlength="10">
+                                    </div>
+                                    <span class="field-error">10-digit valid number required</span>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Mail ID*</label>
-                                <input type="email" id="calc-email" placeholder="raam@gmail.com" required>
+                                <label for="calc-email">Mail ID*</label>
+                                <input type="email" id="calc-email" name="email" placeholder="raam@gmail.com" required>
+                                <span class="field-error">Please enter a valid email</span>
                             </div>
-                            <button type="submit" class="btn-calc btn-next" style="width:100%; margin-top:20px;">Calculate My Cost</button>
+                            <div class="form-row location-row">
+                                <div class="form-group">
+                                    <label for="calc-state">State / UT*</label>
+                                    <select id="calc-state" name="state" required>
+                                        <option value="" disabled selected>Select State / UT</option>
+                                        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                        <option value="Assam">Assam</option>
+                                        <option value="Bihar">Bihar</option>
+                                        <option value="Chandigarh">Chandigarh</option>
+                                        <option value="Chhattisgarh">Chhattisgarh</option>
+                                        <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
+                                        <option value="Delhi">Delhi</option>
+                                        <option value="Goa">Goa</option>
+                                        <option value="Gujarat">Gujarat</option>
+                                        <option value="Haryana">Haryana</option>
+                                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                        <option value="Jharkhand">Jharkhand</option>
+                                        <option value="Karnataka">Karnataka</option>
+                                        <option value="Kerala">Kerala</option>
+                                        <option value="Ladakh">Ladakh</option>
+                                        <option value="Lakshadweep">Lakshadweep</option>
+                                        <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                        <option value="Maharashtra">Maharashtra</option>
+                                        <option value="Manipur">Manipur</option>
+                                        <option value="Meghalaya">Meghalaya</option>
+                                        <option value="Mizoram">Mizoram</option>
+                                        <option value="Nagaland">Nagaland</option>
+                                        <option value="Odisha">Odisha</option>
+                                        <option value="Puducherry">Puducherry</option>
+                                        <option value="Punjab">Punjab</option>
+                                        <option value="Rajasthan">Rajasthan</option>
+                                        <option value="Sikkim">Sikkim</option>
+                                        <option value="Tamil Nadu">Tamil Nadu</option>
+                                        <option value="Telangana">Telangana</option>
+                                        <option value="Tripura">Tripura</option>
+                                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                        <option value="Uttarakhand">Uttarakhand</option>
+                                        <option value="West Bengal">West Bengal</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="calc-city">City*</label>
+                                    <input type="text" id="calc-city" name="city" placeholder="Enter City" required>
+                                    <span class="field-error">Only alphabets allowed</span>
+                                </div>
+                            </div>
+                            <!-- Hidden inputs for Estimate Data -->
+                            <input type="hidden" name="project_size" id="hidden-size">
+                            <input type="hidden" name="project_estimate" id="hidden-total">
+                            <input type="hidden" name="rooms_config" id="hidden-rooms">
+                            <input type="hidden" name="addons_selected" id="hidden-addons">
+
+                            <button type="submit" class="btn-calc btn-next" style="width:100%; margin-top:20px;">CALCULATE MY COST</button>
                         </form>
 
                         <div id="calc-result-box" class="final-result" style="display:none;">
