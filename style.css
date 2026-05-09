@@ -216,7 +216,7 @@ img {
 
 .project-card-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 12px; margin-bottom: 25px; }
 .project-card-num { font-family: var(--font-h); font-size: 18px; font-weight: 800; color: var(--accent); margin-right: 5px; opacity: 1; }
-.project-card-title { font-family: var(--font-h); font-size: 18px; font-weight: 700; color: #ffffff; margin-bottom: 12px; text-transform: none; letter-spacing: 0; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.project-card-title { font-family: var(--font-h); font-size: 18px; font-weight: 700; color: #ffffff; margin-bottom: 12px; text-transform: none; letter-spacing: 0; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .project-card-desc { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 40px; position: relative; z-index: 1; text-align: justify; }
 .project-ghost-num { position: absolute; bottom: 15px; right: 20px; font-family: var(--font-h); font-size: 90px; font-weight: 900; color: rgba(0, 0, 0, 0.05); line-height: 0.8; pointer-events: none; z-index: 0; }
 
