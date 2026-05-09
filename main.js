@@ -163,11 +163,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (hamburger) hamburger.classList.remove('active');
         if (mobileMenu) mobileMenu.classList.remove('active');
 
-        // Force Google Docs Viewer for all screens
+        // Use native renderer with CSS masking to support large 94MB file without toolbars
         const iframe = exploreModal.querySelector('iframe');
         if (iframe && (iframe.src === '' || iframe.src.includes('about:blank'))) {
-            const pdfUrl = 'https://roypadmanabha.github.io/hinest/assets/explore.pdf';
-            iframe.src = `https://docs.google.com/viewer?url=${pdfUrl}&embedded=true`;
+            iframe.src = 'assets/explore.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH';
         }
 
         exploreModal.style.display = 'flex';
