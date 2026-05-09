@@ -166,10 +166,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (hamburger) hamburger.classList.remove('active');
         if (mobileMenu) mobileMenu.classList.remove('active');
 
-        // Use native renderer with CSS masking to support large 94MB file without toolbars
+        // Use PDF.js Viewer (Mozilla) for maximum stability on mobile and large 94MB files
         const iframe = exploreModal.querySelector('iframe');
         if (iframe && (iframe.src === '' || iframe.src.includes('about:blank'))) {
-            iframe.src = 'assets/explore.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH';
+            const pdfUrl = encodeURIComponent('https://roypadmanabha.github.io/hinest/assets/explore.pdf');
+            // Using a hosted PDF.js viewer that renders via canvas (bypassing native mobile issues)
+            iframe.src = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${pdfUrl}#pagemode=none&toolbar=0&view=FitH`;
         }
 
         exploreModal.style.display = 'flex';
