@@ -471,6 +471,35 @@ document.addEventListener('DOMContentLoaded', () => {
     if(consultCloseBtn) consultCloseBtn.addEventListener('click', closeConsult);
     if(consultOverlay) consultOverlay.addEventListener('click', closeConsult);
 
+    // Terms & Conditions Modal Logic
+    const termsModal = document.getElementById('terms-modal');
+    const termsTrigger = document.getElementById('terms-trigger');
+    const termsCloseBtn = document.getElementById('terms-modal-close');
+    const termsOverlay = document.getElementById('terms-modal-overlay');
+
+    const openTerms = (e) => {
+        if (e) e.preventDefault();
+        if (termsModal) {
+            termsModal.style.display = 'flex';
+            setTimeout(() => termsModal.classList.add('active'), 10);
+            document.body.style.overflow = 'hidden';
+        }
+    };
+
+    const closeTerms = () => {
+        if (termsModal) {
+            termsModal.classList.remove('active');
+            setTimeout(() => {
+                termsModal.style.display = 'none';
+                document.body.style.overflow = '';
+            }, 500);
+        }
+    };
+
+    if (termsTrigger) termsTrigger.addEventListener('click', openTerms);
+    if (termsCloseBtn) termsCloseBtn.addEventListener('click', closeTerms);
+    if (termsOverlay) termsOverlay.addEventListener('click', closeTerms);
+
     // ==========================================
     // Multi-Step Cost Calculator Logic
     // ==========================================

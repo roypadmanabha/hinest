@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&family=Nunito:wght@400;600;700;800;900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&family=Nunito:wght@400;600;700;800;900&family=Raleway:wght@300;400;500;600&display=swap"
         rel="stylesheet">
 
     <!-- Icons -->
@@ -452,15 +452,6 @@
             </div>
         </section>
 
-        <!-- Furniture Layout Divider -->
-        <section class="furniture-divider-section">
-            <div class="container">
-                <div class="furniture-layout-wrap reveal">
-                    <img src="assets/furniture-layout.png" alt="Furniture Layout" class="furniture-layout-img">
-                </div>
-            </div>
-        </section>
-
         <!-- Quote Section (Multi-Step Calculator) -->
         <section class="quote-section" id="quote">
             <div class="container">
@@ -802,7 +793,7 @@
             <div class="footer-new-col">
                 <h4 class="footer-new-heading">Legal</h4>
                 <ul class="footer-new-links">
-                    <li><a href="#">Terms and Conditions</a></li>
+                    <li><a href="javascript:void(0)" id="terms-trigger">Terms and Conditions</a></li>
                     <li><a href="#">Privacy Policy</a></li>
                 </ul>
             </div>
@@ -963,6 +954,80 @@
                     <h3>Thank You!</h3>
                     <p>Our team will contact you shortly.</p>
                 </div>
+    
+    <!-- Terms & Conditions Modal -->
+    <div id="terms-modal" class="legal-modal">
+        <div id="terms-modal-overlay" class="legal-modal-overlay"></div>
+        <div class="legal-modal-content">
+            <button id="terms-modal-close" class="legal-modal-close">&times;</button>
+            <div class="legal-modal-body">
+                <h2 class="legal-title">Terms & Conditions</h2>
+                <div class="legal-scroll-content">
+                    <p class="legal-intro">Welcome to Hinest Interiors. By accessing this website or using our services, you agree to the following Terms & Conditions.</p>
+                    
+                    <div class="legal-section">
+                        <h3>1. Services</h3>
+                        <p>Hinest Interiors provides interior design, renovation, consultation, space planning, and related services for residential and commercial projects.</p>
+                    </div>
+
+                    <div class="legal-section">
+                        <h3>2. Quotations & Pricing</h3>
+                        <p>All quotations are subject to project requirements and may change based on material costs, design modifications, or additional work requested by the client.</p>
+                    </div>
+
+                    <div class="legal-section">
+                        <h3>3. Payments</h3>
+                        <p>Clients must follow the agreed payment schedule. Delay in payment may result in project delays or suspension of services.</p>
+                    </div>
+
+                    <div class="legal-section">
+                        <h3>4. Design Approval</h3>
+                        <p>Clients are responsible for reviewing and approving all designs, drawings, materials, and specifications before execution. Any changes after approval may involve additional charges.</p>
+                    </div>
+
+                    <div class="legal-section">
+                        <h3>5. Project Timelines</h3>
+                        <p>Estimated timelines are provided for reference only. Hinest Interiors is not responsible for delays caused by suppliers, site conditions, client changes, or unforeseen circumstances.</p>
+                    </div>
+
+                    <div class="legal-section">
+                        <h3>6. Intellectual Property</h3>
+                        <p>All designs, concepts, images, logos, and website content are the property of Hinest Interiors and may not be copied, reproduced, or used without written permission.</p>
+                    </div>
+
+                    <div class="legal-section">
+                        <h3>7. Website Usage</h3>
+                        <p>Users agree not to misuse this website or engage in activities that may harm the website, business, or other users.</p>
+                    </div>
+
+                    <div class="legal-section">
+                        <h3>8. Limitation of Liability</h3>
+                        <p>Hinest Interiors shall not be liable for any indirect, incidental, or consequential damages arising from the use of our website or services.</p>
+                    </div>
+
+                    <div class="legal-section">
+                        <h3>9. Third-Party Links</h3>
+                        <p>This website may contain links to third-party websites. Hinest Interiors is not responsible for the content or policies of external websites.</p>
+                    </div>
+
+                    <div class="legal-section">
+                        <h3>10. Changes to Terms</h3>
+                        <p>Hinest Interiors reserves the right to update or modify these Terms & Conditions at any time without prior notice.</p>
+                    </div>
+
+                    <div class="legal-section">
+                        <h3>11. Governing Law</h3>
+                        <p>These Terms & Conditions shall be governed by the laws of India.</p>
+                    </div>
+
+                    <div class="legal-section">
+                        <h3>12. Contact Us</h3>
+                        <p>For any questions regarding these Terms & Conditions, please contact us through the contact information provided on our website.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
             </div>
         </div>
     </div>
