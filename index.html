@@ -20,6 +20,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="calculator.css">
 </head>
 
 <body>
@@ -450,39 +451,217 @@
             </div>
         </section>
 
-        <!-- Quote Section -->
+        <!-- Quote Section (Multi-Step Calculator) -->
         <section class="quote-section" id="quote">
             <div class="container">
-                <div class="quote-wrapper reveal">
-                    <div class="quote-left">
-                        <span class="section-tag"><span class="tag-line"></span>Estimate<span
-                                class="tag-line"></span></span>
-                        <h2 class="section-title">Get a Quick<br>Quote</h2>
-                        <p>Receive an instant preliminary estimate for your project based on area and type.</p>
+                <div class="calc-container reveal">
+                    <!-- Progress Steps -->
+                    <div class="calc-steps">
+                        <div class="step-item active" data-step="1">
+                            <div class="step-num">1</div>
+                            <span class="step-label">Size</span>
+                        </div>
+                        <div class="step-item" data-step="2">
+                            <div class="step-num">2</div>
+                            <span class="step-label">Rooms</span>
+                        </div>
+                        <div class="step-item" data-step="3">
+                            <div class="step-num">3</div>
+                            <span class="step-label">Add-ons</span>
+                        </div>
+                        <div class="step-item" data-step="4">
+                            <div class="step-num">4</div>
+                            <span class="step-label">Package</span>
+                        </div>
+                        <div class="step-item" data-step="5">
+                            <div class="step-num">5</div>
+                            <span class="step-label">Details</span>
+                        </div>
                     </div>
-                    <div class="quote-right">
-                        <div class="quote-form-group">
-                            <label>Project Type</label>
-                            <select id="q-type">
-                                <option value="residential">Residential</option>
-                                <option value="commercial">Commercial</option>
-                                <option value="villa">Villa / Bungalow</option>
-                            </select>
+
+                    <!-- Step 1: Size & Status -->
+                    <div class="calc-step-content active" id="step-1">
+                        <h2 class="calc-title">Tell us about your home</h2>
+                        <p class="calc-subtitle">Select your flat size and current status to begin.</p>
+                        <div class="size-grid">
+                            <div class="quote-form-group">
+                                <label>Select Flat Size (Sq Ft)</label>
+                                <select id="calc-size">
+                                    <option value="800">Below 1000 sft</option>
+                                    <option value="1200" selected>1000 - 1500 sft</option>
+                                    <option value="1800">1500 - 2000 sft</option>
+                                    <option value="2500">2000 - 3000 sft</option>
+                                    <option value="4000">Above 3000 sft</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="quote-form-group">
-                            <label>Area (Sq Ft)</label>
-                            <input type="number" id="q-area" placeholder="e.g. 2500">
+                        <div class="status-options">
+                            <button class="status-btn active" data-status="ready">
+                                <i class="fas fa-check-circle"></i> Ready for Interior
+                            </button>
+                            <button class="status-btn" data-status="not-ready">
+                                <i class="fas fa-times-circle"></i> Not Ready
+                            </button>
+                            <button class="status-btn" data-status="under-const">
+                                <i class="fas fa-building"></i> Under Construction
+                            </button>
                         </div>
-                        <button class="btn btn-primary btn-full" id="q-calc">
-                            <span class="desktop-text">Calculate Estimate</span>
-                            <span class="mobile-text">Calculate</span>
-                        </button>
-                        <div class="quote-result" id="quote-result">
-                            <span class="quote-result-label">Estimated Cost</span>
-                            <span class="quote-result-value" id="quote-value">₹0</span>
-                            <span class="quote-result-note">*Preliminary estimate. Final pricing after
-                                consultation.</span>
+                    </div>
+
+                    <!-- Step 2: Select Rooms -->
+                    <div class="calc-step-content" id="step-2">
+                        <h2 class="calc-title">Configure your space</h2>
+                        <p class="calc-subtitle">Select the number of rooms you want us to design.</p>
+                        <div class="rooms-list">
+                            <div class="room-item" data-room="living">
+                                <span class="room-name">Living Room</span>
+                                <div class="room-controls">
+                                    <button class="control-btn minus">-</button>
+                                    <span class="room-count">1</span>
+                                    <button class="control-btn plus">+</button>
+                                </div>
+                            </div>
+                            <div class="room-item" data-room="kitchen">
+                                <span class="room-name">Kitchen</span>
+                                <div class="room-controls">
+                                    <button class="control-btn minus">-</button>
+                                    <span class="room-count">1</span>
+                                    <button class="control-btn plus">+</button>
+                                </div>
+                            </div>
+                            <div class="room-item" data-room="bedroom">
+                                <span class="room-name">Bedroom</span>
+                                <div class="room-controls">
+                                    <button class="control-btn minus">-</button>
+                                    <span class="room-count">2</span>
+                                    <button class="control-btn plus">+</button>
+                                </div>
+                            </div>
+                            <div class="room-item" data-room="bathroom">
+                                <span class="room-name">Bathroom</span>
+                                <div class="room-controls">
+                                    <button class="control-btn minus">-</button>
+                                    <span class="room-count">2</span>
+                                    <button class="control-btn plus">+</button>
+                                </div>
+                            </div>
+                            <div class="room-item" data-room="dining">
+                                <span class="room-name">Dining</span>
+                                <div class="room-controls">
+                                    <button class="control-btn minus">-</button>
+                                    <span class="room-count">1</span>
+                                    <button class="control-btn plus">+</button>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+
+                    <!-- Step 3: Add-ons -->
+                    <div class="calc-step-content" id="step-3">
+                        <h2 class="calc-title">Enhance your design</h2>
+                        <p class="calc-subtitle">Pick additional features to personalize your space.</p>
+                        <div class="addons-grid">
+                            <div class="addon-card" data-price="45000">
+                                <div class="addon-checkbox"></div>
+                                <span class="addon-text">Wooden Ceiling with Lighting</span>
+                            </div>
+                            <div class="addon-card" data-price="85000">
+                                <div class="addon-checkbox"></div>
+                                <span class="addon-text">Wall Cabinet with Dressing</span>
+                            </div>
+                            <div class="addon-card" data-price="35000">
+                                <div class="addon-checkbox"></div>
+                                <span class="addon-text">Modular Study Unit</span>
+                            </div>
+                            <div class="addon-card" data-price="55000">
+                                <div class="addon-checkbox"></div>
+                                <span class="addon-text">Premium Bed Head Panel</span>
+                            </div>
+                            <div class="addon-card" data-price="12000">
+                                <div class="addon-checkbox"></div>
+                                <span class="addon-text">Designer Wall Paint / Paper</span>
+                            </div>
+                            <div class="addon-card" data-price="25000">
+                                <div class="addon-checkbox"></div>
+                                <span class="addon-text">Custom Foyer Partition</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Pick Package -->
+                    <div class="calc-step-content" id="step-4">
+                        <h2 class="calc-title">Choose your finish level</h2>
+                        <p class="calc-subtitle">Select a package that fits your budget and style preference.</p>
+                        <div class="package-grid">
+                            <div class="package-card" data-multiplier="1">
+                                <div class="package-badge">POPULAR</div>
+                                <h3 class="package-name">Standard</h3>
+                                <p class="package-desc">Essential quality solutions for a clean, modern look.</p>
+                                <ul class="package-features">
+                                    <li><i class="fas fa-check"></i> Quality Material</li>
+                                    <li><i class="fas fa-check"></i> Standard Designs</li>
+                                    <li><i class="fas fa-check"></i> 5 Years Warranty</li>
+                                </ul>
+                            </div>
+                            <div class="package-card selected" data-multiplier="1.5">
+                                <div class="package-badge">RECOMMENDED</div>
+                                <h3 class="package-name">Superio</h3>
+                                <p class="package-desc">Premium materials and sophisticated designer touches.</p>
+                                <ul class="package-features">
+                                    <li><i class="fas fa-check"></i> HDMR / Marine Ply</li>
+                                    <li><i class="fas fa-check"></i> Trendy PU Finish</li>
+                                    <li><i class="fas fa-check"></i> 10 Years Warranty</li>
+                                </ul>
+                            </div>
+                            <div class="package-card" data-multiplier="2.2">
+                                <div class="package-badge">LUXURY</div>
+                                <h3 class="package-name">Signature</h3>
+                                <p class="package-desc">Ultra-luxury finishes and bespoke architectural details.</p>
+                                <ul class="package-features">
+                                    <li><i class="fas fa-check"></i> Italian Marble/Veneer</li>
+                                    <li><i class="fas fa-check"></i> Custom Smart Tech</li>
+                                    <li><i class="fas fa-check"></i> Lifetime Service</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Contact Details -->
+                    <div class="calc-step-content" id="step-5">
+                        <h2 class="calc-title">Get your estimate</h2>
+                        <p class="calc-subtitle">Please provide your details to see the final calculation.</p>
+                        <form id="calc-final-form" class="consult-form">
+                            <div class="form-group">
+                                <label>Full Name*</label>
+                                <input type="text" id="calc-name" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Mobile Number*</label>
+                                <div class="mobile-input-group">
+                                    <span class="country-code-fixed">+91</span>
+                                    <input type="tel" id="calc-mobile" placeholder="9876543210" required maxlength="10">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Mail ID*</label>
+                                <input type="email" id="calc-email" placeholder="raam@gmail.com" required>
+                            </div>
+                            <button type="submit" class="btn-calc btn-next" style="width:100%; margin-top:20px;">Calculate My Cost</button>
+                        </form>
+
+                        <div id="calc-result-box" class="final-result" style="display:none;">
+                            <h2 class="calc-title">Estimated Project Cost</h2>
+                            <div class="result-amount" id="calc-total">₹0</div>
+                            <p class="calc-subtitle">Based on your selections and premium material standards.</p>
+                            <p class="result-disclaimer">*This is a preliminary estimate. Our architects will provide a detailed quote after site visit and requirement finalization.</p>
+                            <button class="btn btn-primary" onclick="window.location.reload()" style="margin-top:30px;">Restart Calculator</button>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="calc-nav" id="calc-nav-btns">
+                        <button class="btn-calc btn-prev" id="calc-prev" style="visibility:hidden;">Back</button>
+                        <button class="btn-calc btn-next" id="calc-next">Next Step</button>
                     </div>
                 </div>
             </div>

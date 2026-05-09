@@ -325,4 +325,170 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize both forms
     setupConsultationForm('consultation-form', 'form-success', 'char-count');
     setupConsultationForm('book-form-static', 'form-success-static', 'b-char-count');
+
+    // ==========================================
+    // Multi-Step Cost Calculator Logic
+    // ==========================================
+    let currentStep = 1;
+    const totalSteps = 5;
+    const calcData = {
+        size: 1200,
+        status: 'ready',
+        rooms: { living: 1, kitchen: 1, bedroom: 2, bathroom: 2, dining: 1 },
+        addons: [],
+        multiplier: 1.5
+    };
+
+    const updateStepUI = () => {
+        // Content
+        document.querySelectorAll('.calc-step-content').forEach(c => c.classList.remove('active'));
+        const activeContent = document.getElementById(`step-${currentStep}`);
+        if (activeContent) activeContent.classList.add('active');
+
+        // Progress Steps
+        document.querySelectorAll('.step-item').forEach(s => {
+            const stepNum = parseInt(s.dataset.step);
+            s.classList.remove('active', 'completed');
+            if (stepNum === currentStep) s.classList.add('active');
+            if (stepNum < currentStep) s.classList.add('completed');
+        });
+
+        // Nav Buttons
+        const prevBtn = document.getElementById('calc-prev');
+        const nextBtn = document.getElementById('calc-next');
+        const navBtns = document.getElementById('calc-nav-btns');
+
+        if (prevBtn) prevBtn.style.visibility = currentStep === 1 ? 'hidden' : 'visible';
+        
+        if (currentStep === totalSteps) {
+            if (navBtns) navBtns.style.display = 'none';
+        } else {
+            if (navBtns) navBtns.style.display = 'flex';
+            if (nextBtn) nextBtn.textContent = currentStep === totalSteps - 1 ? 'Go to Final Details' : 'Next Step';
+        }
+    };
+
+    // Size Selection
+    const calcSizeSelect = document.getElementById('calc-size');
+    if (calcSizeSelect) {
+        calcSizeSelect.addEventListener('change', (e) => {
+            calcData.size = parseInt(e.target.value);
+        });
+    }
+
+    // Status Buttons
+    document.querySelectorAll('.status-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.status-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            calcData.status = btn.dataset.status;
+        });
+    });
+
+    // Room Controls
+    document.querySelectorAll('.room-item').forEach(item => {
+        const room = item.dataset.room;
+        const countSpan = item.querySelector('.room-count');
+        const plusBtn = item.querySelector('.plus');
+        const minusBtn = item.querySelector('.minus');
+
+        if (plusBtn && countSpan) {
+            plusBtn.addEventListener('click', () => {
+                calcData.rooms[room]++;
+                countSpan.textContent = calcData.rooms[room];
+            });
+        }
+
+        if (minusBtn && countSpan) {
+            minusBtn.addEventListener('click', () => {
+                if (calcData.rooms[room] > 0) {
+                    calcData.rooms[room]--;
+                    countSpan.textContent = calcData.rooms[room];
+                }
+            });
+        }
+    });
+
+    // Addons
+    document.querySelectorAll('.addon-card').forEach(card => {
+        card.addEventListener('click', () => {
+            card.classList.toggle('selected');
+            const price = parseInt(card.dataset.price);
+            const index = calcData.addons.indexOf(price);
+            if (index > -1) {
+                calcData.addons.splice(index, 1);
+            } else {
+                calcData.addons.push(price);
+            }
+        });
+    });
+
+    // Packages
+    document.querySelectorAll('.package-card').forEach(card => {
+        card.addEventListener('click', () => {
+            document.querySelectorAll('.package-card').forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            calcData.multiplier = parseFloat(card.dataset.multiplier);
+        });
+    });
+
+    // Navigation Click
+    const nextBtn = document.getElementById('calc-next');
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                updateStepUI();
+                const quoteSection = document.getElementById('quote');
+                if (quoteSection) window.scrollTo({ top: quoteSection.offsetTop - 80, behavior: 'smooth' });
+            }
+        });
+    }
+
+    const prevBtn = document.getElementById('calc-prev');
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            if (currentStep > 1) {
+                currentStep--;
+                updateStepUI();
+            }
+        });
+    }
+
+    // Final Calculation
+    const calcFinalForm = document.getElementById('calc-final-form');
+    if (calcFinalForm) {
+        calcFinalForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const mobileInput = document.getElementById('calc-mobile');
+            if (mobileInput && mobileInput.value.length < 10) {
+                alert("Please enter a valid 10-digit mobile number.");
+                return;
+            }
+
+            const baseRate = 1200; // Per sft base
+            const roomRate = 85000; // Fixed per room design base
+            
+            let roomsTotal = Object.values(calcData.rooms).reduce((a, b) => a + b, 0) * roomRate;
+            let addonsTotal = calcData.addons.reduce((a, b) => a + b, 0);
+            let sizeBase = calcData.size * baseRate * calcData.multiplier;
+
+            let statusMultiplier = 1;
+            if (calcData.status === 'under-const') statusMultiplier = 1.1;
+            if (calcData.status === 'ready') statusMultiplier = 1.05;
+
+            const finalTotal = Math.round((sizeBase + roomsTotal + addonsTotal) * statusMultiplier);
+
+            const totalDisplay = document.getElementById('calc-total');
+            if (totalDisplay) totalDisplay.textContent = '₹' + finalTotal.toLocaleString('en-IN');
+            
+            calcFinalForm.style.display = 'none';
+            const resultBox = document.getElementById('calc-result-box');
+            if (resultBox) {
+                resultBox.style.display = 'block';
+                gsap.from(resultBox, { opacity: 0, scale: 0.9, duration: 0.5 });
+            }
+        });
+    }
 });
