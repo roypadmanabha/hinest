@@ -269,8 +269,43 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
+        let isOtpSent = false;
+        let generatedOtp = null;
+
+        const sendOtpEmail = async (userEmail, otpCode) => {
+            return emailjs.send("service_9sw7y1f", "template_zn5tk8b", {
+                to_email: userEmail,
+                otp_code: otpCode,
+                message: `Your verification code for Hinest Interiors estimate is: ${otpCode}`
+            });
+        };
+
+        const sendFinalEstimateEmail = async (formData, calcData, finalTotal) => {
+            const tableHtml = `
+                <table style="width:100%; border-collapse: collapse; font-family: sans-serif; border: 1px solid #ddd;">
+                    <tr style="background-color: #f2f2f2;"><th colspan="2" style="padding: 12px; text-align: left;">Contact Details</th></tr>
+                    <tr><td style="padding: 8px; border: 1px solid #ddd;">Name</td><td style="padding: 8px; border: 1px solid #ddd;">${formData.get('firstname')} ${formData.get('lastname')}</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid #ddd;">Mobile</td><td style="padding: 8px; border: 1px solid #ddd;">${formData.get('mobile')}</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid #ddd;">Email</td><td style="padding: 8px; border: 1px solid #ddd;">${formData.get('email')}</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid #ddd;">Location</td><td style="padding: 8px; border: 1px solid #ddd;">${formData.get('city')}, ${formData.get('state')}</td></tr>
+                    <tr style="background-color: #f2f2f2;"><th colspan="2" style="padding: 12px; text-align: left;">Project Estimate</th></tr>
+                    <tr><td style="padding: 8px; border: 1px solid #ddd;">Flat Size</td><td style="padding: 8px; border: 1px solid #ddd;">${calcData.size} sq ft</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid #ddd;">Config</td><td style="padding: 8px; border: 1px solid #ddd;">${JSON.stringify(calcData.rooms)}</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid #ddd;">Add-ons</td><td style="padding: 8px; border: 1px solid #ddd;">${calcData.addons.length} items</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">TOTAL ESTIMATE</td><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold; color: #FFD700;">₹${finalTotal.toLocaleString('en-IN')}</td></tr>
+                </table>
+            `;
+
+            return emailjs.send("service_9sw7y1f", "template_zn5tk8b", {
+                to_email: "info.hinestinteriors@gmail.com",
+                from_name: `${formData.get('firstname')} ${formData.get('lastname')}`,
+                message_html: tableHtml,
+                subject: `New Estimate Verified - ₹${finalTotal.toLocaleString('en-IN')}`
+            });
+        };
+
         // Submission Logic
-        form.addEventListener('submit', (e) => {
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
             if (form.querySelectorAll('.form-group.has-error').length > 0) {
                 alert("Please correct the errors in the form before submitting.");
@@ -278,6 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const mobileInput = form.querySelector('input[name="mobile"]');
+            const emailInput = form.querySelector('input[name="email"]');
             if (mobileInput.value.length < 10) {
                 alert("Please enter a valid 10-digit mobile number.");
                 return;
@@ -285,27 +321,59 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const submitBtn = form.querySelector('button[type="submit"]');
             const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Sending...';
+
+            // OTP Workflow for Calculator
+            if (formId === 'calc-final-form') {
+                if (!isOtpSent) {
+                    submitBtn.textContent = 'Sending OTP...';
+                    submitBtn.disabled = true;
+                    generatedOtp = Math.floor(100000 + Math.random() * 900000);
+                    
+                    try {
+                        await sendOtpEmail(emailInput.value, generatedOtp);
+                        isOtpSent = true;
+                        document.getElementById('calc-otp-group').style.display = 'block';
+                        submitBtn.textContent = 'VERIFY & CALCULATE';
+                        submitBtn.disabled = false;
+                        alert("A verification code has been sent to " + emailInput.value);
+                    } catch (err) {
+                        console.error("OTP Error:", err);
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                        alert("Failed to send OTP. Please check your email and try again.");
+                    }
+                    return;
+                } else {
+                    const enteredOtp = document.getElementById('calc-otp').value;
+                    if (enteredOtp !== generatedOtp.toString()) {
+                        document.getElementById('calc-otp-group').classList.add('has-error');
+                        alert("Invalid OTP code. Please try again.");
+                        return;
+                    }
+                }
+            }
+
+            submitBtn.textContent = 'Processing...';
             submitBtn.disabled = true;
 
-            if (formId === 'calc-final-form') {
-                const baseRate = 1200;
-                const roomRate = 85000;
-                let roomsTotal = Object.values(calcData.rooms).reduce((a, b) => a + b, 0) * roomRate;
-                let addonsTotal = calcData.addons.reduce((a, b) => a + b, 0);
-                let sizeBase = calcData.size * baseRate * calcData.multiplier;
-                let statusMultiplier = 1;
-                if (calcData.status === 'under-const') statusMultiplier = 1.1;
-                if (calcData.status === 'ready') statusMultiplier = 1.05;
-                const finalTotal = Math.round((sizeBase + roomsTotal + addonsTotal) * statusMultiplier);
+            const baseRate = 1200;
+            const roomRate = 85000;
+            let roomsTotal = Object.values(calcData.rooms).reduce((a, b) => a + b, 0) * roomRate;
+            let addonsTotal = calcData.addons.reduce((a, b) => a + b, 0);
+            let sizeBase = calcData.size * baseRate * calcData.multiplier;
+            let statusMultiplier = 1;
+            if (calcData.status === 'under-const') statusMultiplier = 1.1;
+            if (calcData.status === 'ready') statusMultiplier = 1.05;
+            const finalTotal = Math.round((sizeBase + roomsTotal + addonsTotal) * statusMultiplier);
 
-                document.getElementById('hidden-size').value = calcData.size + ' sq ft';
-                document.getElementById('hidden-total').value = '₹' + finalTotal.toLocaleString('en-IN');
-                document.getElementById('hidden-rooms').value = JSON.stringify(calcData.rooms);
-                document.getElementById('hidden-addons').value = calcData.addons.length + ' selected';
-                
-                const totalDisplay = document.getElementById('calc-total');
-                if (totalDisplay) totalDisplay.textContent = '₹' + finalTotal.toLocaleString('en-IN');
+            if (formId === 'calc-final-form') {
+                try {
+                    await sendFinalEstimateEmail(new FormData(form), calcData, finalTotal);
+                    const totalDisplay = document.getElementById('calc-total');
+                    if (totalDisplay) totalDisplay.textContent = '₹' + finalTotal.toLocaleString('en-IN');
+                } catch (err) {
+                    console.error("EmailJS Final Error:", err);
+                }
             }
 
             fetch(form.action, {

@@ -723,13 +723,22 @@
                                     <span class="field-error">Only alphabets allowed</span>
                                 </div>
                             </div>
+                            <div class="form-group" id="calc-otp-group" style="display:none; margin-top:20px;">
+                                <label for="calc-otp">Verification Code (Sent to Email)*</label>
+                                <div class="otp-input-wrapper">
+                                    <input type="text" id="calc-otp" placeholder="Enter 6-digit OTP" maxlength="6">
+                                    <button type="button" id="resend-calc-otp" class="btn-resend">Resend</button>
+                                </div>
+                                <span class="field-error" id="err-calc-otp">Invalid OTP</span>
+                            </div>
+
                             <!-- Hidden inputs for Estimate Data -->
                             <input type="hidden" name="project_size" id="hidden-size">
                             <input type="hidden" name="project_estimate" id="hidden-total">
                             <input type="hidden" name="rooms_config" id="hidden-rooms">
                             <input type="hidden" name="addons_selected" id="hidden-addons">
 
-                            <button type="submit" class="btn-calc btn-next" style="width:100%; margin-top:20px;">CALCULATE MY COST</button>
+                            <button type="submit" id="calc-submit-btn" class="btn-calc btn-next" style="width:100%; margin-top:20px;">SEND OTP</button>
                         </form>
 
                         <div id="calc-result-box" class="final-result" style="display:none;">
@@ -933,6 +942,14 @@
             </div>
         </div>
     </div>
+
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("NLKtgxLoRrH9Jw06R");
+        })();
+    </script>
 
     <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
