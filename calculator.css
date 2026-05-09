@@ -82,7 +82,7 @@
 
 /* OTP Specific Styles */
 .otp-boxes-wrapper { display: flex; gap: 15px; align-items: center; margin: 15px 0; }
-.otp-inputs { display: flex; gap: 8px; flex: 1; }
+.otp-inputs { display: flex; gap: 10px; flex: 1; border: 1px solid var(--accent); border-radius: 15px; padding: 15px; background: rgba(255, 255, 255, 0.02); justify-content: center; }
 .otp-box { width: 45px; height: 50px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; color: #fff; font-family: var(--font-h); font-weight: 700; font-size: 20px; text-align: center; transition: all 0.3s; }
 .otp-box:focus { border-color: var(--accent); background: rgba(255, 215, 0, 0.05); outline: none; box-shadow: 0 0 15px rgba(255, 215, 0, 0.2); }
 .btn-resend { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 10px 15px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: default; text-transform: uppercase; flex-shrink: 0; }
