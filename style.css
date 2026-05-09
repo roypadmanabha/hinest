@@ -540,10 +540,10 @@ select option { background:#050725; color:var(--text); }
     max-height: 90vh; 
     overflow-y: auto; 
     padding: 40px; 
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
-.consult-modal-content::-webkit-scrollbar { width: 4px; }
-.consult-modal-content::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); }
-.consult-modal-content::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
+.consult-modal-content::-webkit-scrollbar { display: none; }
 
 .consult-form-container { width: 100%; }
 .form-title { font-family: var(--font-h); font-size: 28px; font-weight: 800; color: #fff; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
