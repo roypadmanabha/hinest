@@ -203,6 +203,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const descTextarea = document.getElementById('c-desc');
     const charCount = document.getElementById('char-count');
 
+    // Auto-Capitalization & Input cleaning
+    const autoCap = (input) => {
+        input.addEventListener('input', (e) => {
+            let val = e.target.value;
+            if (val.length > 0) {
+                e.target.value = val.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+            }
+        });
+    };
+
+    const fnameInput = document.getElementById('c-fname');
+    const lnameInput = document.getElementById('c-lname');
+    const cityInput = document.getElementById('c-city');
+    if(fnameInput) autoCap(fnameInput);
+    if(lnameInput) autoCap(lnameInput);
+    if(cityInput) autoCap(cityInput);
+
     const openConsult = (e) => {
         if (e) e.preventDefault();
 
@@ -226,9 +243,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 consultModal.style.display = 'none';
                 document.body.style.overflow = '';
                 // Reset form if submitted
-                if (consultForm) consultForm.style.display = 'block';
+                if (consultForm) {
+                    consultForm.reset();
+                    consultForm.style.display = 'block';
+                }
                 const successMsg = document.getElementById('form-success');
                 if (successMsg) successMsg.style.display = 'none';
+                if (charCount) charCount.textContent = '200';
             }, 500);
         }
     };
@@ -252,6 +273,22 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             
             const submitBtn = consultForm.querySelector('button[type="submit"]');
+            const mobileInput = document.getElementById('c-mobile');
+            const mobileVal = mobileInput.value;
+
+            // Strict Mobile Validation
+            const invalidPatterns = [
+                "1234567890", "0123456789", "9876543210", "0987654321",
+                "1111111111", "2222222222", "3333333333", "4444444444", 
+                "5555555555", "6666666666", "7777777777", "8888888888", "9999999999", "0000000000"
+            ];
+
+            if (invalidPatterns.includes(mobileVal)) {
+                alert("Please enter a valid mobile number. Sequential or repeating digits are not allowed.");
+                mobileInput.focus();
+                return;
+            }
+            
             const originalText = submitBtn.textContent;
             submitBtn.textContent = 'Sending...';
             submitBtn.disabled = true;
