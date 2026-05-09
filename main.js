@@ -461,6 +461,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextBtn = document.getElementById('calc-next');
     if (nextBtn) {
         nextBtn.addEventListener('click', () => {
+            if (currentStep === 1) {
+                const sizeVal = document.getElementById('calc-size').value;
+                if (!sizeVal) {
+                    alert("Please select your flat size first.");
+                    return;
+                }
+            }
             if (currentStep < totalSteps) {
                 currentStep++;
                 updateStepUI();
