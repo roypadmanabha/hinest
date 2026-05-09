@@ -643,9 +643,9 @@ select option { background:#050725; color:var(--text); }
     flex-direction: column; 
 }
 .legal-title { 
-    font-family: var(--font-h); 
+    font-family: var(--font-b); 
     font-size: 28px; 
-    font-weight: 800; 
+    font-weight: 600; 
     color: var(--accent); 
     margin-bottom: 25px; 
     text-align: center; 
@@ -657,7 +657,8 @@ select option { background:#050725; color:var(--text); }
     overflow-y: auto; 
     padding-right: 15px; 
     text-align: justify; 
-    font-family: 'Raleway', sans-serif; 
+    font-family: var(--font-h); 
+    font-weight: 600;
     color: rgba(255, 255, 255, 0.85); 
     line-height: 1.8; 
 }
@@ -669,9 +670,9 @@ select option { background:#050725; color:var(--text); }
 .legal-intro { font-weight: 600; margin-bottom: 30px; color: #fff; border-left: 3px solid var(--accent); padding-left: 15px; }
 .legal-section { margin-bottom: 30px; }
 .legal-section h3 { 
-    font-family: var(--font-h); 
+    font-family: var(--font-b); 
     font-size: 16px; 
-    font-weight: 700; 
+    font-weight: 600; 
     color: #fff; 
     margin-bottom: 12px; 
     text-transform: uppercase; 
