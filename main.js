@@ -357,9 +357,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentStep = 1;
     const totalSteps = 5;
     const calcData = {
-        size: 1200,
+        size: null,
         status: 'ready',
-        rooms: { living: 1, kitchen: 1, bedroom: 2, bathroom: 2, dining: 1 },
+        rooms: { living: 0, kitchen: 0, bedroom: 0, bathroom: 0, dining: 0 },
         addons: [],
         multiplier: 1.5
     };
@@ -467,7 +467,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     alert("Please select your flat size first.");
                     return;
                 }
+                calcData.size = parseInt(sizeVal);
+            } else if (currentStep === 2) {
+                const totalRooms = Object.values(calcData.rooms).reduce((a, b) => a + b, 0);
+                if (totalRooms === 0) {
+                    alert("Please select at least one room to design.");
+                    return;
+                }
+            } else if (currentStep === 3) {
+                if (calcData.addons.length === 0) {
+                    alert("Please select at least one add-on feature.");
+                    return;
+                }
             }
+            
             if (currentStep < totalSteps) {
                 currentStep++;
                 updateStepUI();
