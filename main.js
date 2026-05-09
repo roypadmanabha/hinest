@@ -326,6 +326,41 @@ document.addEventListener('DOMContentLoaded', () => {
     setupConsultationForm('consultation-form', 'form-success', 'char-count');
     setupConsultationForm('book-form-static', 'form-success-static', 'b-char-count');
 
+    const openConsult = (e) => {
+        if (e) e.preventDefault();
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (hamburger) hamburger.classList.remove('active');
+        if (mobileMenu) mobileMenu.classList.remove('active');
+        if (consultModal) {
+            consultModal.style.display = 'flex';
+            setTimeout(() => consultModal.classList.add('active'), 10);
+            document.body.style.overflow = 'hidden';
+        }
+    };
+
+    const closeConsult = () => {
+        if (consultModal) {
+            consultModal.classList.remove('active');
+            setTimeout(() => {
+                consultModal.style.display = 'none';
+                document.body.style.overflow = '';
+                if (consultForm) {
+                    consultForm.reset();
+                    consultForm.style.display = 'block';
+                    document.querySelectorAll('.form-group').forEach(g => g.classList.remove('has-error'));
+                }
+                const successMsg = document.getElementById('form-success');
+                if (successMsg) successMsg.style.display = 'none';
+                if (charCount) charCount.textContent = '200';
+            }, 500);
+        }
+    };
+
+    consultTriggers.forEach(t => t.addEventListener('click', openConsult));
+    if(consultCloseBtn) consultCloseBtn.addEventListener('click', closeConsult);
+    if(consultOverlay) consultOverlay.addEventListener('click', closeConsult);
+
     // ==========================================
     // Multi-Step Cost Calculator Logic
     // ==========================================
