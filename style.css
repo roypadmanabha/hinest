@@ -208,19 +208,20 @@ img {
 
 /* Services */
 .services { padding:140px 0; background: transparent; }
-.services-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:40px; }
+.services-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:50px; }
 .service-card { 
     background: linear-gradient(135deg, #1a1a4d 0%, #0a0a2e 100%); 
     backdrop-filter: blur(40px); 
     -webkit-backdrop-filter: blur(40px); 
     border: 1px solid rgba(255, 215, 0, 0.8); 
     border-radius: 15px; 
-    padding:60px 45px; 
+    padding:80px 60px; 
     position:relative; 
     overflow:hidden; 
     transition:all 0.6s var(--ease); 
     z-index: 1; 
     box-shadow: inset 0 0 40px rgba(0,0,0,0.6), 0 20px 40px rgba(0,0,0,0.4); 
+    text-align: left;
 }
 .service-card:hover { 
     background: linear-gradient(135deg, #2a2a6d 0%, #1a1a4d 100%); 
@@ -264,10 +265,39 @@ img {
     top: -50%;
     left: -50%;
 }
-.service-num { font-family:var(--font-h); font-size:14px; font-weight:800; color:var(--text-dim); margin-bottom:25px; }
-.service-icon { font-size:32px; color:var(--accent); margin-bottom:25px; }
-.service-name { font-family:var(--font-h); font-size:22px; font-weight:700; margin-bottom:15px; text-transform:uppercase; letter-spacing:1px; }
-.service-desc { color:var(--text-muted); font-size:15px; margin-bottom:25px; text-align: justify; }
+.service-num { 
+    font-family:var(--font-h); 
+    font-size:16px; 
+    font-weight:800; 
+    color:rgba(255,255,255,0.2); 
+    position: absolute;
+    top: 70px;
+    left: 45px;
+}
+.service-icon { 
+    font-size:56px; 
+    color:var(--accent); 
+    margin-bottom:40px; 
+    display: inline-block;
+    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.3));
+}
+.service-name { 
+    font-family:var(--font-h); 
+    font-size:26px; 
+    font-weight:700; 
+    margin-bottom:20px; 
+    text-transform:uppercase; 
+    letter-spacing:2px; 
+    color: #fff;
+}
+.service-desc { 
+    color:var(--text-muted); 
+    font-size:16px; 
+    margin-bottom:0; 
+    text-align: left; 
+    line-height: 1.7;
+    max-width: 95%;
+}
 .service-link { font-family:var(--font-h); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:2px; color:var(--accent); display:none; align-items:center; gap:10px; }
 @media (max-width: 1024px) {
     .service-link { display: inline-flex; }
