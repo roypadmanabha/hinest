@@ -276,10 +276,6 @@ document.addEventListener('DOMContentLoaded', () => {
             boxes.forEach((box, idx) => {
                 box.addEventListener('input', (e) => {
                     const val = e.target.value;
-                    if (val && !/^\d$/.test(val)) {
-                        box.value = '';
-                        return;
-                    }
                     if (val && idx < boxes.length - 1) {
                         boxes[idx + 1].focus();
                     }
@@ -287,16 +283,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 box.addEventListener('keydown', (e) => {
                     if (e.key === 'Backspace' && !e.target.value && idx > 0) {
                         boxes[idx - 1].focus();
-                    }
-                });
-                box.addEventListener('paste', (e) => {
-                    e.preventDefault();
-                    const pasteData = (e.clipboardData || window.clipboardData).getData('text').trim();
-                    if (pasteData.length === 6 && /^\d+$/.test(pasteData)) {
-                        pasteData.split('').forEach((char, i) => {
-                            if (boxes[i]) boxes[i].value = char;
-                        });
-                        boxes[5].focus();
                     }
                 });
             });
@@ -388,19 +374,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     boxes.forEach(box => enteredOtp += box.value);
                     
                     if (enteredOtp !== generatedOtp.toString()) {
-                        showMessage("Incorrect OTP. Process aborted. Please restart from step 1.", "error");
-                        setTimeout(() => {
-                            currentStep = 1;
-                            updateStepUI();
-                            // Reset form and variables
-                            isOtpSent = false;
-                            generatedOtp = null;
-                            const otpGroup = document.getElementById('calc-otp-group');
-                            if (otpGroup) otpGroup.style.display = 'none';
-                            form.reset();
-                            boxes.forEach(b => b.value = '');
-                            submitBtn.textContent = 'PROCEED';
-                        }, 2000);
+                        document.getElementById('calc-otp-group').classList.add('has-error');
+                        showMessage("Invalid OTP code. Please try again.", "error");
                         return;
                     }
                 }
