@@ -407,7 +407,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Prepare data for Google Sheets
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbzS6634C2W80vWzW_2N9H6Wq_Y_K6X6_6_6/exec'; // Placeholder: User will replace this
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbxSdRvm9DA1Xf3BdiDhRmoNoSLaw5cG-MgNaSQWanJZe9zBXk_FilhzaqvLCsrChll4/exec';
             const formData = new FormData(form);
             if (formId === 'calc-final-form') {
                 formData.append('total_estimate', `₹${finalTotal.toLocaleString('en-IN')}`);
