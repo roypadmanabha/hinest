@@ -859,6 +859,7 @@ select option { background:#050725; color:var(--text); }
     .legal-modal-content { width: 95%; aspect-ratio: auto; height: 80vh; }
     .legal-modal-body { padding: 40px 25px; }
     .legal-title { font-size: 22px; }
+    .hide-mobile { display: none !important; }
 
     /* Service Cards Independent Expansion Mobile */
     .services-grid {
