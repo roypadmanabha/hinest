@@ -90,8 +90,16 @@ img {
 }
 .header-inner { display:flex; justify-content:space-between; align-items:center; width:100%; }
 
-.logo { display: flex; align-items: center; text-decoration: none; }
+.logo { display: flex; align-items: center; text-decoration: none; gap: 10px; }
 .logo-svg { height: 32px; width: auto; transition: transform 0.4s var(--ease); }
+.mobile-brand-logo { 
+    display: none; 
+    width: 35px; 
+    height: 35px; 
+    border-radius: 50%; 
+    border: 1px solid var(--accent); 
+    object-fit: cover; 
+}
 .logo:hover .logo-svg { transform: scale(1.05); }
 
 .nav-desktop { display:flex; gap:40px; }
@@ -137,6 +145,18 @@ img {
     justify-content: space-between;
     padding: 60px 40px 30px;
     border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.mobile-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.mobile-brand-logo-inner {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--accent);
+    object-fit: cover;
 }
 .mobile-logo .logo-text {
     font-family: var(--font-h);
@@ -833,7 +853,9 @@ select option { background:#050725; color:var(--text); }
 }
 .legal-section p { font-size: 14px; }
 
-@media (max-width: 600px) {
+@media (max-width: 1024px) {
+    .mobile-brand-logo { display: block; }
+    .logo-svg { height: 28px; }
     .legal-modal-content { width: 95%; aspect-ratio: auto; height: 80vh; }
     .legal-modal-body { padding: 40px 25px; }
     .legal-title { font-size: 22px; }
