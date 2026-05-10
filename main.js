@@ -406,23 +406,45 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (hiddenAddons) hiddenAddons.value = `${calcData.addons.length} addons selected`;
             }
 
-            fetch(form.action, {
+            // Prepare data for Google Sheets
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbzS6634C2W80vWzW_2N9H6Wq_Y_K6X6_6_6/exec'; // Placeholder: User will replace this
+            const formData = new FormData(form);
+            if (formId === 'calc-final-form') {
+                formData.append('total_estimate', `₹${finalTotal.toLocaleString('en-IN')}`);
+            }
+
+            // Send to FormSubmit (Email)
+            const formSubmitPromise = fetch(form.action, {
                 method: 'POST',
-                body: new FormData(form),
+                body: formData,
                 headers: { 'Accept': 'application/json' }
-            })
-            .then(response => {
-                gsap.to(form, { opacity: 0, y: -20, duration: 0.5, onComplete: () => {
-                    form.style.display = 'none';
-                    const successMsg = document.getElementById(successMsgId);
-                    if (successMsg) {
-                        successMsg.style.display = 'block';
-                        gsap.fromTo(successMsg, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.5 });
-                    }
-                }});
+            });
+
+            // Send to Google Sheets (Sheets)
+            const googleSheetsPromise = fetch(scriptURL, { 
+                method: 'POST', 
+                body: formData,
+                mode: 'no-cors' // Google Script requires no-cors if not using specialized headers
+            });
+
+            Promise.allSettled([formSubmitPromise, googleSheetsPromise])
+            .then(results => {
+                const formResult = results[0];
+                if (formResult.status === 'fulfilled') {
+                    gsap.to(form, { opacity: 0, y: -20, duration: 0.5, onComplete: () => {
+                        form.style.display = 'none';
+                        const successMsg = document.getElementById(successMsgId);
+                        if (successMsg) {
+                            successMsg.style.display = 'block';
+                            gsap.fromTo(successMsg, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.5 });
+                        }
+                    }});
+                } else {
+                    throw new Error('Email submission failed');
+                }
             })
             .catch(error => {
-                console.error('FormSubmit Error:', error);
+                console.error('Submission Error:', error);
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
                 showMessage("Submission failed. Please try again.", "error");
