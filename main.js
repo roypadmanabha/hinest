@@ -157,12 +157,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (mobileMenu) mobileMenu.classList.remove('active');
 
         // Use PDF.js Viewer (Mozilla) for maximum stability on mobile and large 94MB files
-        const iframe = exploreModal.querySelector('iframe');
-        if (iframe && (iframe.src === '' || iframe.src.includes('about:blank'))) {
-            // Using Google Drive Preview link for high-stability and cross-device compatibility
-            iframe.src = `https://drive.google.com/file/d/1rdcTvUjjd7KASs3S6nMB8dAOLa_eCSUa/preview`;
-        }
-
         exploreModal.style.display = 'flex';
         setTimeout(() => exploreModal.classList.add('active'), 10);
         document.body.style.overflow = 'hidden';
@@ -178,6 +172,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     exploreTriggers.forEach(trigger => {
         trigger.addEventListener('click', openExplore);
+    });
+
+    // Preload Brochure for "no-delay" experience
+    window.addEventListener('load', () => {
+        const iframe = exploreModal.querySelector('iframe');
+        if (iframe) {
+            iframe.src = `https://drive.google.com/file/d/1rdcTvUjjd7KASs3S6nMB8dAOLa_eCSUa/preview`;
+        }
     });
 
     if(exploreCloseBtn) exploreCloseBtn.addEventListener('click', closeExplore);
