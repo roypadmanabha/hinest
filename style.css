@@ -230,20 +230,24 @@ img {
 }
 .service-ribbon {
     position: absolute;
-    top: 15px;
-    right: -35px;
-    background: linear-gradient(90deg, #B8860B, #FFD700, #B8860B);
+    top: 12px;
+    right: -42px;
+    width: 150px;
+    background: linear-gradient(135deg, #B8860B 0%, #FFD700 50%, #B8860B 100%);
     color: #000;
     font-family: var(--font-h);
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 900;
-    padding: 8px 40px;
+    padding: 10px 0;
     transform: rotate(45deg);
     text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    letter-spacing: 1.5px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     z-index: 10;
     pointer-events: none;
+    border-top: 0.5px solid rgba(255,255,255,0.3);
+    border-bottom: 0.5px solid rgba(0,0,0,0.2);
 }
 .service-gloss { 
     position: absolute; 
