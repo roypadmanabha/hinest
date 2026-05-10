@@ -261,13 +261,7 @@ img {
     left: -50%;
 }
 .service-num { 
-    font-family:var(--font-h); 
-    font-size:16px; 
-    font-weight:800; 
-    color:rgba(255,255,255,0.2); 
-    position: absolute;
-    top: 70px;
-    left: 45px;
+    display: none;
 }
 .service-icon { 
     font-size:56px; 
@@ -836,9 +830,7 @@ select option { background:#050725; color:var(--text); }
         z-index: 10;
         box-shadow: 0 20px 40px rgba(0,0,0,0.6);
     }
-    .service-num {
-        display: none;
-    }
+    /* service-num removed */
     .service-ribbon {
         font-size: 8px;
         padding: 6px 0;
