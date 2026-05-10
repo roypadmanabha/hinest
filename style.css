@@ -757,13 +757,14 @@ select option { background:#050725; color:var(--text); }
     .legal-modal-body { padding: 40px 25px; }
     .legal-title { font-size: 22px; }
 
-    /* Service Cards Equal Size Mobile */
+    /* Service Cards Independent Expansion Mobile */
     .services-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 15px;
-        grid-auto-rows: 1fr;
+        align-items: start;
     }
     .service-card {
+        min-height: 260px; /* Force equal size when closed */
         padding: 40px 15px 30px;
         text-align: center;
         display: flex;
