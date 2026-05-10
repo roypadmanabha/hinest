@@ -833,8 +833,7 @@ select option { background:#050725; color:var(--text); }
         box-shadow: 0 20px 40px rgba(0,0,0,0.6);
     }
     .service-num {
-        margin-bottom: 15px;
-        font-size: 12px;
+        display: none;
     }
     .service-ribbon {
         font-size: 8px;
