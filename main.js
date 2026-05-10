@@ -20,12 +20,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Mobile Menu
     const hamburger = document.getElementById('hamburger');
+    const mobileClose = document.getElementById('mobile-close');
     const mobileMenu = document.getElementById('mobile-menu');
-    hamburger.addEventListener('click', () => {
+
+    function toggleMenu() {
         hamburger.classList.toggle('active');
         mobileMenu.classList.toggle('active');
         document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
-    });
+    }
+
+    hamburger.addEventListener('click', toggleMenu);
+    mobileClose.addEventListener('click', toggleMenu);
+
     document.querySelectorAll('.mobile-link').forEach(link => {
         link.addEventListener('click', () => {
             hamburger.classList.remove('active');
