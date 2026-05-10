@@ -202,7 +202,7 @@ img {
 /* Services */
 .services { padding:140px 0; background: transparent; }
 .services-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:30px; }
-.service-card { background: linear-gradient(135deg, rgba(10, 15, 40, 0.8) 0%, rgba(5, 7, 25, 0.9) 100%); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 215, 0, 0.15); border-radius: 15px; padding:50px 40px; position:relative; overflow:hidden; transition:all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); z-index: 1; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+.service-card { background: linear-gradient(135deg, #1a1c4f 0%, #0d0e2c 100%); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 215, 0, 0.15); border-radius: 15px; padding:50px 40px; position:relative; overflow:hidden; transition:all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); z-index: 1; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 .card-ribbon {
     position: absolute;
     top: 15px;
