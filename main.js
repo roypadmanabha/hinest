@@ -719,41 +719,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 25. Content Protection (Anti-Copy, Anti-Drag, Anti-Right Click)
-    const disableProtections = () => {
-        // Disable Right Click
-        document.addEventListener('contextmenu', (e) => e.preventDefault());
+    // 15. Content Protection - Disable Right Click, Copy, Paste, Selection, and Drag
+    document.addEventListener('contextmenu', event => event.preventDefault());
+    
+    document.addEventListener('copy', event => event.preventDefault());
+    document.addEventListener('cut', event => event.preventDefault());
+    document.addEventListener('paste', event => event.preventDefault());
+    
+    document.addEventListener('dragstart', event => event.preventDefault());
+    document.addEventListener('selectstart', event => event.preventDefault());
 
-        // Disable Copy, Cut, Paste
-        document.addEventListener('copy', (e) => e.preventDefault());
-        document.addEventListener('cut', (e) => e.preventDefault());
-        document.addEventListener('paste', (e) => e.preventDefault());
-
-        // Disable Drag & Selection
-        document.addEventListener('dragstart', (e) => e.preventDefault());
-        document.addEventListener('selectstart', (e) => e.preventDefault());
-
-        // Specifically block keyboard shortcuts for Inspect Element and Copy (Ctrl/Cmd + C, S, U, I, J)
-        document.addEventListener('keydown', (e) => {
-            if (
-                e.ctrlKey || e.metaKey || 
-                (e.keyCode === 123) || // F12
-                (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) || // Ctrl+Shift+I/J/C
-                (e.metaKey && e.altKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) // Cmd+Opt+I/J/C
-            ) {
-                if (e.keyCode !== 82) { // Allow refresh (Cmd+R / F5)
-                    e.preventDefault();
-                }
-            }
-        });
-
-        // Disable Pinch Zoom for iPhones/Safari
-        document.addEventListener('gesturestart', (e) => e.preventDefault());
-        document.addEventListener('touchmove', (e) => {
-            if (e.scale !== 1) { e.preventDefault(); }
-        }, { passive: false });
-    };
-
-    disableProtections();
+    // Block keyboard shortcuts (Ctrl+C, Ctrl+V, Ctrl+U, F12 etc.)
+    document.addEventListener('keydown', (e) => {
+        if (
+            (e.ctrlKey || e.metaKey) && 
+            (e.key === 'c' || e.key === 'v' || e.key === 'x' || e.key === 'u' || e.key === 's' || e.key === 'i' || e.key === 'j')
+        ) {
+            e.preventDefault();
+            return false;
+        }
+        
+        if (e.key === 'F12') {
+            e.preventDefault();
+            return false;
+        }
+    });
 
 });

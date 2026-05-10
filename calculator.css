@@ -1,9 +1,9 @@
 /* Multi-Step Cost Calculator */
-.calc-container { max-width: 900px; margin: 0 auto; background: linear-gradient(135deg, #1a1c4f 0%, #0d0e2c 100%); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid var(--accent); border-radius: 15px; padding: 50px; box-shadow: 0 0 50px rgba(255, 215, 0, 0.1); }
+.calc-container { max-width: 900px; margin: 0 auto; background: rgba(5, 7, 37, 0.4); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid var(--accent); border-radius: 15px; padding: 50px; box-shadow: 0 0 50px rgba(255, 215, 0, 0.1); }
 .calc-steps { display: flex; justify-content: space-between; margin-bottom: 50px; position: relative; padding: 0; }
 .calc-steps::before { content: ''; position: absolute; top: 20px; left: 30px; right: 30px; height: 2px; background: rgba(255,255,255,0.1); z-index: 0; }
 .step-item { position: relative; z-index: 1; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; width: 80px; }
-.step-num { width: 40px; height: 40px; background: #0d0e2c; border: 2px solid rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--text-muted); transition: all 0.4s ease; }
+.step-num { width: 40px; height: 40px; background: #1a1c3d; border: 2px solid rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--text-muted); transition: all 0.4s ease; }
 .step-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); }
 .step-item.active .step-num { background: var(--accent); border-color: var(--accent); color: #000; box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
 .step-item.active .step-label { color: var(--accent); font-weight: 700; }
