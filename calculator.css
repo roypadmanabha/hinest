@@ -1,5 +1,5 @@
 /* Multi-Step Cost Calculator */
-.calc-container { max-width: 900px; margin: 0 auto; background: rgba(5, 7, 37, 0.4); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid var(--accent); border-radius: 15px; padding: 50px; box-shadow: 0 0 50px rgba(255, 215, 0, 0.1); }
+.calc-container { max-width: 900px; margin: 0 auto; background: rgba(5, 7, 37, 0.7); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1.5px solid #FFD700; border-radius: 15px; padding: 50px; box-shadow: 0 0 50px rgba(255, 215, 0, 0.1); }
 .calc-steps { display: flex; justify-content: space-between; margin-bottom: 50px; position: relative; padding: 0; }
 .calc-steps::before { content: ''; position: absolute; top: 20px; left: 30px; right: 30px; height: 2px; background: rgba(255,255,255,0.1); z-index: 0; }
 .step-item { position: relative; z-index: 1; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; width: 80px; }
@@ -19,7 +19,7 @@
 .size-grid { display: grid; grid-template-columns: 1fr; gap: 30px; margin-bottom: 40px; }
 .status-options { display: flex; gap: 15px; justify-content: center; margin-bottom: 40px; }
 .status-btn { flex: 1; padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: var(--text-muted); cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 14px; }
-.status-btn.active { background: rgba(255, 165, 0, 0.15); border-color: #ffa500; color: #fff; box-shadow: 0 0 15px rgba(255, 165, 0, 0.2); }
+.status-btn.active { background: rgba(255, 215, 0, 0.1); border-color: var(--accent); color: #fff; box-shadow: 0 0 15px rgba(255, 215, 0, 0.2); }
 .status-btn i { font-size: 16px; }
 
 /* Room Controls */
@@ -67,7 +67,7 @@
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
 @media (max-width: 768px) {
-    .calc-container { padding: 30px 15px; border-radius: 15px; border: 1px solid var(--accent); margin: 0 10px; width: auto; }
+    .calc-container { padding: 30px 15px; border-radius: 15px; border: 1.5px solid #FFD700; margin: 0 10px; width: auto; }
     .calc-steps { margin-bottom: 30px; gap: 5px; }
     .step-item { width: 55px; }
     .step-num { width: 30px; height: 30px; font-size: 12px; }
