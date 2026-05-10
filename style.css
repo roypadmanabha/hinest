@@ -285,6 +285,10 @@ img {
     letter-spacing:2px; 
     color: #fff;
 }
+.heading-num { display: none; }
+@media (min-width: 1025px) {
+    .heading-num { display: inline; }
+}
 .service-desc { 
     color:var(--text-muted); 
     font-size:16px; 
