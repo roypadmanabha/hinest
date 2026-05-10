@@ -408,9 +408,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Prepare data for Google Sheets
             const scriptURL = 'https://script.google.com/macros/s/AKfycbxSdRvm9DA1Xf3BdiDhRmoNoSLaw5cG-MgNaSQWanJZe9zBXk_FilhzaqvLCsrChll4/exec';
+            
+            // Convert FormData to URLSearchParams for better Google Script compatibility
+            const sheetData = new URLSearchParams();
             const formData = new FormData(form);
+            for (const [key, value] of formData.entries()) {
+                sheetData.append(key, value);
+            }
             if (formId === 'calc-final-form') {
-                formData.append('total_estimate', `₹${finalTotal.toLocaleString('en-IN')}`);
+                sheetData.append('total_estimate', `₹${finalTotal.toLocaleString('en-IN')}`);
             }
 
             // Send to FormSubmit (Email)
@@ -423,8 +429,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Send to Google Sheets (Sheets)
             const googleSheetsPromise = fetch(scriptURL, { 
                 method: 'POST', 
-                body: formData,
-                mode: 'no-cors' // Google Script requires no-cors if not using specialized headers
+                body: sheetData,
+                mode: 'no-cors'
             });
 
             Promise.allSettled([formSubmitPromise, googleSheetsPromise])
