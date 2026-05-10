@@ -1,9 +1,9 @@
 /* Multi-Step Cost Calculator */
-.calc-container { max-width: 900px; margin: 0 auto; background: rgba(5, 7, 37, 0.4); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid var(--accent); border-radius: 15px; padding: 50px; box-shadow: 0 0 50px rgba(255, 215, 0, 0.1); }
+.calc-container { max-width: 900px; margin: 0 auto; background: linear-gradient(135deg, #1a1a4d 0%, #0a0a2e 100%); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid #FFD700; border-radius: 15px; padding: 50px; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
 .calc-steps { display: flex; justify-content: space-between; margin-bottom: 50px; position: relative; padding: 0; }
 .calc-steps::before { content: ''; position: absolute; top: 20px; left: 30px; right: 30px; height: 2px; background: rgba(255,255,255,0.1); z-index: 0; }
 .step-item { position: relative; z-index: 1; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; width: 80px; }
-.step-num { width: 40px; height: 40px; background: #1a1c3d; border: 2px solid rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--text-muted); transition: all 0.4s ease; }
+.step-num { width: 40px; height: 40px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--text-muted); transition: all 0.4s ease; }
 .step-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); }
 .step-item.active .step-num { background: var(--accent); border-color: var(--accent); color: #000; box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
 .step-item.active .step-label { color: var(--accent); font-weight: 700; }
@@ -19,7 +19,7 @@
 .size-grid { display: grid; grid-template-columns: 1fr; gap: 30px; margin-bottom: 40px; }
 .status-options { display: flex; gap: 15px; justify-content: center; margin-bottom: 40px; }
 .status-btn { flex: 1; padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: var(--text-muted); cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 14px; }
-.status-btn.active { background: rgba(255, 165, 0, 0.15); border-color: #ffa500; color: #fff; box-shadow: 0 0 15px rgba(255, 165, 0, 0.2); }
+.status-btn.active { background: rgba(255, 215, 0, 0.1); border-color: #FFD700; color: #fff; box-shadow: 0 0 15px rgba(255, 215, 0, 0.2); }
 .status-btn i { font-size: 16px; }
 
 /* Room Controls */
@@ -28,14 +28,14 @@
 .room-info { display: flex; flex-direction: column; }
 .room-name { font-weight: 600; font-size: 15px; color: #fff; }
 .room-controls { display: flex; align-items: center; gap: 20px; }
-.control-btn { width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--accent); color: var(--accent); background: transparent; cursor: default; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+.control-btn { width: 32px; height: 32px; border-radius: 8px; border: 1px solid #FFD700; color: #FFD700; background: transparent; cursor: default; display: flex; align-items: center; justify-content: center; font-size: 18px; }
 .room-count { font-family: var(--font-h); font-weight: 700; width: 20px; text-align: center; color: #fff; }
 
 /* Add-ons */
 .addons-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
 .addon-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 15px; padding: 20px; cursor: default; display: flex; align-items: center; gap: 15px; }
 .addon-card.selected { border-color: var(--accent); background: rgba(255, 215, 0, 0.05); }
-.addon-checkbox { width: 20px; height: 20px; border: 2px solid var(--accent); border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.addon-checkbox { width: 20px; height: 20px; border: 2px solid #FFD700; border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .addon-card.selected .addon-checkbox { background: var(--accent); }
 .addon-card.selected .addon-checkbox::after { content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: #000; font-size: 12px; }
 .addon-text { font-size: 14px; font-weight: 500; color: var(--text-muted); }
@@ -57,7 +57,7 @@
 .calc-nav { display: flex; justify-content: space-between; margin-top: 50px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); }
 .btn-calc { padding: 12px 35px; border-radius: 10px; font-weight: 700; cursor: pointer; transition: all 0.3s; border: none; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
 .btn-prev { background: rgba(255,255,255,0.1); color: #fff; cursor: default; }
-.btn-next { background: var(--accent); color: #000; cursor: default; }
+.btn-next { background: #FFD700; color: #000; cursor: default; }
 
 /* Final Step */
 .final-result { text-align: center; }
