@@ -268,7 +268,10 @@ img {
 .service-icon { font-size:32px; color:var(--accent); margin-bottom:25px; }
 .service-name { font-family:var(--font-h); font-size:22px; font-weight:700; margin-bottom:15px; text-transform:uppercase; letter-spacing:1px; }
 .service-desc { color:var(--text-muted); font-size:15px; margin-bottom:25px; text-align: justify; }
-.service-link { font-family:var(--font-h); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:2px; color:var(--accent); display:inline-flex; align-items:center; gap:10px; }
+.service-link { font-family:var(--font-h); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:2px; color:var(--accent); display:none; align-items:center; gap:10px; }
+@media (max-width: 1024px) {
+    .service-link { display: inline-flex; }
+}
 .service-link i { font-size:11px; transition:transform 0.3s; }
 .service-link:hover i { transform:translateX(5px); }
 
