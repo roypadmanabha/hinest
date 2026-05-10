@@ -499,6 +499,35 @@ document.addEventListener('DOMContentLoaded', () => {
     if (termsCloseBtn) termsCloseBtn.addEventListener('click', closeTerms);
     if (termsOverlay) termsOverlay.addEventListener('click', closeTerms);
 
+    // Privacy Policy Modal Logic
+    const privacyModal = document.getElementById('privacy-modal');
+    const privacyTrigger = document.getElementById('privacy-trigger');
+    const privacyCloseBtn = document.getElementById('privacy-modal-close');
+    const privacyOverlay = document.getElementById('privacy-modal-overlay');
+
+    const openPrivacy = (e) => {
+        if (e) e.preventDefault();
+        if (privacyModal) {
+            privacyModal.style.display = 'flex';
+            setTimeout(() => privacyModal.classList.add('active'), 10);
+            document.body.style.overflow = 'hidden';
+        }
+    };
+
+    const closePrivacy = () => {
+        if (privacyModal) {
+            privacyModal.classList.remove('active');
+            setTimeout(() => {
+                privacyModal.style.display = 'none';
+                document.body.style.overflow = '';
+            }, 500);
+        }
+    };
+
+    if (privacyTrigger) privacyTrigger.addEventListener('click', openPrivacy);
+    if (privacyCloseBtn) privacyCloseBtn.addEventListener('click', closePrivacy);
+    if (privacyOverlay) privacyOverlay.addEventListener('click', closePrivacy);
+
     // ==========================================
     // Multi-Step Cost Calculator Logic
     // ==========================================
