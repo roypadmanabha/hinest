@@ -137,7 +137,14 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             card.classList.toggle('expanded');
-            link.innerHTML = card.classList.contains('expanded') ? 'Read Less' : 'Read More';
+            
+            const btnText = card.classList.contains('expanded') ? 'Read Less' : 'Read More';
+            link.innerHTML = `${btnText} <i class="fas fa-arrow-right"></i>`;
+            
+            const icon = link.querySelector('i');
+            if (icon) {
+                icon.style.transform = card.classList.contains('expanded') ? 'rotate(-90deg)' : 'none';
+            }
         });
     });
 

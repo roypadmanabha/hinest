@@ -785,7 +785,29 @@ select option { background:#050725; color:var(--text); }
         justify-content: center;
     }
     .service-desc {
-        display: none; /* Hide description on mobile grid to keep cards compact and equal */
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        text-align: center;
+        font-size: 13px;
+        margin-bottom: 0;
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        transform-origin: top;
+        transform: perspective(1000px) rotateX(-30deg) scaleY(0.8);
+        pointer-events: none;
+    }
+    .service-card.expanded .service-desc {
+        max-height: 500px;
+        opacity: 1;
+        margin-bottom: 20px;
+        transform: perspective(1000px) rotateX(0deg) scaleY(1);
+        pointer-events: auto;
+    }
+    .service-card.expanded {
+        grid-row: span 2; /* Allow card to grow without breaking grid flow if needed, but auto-rows: 1fr handles most cases */
+        height: auto;
+        min-height: 100%;
+        z-index: 10;
     }
     .service-num {
         margin-bottom: 15px;
