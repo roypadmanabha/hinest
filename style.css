@@ -414,7 +414,7 @@ img {
 .form-group label { display:block; font-family:var(--font-h); font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:2px; color:var(--accent); margin-bottom:12px; }
 input, textarea, select { 
   width:100%; 
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid #FFD700;
@@ -642,15 +642,15 @@ select option { background:#050725; color:var(--text); }
 .form-subtitle { color: rgba(255, 255, 255, 0.6); font-size: 14px; margin-bottom: 30px; }
 .consult-form .form-group { margin-bottom: 20px; }
 .consult-form label { display: block; font-family: var(--font-h); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); margin-bottom: 8px; }
-.consult-form input, .consult-form select, .consult-form textarea { width: 100%; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 14px 18px; color: #fff; font-size: 14px; transition: all 0.3s; }
-.consult-form input:focus, .consult-form select:focus, .consult-form textarea:focus { outline: none; border-color: #007bff; background: rgba(255, 255, 255, 0.08); box-shadow: 0 0 20px rgba(0, 123, 255, 0.3); }
+.consult-form input, .consult-form select, .consult-form textarea { width: 100%; background: rgba(255, 255, 255, 0.05); border: 1px solid #FFD700; border-radius: 15px; padding: 14px 18px; color: #fff; font-size: 14px; transition: all 0.3s; }
+.consult-form input:focus, .consult-form select:focus, .consult-form textarea:focus { outline: none; border-color: #FFD700; background: rgba(255, 255, 255, 0.08); box-shadow: 0 0 20px rgba(255, 215, 0, 0.2); }
 
 .form-row { display: flex; gap: 15px; }
 .name-row .first-name { flex: 1.8; }
 .name-row .last-name { flex: 1; }
 
 .mobile-input-group { display: flex; align-items: center; gap: 10px; }
-.country-code-fixed { background: rgba(0, 0, 0, 0.2); padding: 14px 15px; border-radius: 15px; border: 1px solid #FFD700; color: var(--accent); font-weight: 800; font-size: 14px; min-width: 65px; text-align: center; }
+.country-code-fixed { background: rgba(255, 255, 255, 0.1); padding: 14px 15px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1); color: var(--accent); font-weight: 800; font-size: 14px; min-width: 65px; text-align: center; }
 
 .location-row { display: grid; grid-template-columns: 1.2fr 1fr; }
 .consult-form textarea { height: 100px; resize: none; line-height: 1.6; }
