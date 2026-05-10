@@ -14,7 +14,25 @@
   --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+*, *::before, *::after { 
+  margin:0; 
+  padding:0; 
+  box-sizing:border-box; 
+  /* Content Protection: Disable Selection */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+img, a, .project-card, .service-card {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}
 html { scroll-behavior:smooth; overflow-x:hidden; }
 body { 
   background: linear-gradient(to bottom, #000000 0%, #001a4d 50%, #000000 100%);
