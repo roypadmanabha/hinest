@@ -78,10 +78,12 @@
     .room-item { padding: 12px 15px; }
     .room-name { font-size: 13px; }
     .room-controls { gap: 12px; }
-    .control-btn { width: 30px; height: 30px; font-size: 14px; }
-    .result-amount { font-size: 38px; }
-    .calc-nav { margin-top: 30px; padding-top: 20px; flex-direction: column; gap: 15px; }
-    .btn-calc { width: 100%; padding: 15px; font-size: 14px; }
+    .calc-title { font-size: 20px; margin-bottom: 15px; }
+    .calc-subtitle { font-size: 13px; margin-bottom: 25px; }
+    .size-grid { margin-bottom: 20px; }
+    .status-options { margin-bottom: 25px; }
+    .calc-nav { margin-top: 25px; padding-top: 15px; flex-direction: column; gap: 12px; }
+    .btn-calc { width: 100%; padding: 14px; font-size: 13px; }
     
     /* Center the only visible button on mobile */
     .calc-nav { justify-content: center; align-items: center; }
