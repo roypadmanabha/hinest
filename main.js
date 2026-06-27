@@ -1,16 +1,8 @@
 /* Hinest Interiors - Interactive Logic */
 document.addEventListener('DOMContentLoaded', () => {
 
-    // 1. Preloader
-    const preloader = document.getElementById('preloader');
-    window.addEventListener('load', () => {
-        setTimeout(() => {
-            gsap.to(preloader, { opacity: 0, duration: 0.8, onComplete: () => {
-                preloader.style.display = 'none';
-                animateHero();
-            }});
-        }, 1800);
-    });
+    // 1. Preloader (Removed welcome loading screen)
+    animateHero();
 
     // 2. Sticky Header
     const header = document.getElementById('header');
@@ -22,20 +14,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const hamburger = document.getElementById('hamburger');
     const mobileClose = document.getElementById('mobile-close');
     const mobileMenu = document.getElementById('mobile-menu');
+    const mobileOverlay = document.getElementById('mobile-menu-overlay');
 
     function toggleMenu() {
         hamburger.classList.toggle('active');
         mobileMenu.classList.toggle('active');
+        if (mobileOverlay) {
+            mobileOverlay.classList.toggle('active');
+        }
         document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
     }
 
     hamburger.addEventListener('click', toggleMenu);
     mobileClose.addEventListener('click', toggleMenu);
+    if (mobileOverlay) {
+        mobileOverlay.addEventListener('click', toggleMenu);
+    }
 
     document.querySelectorAll('.mobile-link').forEach(link => {
         link.addEventListener('click', () => {
             hamburger.classList.remove('active');
             mobileMenu.classList.remove('active');
+            if (mobileOverlay) {
+                mobileOverlay.classList.remove('active');
+            }
             document.body.style.overflow = '';
         });
     });
@@ -62,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
           .from('.hero-desc', { y: 30, opacity: 0, duration: 0.8 }, 0.9)
           .from('.hero-btns', { y: 30, opacity: 0, duration: 0.8 }, 1.1)
           .to('.hero-img', { scale: 1, duration: 3, ease: 'power2.out' }, 0);
-        initScrollAnimations();
     }
 
     // 6. Scroll Reveal
@@ -289,6 +290,24 @@ document.addEventListener('DOMContentLoaded', () => {
         if (formId === 'calc-final-form') {
             const boxes = form.querySelectorAll('.otp-box');
             boxes.forEach((box, idx) => {
+                // Paste Handler
+                box.addEventListener('paste', (e) => {
+                    e.stopPropagation(); // Stop global paste blocker
+                    const data = (e.clipboardData || window.clipboardData).getData('text').trim();
+                    if (data.length > 0) {
+                        const chars = data.split('');
+                        chars.forEach((char, charIdx) => {
+                            if (idx + charIdx < boxes.length) {
+                                boxes[idx + charIdx].value = char;
+                            }
+                        });
+                        // Focus the correct box after pasting
+                        const nextFocusIdx = Math.min(idx + chars.length, boxes.length - 1);
+                        boxes[nextFocusIdx].focus();
+                    }
+                    e.preventDefault();
+                });
+
                 box.addEventListener('input', (e) => {
                     const val = e.target.value;
                     if (val && idx < boxes.length - 1) {
@@ -735,9 +754,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // 15. Content Protection - Disable Right Click, Copy, Paste, Selection, and Drag
     document.addEventListener('contextmenu', event => event.preventDefault());
     
-    document.addEventListener('copy', event => event.preventDefault());
-    document.addEventListener('cut', event => event.preventDefault());
-    document.addEventListener('paste', event => event.preventDefault());
+    document.addEventListener('copy', event => {
+        if (event.target.classList.contains('otp-box')) return;
+        event.preventDefault();
+    });
+    document.addEventListener('cut', event => {
+        if (event.target.classList.contains('otp-box')) return;
+        event.preventDefault();
+    });
+    document.addEventListener('paste', event => {
+        if (event.target.classList.contains('otp-box')) return;
+        event.preventDefault();
+    });
     
     document.addEventListener('dragstart', event => event.preventDefault());
     document.addEventListener('selectstart', event => event.preventDefault());
@@ -748,6 +776,7 @@ document.addEventListener('DOMContentLoaded', () => {
             (e.ctrlKey || e.metaKey) && 
             (e.key === 'c' || e.key === 'v' || e.key === 'x' || e.key === 'u' || e.key === 's' || e.key === 'i' || e.key === 'j')
         ) {
+            if (e.target.classList.contains('otp-box')) return;
             e.preventDefault();
             return false;
         }

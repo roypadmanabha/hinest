@@ -122,74 +122,111 @@ img {
 .mobile-menu { 
   position:fixed; 
   top:0; 
-  right:-100%; 
-  width:100%; 
+  right:-50%; 
+  width:50%; 
   height:100vh; 
-  background: #00021f;
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
+  background: rgba(0, 2, 31, 0.7); /* translucent dark blue matching Hinest style */
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
   z-index: 1100; 
-  transition: all 0.6s cubic-bezier(0.85, 0, 0.15, 1); 
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); 
   display:flex; 
   flex-direction:column; 
   padding: 0;
   overflow:hidden; 
   opacity: 0;
   visibility: hidden;
+  border-left: 1px solid rgba(255, 215, 0, 0.15); /* gold border on the left edge */
 }
-.mobile-menu.active { right:0; opacity: 1; visibility: visible; }
+.mobile-menu.active { 
+  right:0; 
+  opacity: 1; 
+  visibility: visible; 
+}
+
+.mobile-menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 1099;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s ease;
+}
+.mobile-menu-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
 
 .mobile-menu-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 60px 40px 30px;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 45px 30px 25px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 .mobile-logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 .mobile-brand-logo-inner {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 0.5px solid var(--accent);
-    object-fit: cover;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  object-fit: cover;
 }
 .mobile-logo .logo-text {
-    font-family: var(--font-h);
-    font-size: 24px;
-    font-weight: 800;
-    color: var(--accent);
-    letter-spacing: -0.5px;
+  font-family: var(--font-h);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: -0.5px;
 }
 .mobile-close {
-    background: none;
-    border: none;
-    color: var(--accent);
-    font-size: 24px;
-    cursor: pointer;
-    transition: all 0.3s;
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 22px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+.mobile-close:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: rotate(90deg);
 }
 
 .mobile-menu-inner {
-    padding: 40px;
+  padding: 25px 30px;
 }
 .mobile-nav { 
-    display: flex; 
-    flex-direction: column; 
-    gap: 15px; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 8px; 
 }
 .mobile-link { 
   display: flex; 
   align-items: center; 
-  gap: 20px; 
-  padding: 12px 0;
-  transition: all 0.4s var(--ease);
-  transform: translateX(20px);
+  gap: 16px; 
+  padding: 14px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  text-decoration: none;
+  transition: all 0.3s var(--ease);
+  transform: translateX(30px);
   opacity: 0;
+  border-radius: 12px;
+}
+.mobile-link:last-child {
+  border-bottom: none;
 }
 .mobile-menu.active .mobile-link {
   transform: translateX(0);
@@ -202,33 +239,82 @@ img {
 .mobile-menu.active .mobile-link:nth-child(5) { transition-delay: 0.3s; }
 
 .mobile-icon {
-  width: 44px;
-  height: 44px;
-  background: rgba(255, 215, 0, 0.05);
-  border-radius: 12px;
+  width: 42px;
+  height: 42px;
+  background: rgba(255, 215, 0, 0.06); /* Soft translucent gold background for icon */
+  border-radius: 50%; /* Circular icon container */
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--accent);
-  font-size: 14px;
-  transition: all 0.4s var(--ease);
+  font-size: 16px;
+  transition: all 0.3s var(--ease);
+  flex-shrink: 0;
 }
 .mobile-text {
   font-family: var(--font-h);
-  font-size: 18px;
-  font-weight: 700;
-  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
   letter-spacing: 0.5px;
   text-transform: none;
-  transition: all 0.4s var(--ease);
+  transition: all 0.3s var(--ease);
 }
 
+.mobile-link:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
 .mobile-link:hover .mobile-icon { 
   background: var(--accent); 
   color: #000; 
+  transform: scale(1.05);
 }
 .mobile-link:hover .mobile-text { color: var(--accent); }
-.mobile-link.accent .mobile-text { color: var(--accent); }
+.mobile-link.accent .mobile-text { color: var(--accent); font-weight: 700; }
+.mobile-link.accent .mobile-icon { background: rgba(255, 215, 0, 0.12); }
+
+/* Responsive adjustments for 50% width menu on tiny screens */
+@media (max-width: 480px) {
+  .mobile-menu {
+    width: 50%;
+    right: -50%;
+  }
+  .mobile-menu-header {
+    padding: 30px 15px 15px;
+    gap: 8px;
+  }
+  .mobile-brand-logo-inner {
+    width: 28px;
+    height: 28px;
+  }
+  .mobile-logo .logo-text {
+    font-size: 13px;
+  }
+  .mobile-logo .logo-text span {
+    display: none; /* Hide the word "Interiors" on very narrow screens to prevent text wrap issues */
+  }
+  .mobile-close {
+    font-size: 18px;
+    width: 28px;
+    height: 28px;
+  }
+  .mobile-menu-inner {
+    padding: 15px;
+  }
+  .mobile-link {
+    gap: 10px;
+    padding: 10px 6px;
+    border-radius: 8px;
+  }
+  .mobile-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+  .mobile-text {
+    font-size: 13px;
+  }
+}
 
 /* Buttons */
 .btn { display:inline-block; font-family:var(--font-h); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:3px; padding:18px 45px; transition:all 0.5s var(--ease); cursor:pointer; border:none; text-align:center; border-radius: 10px; }
