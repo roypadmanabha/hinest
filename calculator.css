@@ -1,9 +1,9 @@
 /* Multi-Step Cost Calculator */
-.calc-container { max-width: 900px; margin: 0 auto; background: linear-gradient(135deg, #1a1a4d 0%, #0a0a2e 100%); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid #FFD700; border-radius: 15px; padding: 50px; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
+.calc-container { max-width: 900px; margin: 0 auto; background: #17202A; backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 50px; box-shadow: 0 0 50px rgba(0,0,0,0.8); }
 .calc-steps { display: flex; justify-content: space-between; margin-bottom: 50px; position: relative; padding: 0; }
 .calc-steps::before { content: ''; position: absolute; top: 20px; left: 30px; right: 30px; height: 2px; background: rgba(255,255,255,0.1); z-index: 0; }
 .step-item { position: relative; z-index: 1; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; width: 80px; }
-.step-num { width: 40px; height: 40px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--text-muted); transition: all 0.4s ease; }
+.step-num { width: 40px; height: 40px; background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255,255,255,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--text-muted); transition: all 0.4s ease; }
 .step-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); }
 .step-item.active .step-num { background: var(--accent); border-color: var(--accent); color: #000; box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
 .step-item.active .step-label { color: var(--accent); font-weight: 700; }
@@ -18,13 +18,13 @@
 /* Home Size & Status */
 .size-grid { display: grid; grid-template-columns: 1fr; gap: 30px; margin-bottom: 40px; }
 .status-options { display: flex; gap: 15px; justify-content: center; margin-bottom: 40px; }
-.status-btn { flex: 1; padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: var(--text-muted); cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 14px; }
+.status-btn { flex: 1; padding: 15px; background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: var(--text-muted); cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 14px; }
 .status-btn.active { background: rgba(255, 215, 0, 0.1); border-color: #FFD700; color: #fff; box-shadow: 0 0 15px rgba(255, 215, 0, 0.2); }
 .status-btn i { font-size: 16px; }
 
 /* Room Controls */
 .rooms-list { display: flex; flex-direction: column; gap: 15px; }
-.room-item { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 15px; padding: 15px 25px; display: flex; align-items: center; justify-content: space-between; }
+.room-item { background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 15px; padding: 15px 25px; display: flex; align-items: center; justify-content: space-between; }
 .room-info { display: flex; flex-direction: column; }
 .room-name { font-weight: 600; font-size: 15px; color: #fff; }
 .room-controls { display: flex; align-items: center; gap: 20px; }
@@ -33,7 +33,7 @@
 
 /* Add-ons */
 .addons-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-.addon-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 15px; padding: 20px; cursor: default; display: flex; align-items: center; gap: 15px; }
+.addon-card { background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 15px; padding: 20px; cursor: default; display: flex; align-items: center; gap: 15px; }
 .addon-card.selected { border-color: var(--accent); background: rgba(255, 215, 0, 0.05); }
 .addon-checkbox { width: 20px; height: 20px; border: 2px solid #FFD700; border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .addon-card.selected .addon-checkbox { background: var(--accent); }
@@ -43,7 +43,7 @@
 
 /* Packages */
 .package-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.package-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 30px 20px; cursor: default; text-align: center; position: relative; overflow: hidden; }
+.package-card { background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 30px 20px; cursor: default; text-align: center; position: relative; overflow: hidden; }
 .package-card.selected { border-color: var(--accent); background: rgba(255, 215, 0, 0.05); box-shadow: 0 0 30px rgba(255, 215, 0, 0.1); }
 .package-badge { position: absolute; top: 15px; right: -30px; background: var(--accent); color: #000; font-size: 10px; font-weight: 800; padding: 5px 35px; transform: rotate(45deg); display: none; }
 .package-card.selected .package-badge { display: block; }
@@ -117,3 +117,175 @@
 .form-status-msg { padding: 12px 15px; border-radius: 10px; font-size: 12px; font-weight: 600; text-align: center; font-family: var(--font-b); }
 .form-status-msg.success { background: rgba(0, 200, 83, 0.1); border: 1px solid rgba(0, 200, 83, 0.3); color: #00c853; }
 .form-status-msg.error { background: rgba(255, 77, 77, 0.1); border: 1px solid rgba(255, 77, 77, 0.3); color: #ff4d4d; }
+
+.custom-select-wrapper.has-error .custom-select-trigger {
+    border-color: #ff4d4d !important;
+    box-shadow: 0 0 15px rgba(255, 77, 77, 0.4) !important;
+    animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
+}
+
+/* Construction Calculator Specific Styles */
+.calc-reset-wrap { text-align: center; margin-top: 25px; }
+.btn-calc-reset {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--text-dim);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    border-radius: 20px;
+}
+.btn-calc-reset:hover {
+    color: #FFD700;
+    border-color: #FFD700;
+    background: rgba(255, 215, 0, 0.08);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+}
+.btn-calc-reset i { font-size: 11px; }
+
+.construction-calc-box {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: 16px;
+    padding: 24px;
+    margin-top: 15px;
+}
+.formula-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 215, 0, 0.08);
+    border: 1px dashed #FFD700;
+    border-radius: 10px;
+    padding: 12px 18px;
+    color: #FFD700;
+    font-size: 13px;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+.formula-badge i { font-size: 16px; }
+.dimensions-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+.dim-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.dim-group label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+}
+.dim-group input {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    padding: 12px 14px;
+    color: #fff;
+    font-size: 14px;
+    font-family: var(--font-h);
+    font-weight: 700;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    width: 100%;
+}
+.dim-group input:focus {
+    border-color: #FFD700;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.25);
+    outline: none;
+    background: rgba(255, 215, 0, 0.03);
+}
+.construction-summary-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 18px 24px;
+}
+.summary-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.summary-stat .stat-lbl {
+    font-size: 10px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    letter-spacing: 0.5px;
+}
+.summary-stat .stat-val {
+    font-size: 16px;
+    font-weight: 800;
+    color: #fff;
+}
+.summary-stat.highlight .stat-val {
+    color: #FFD700;
+    font-size: 18px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+.summary-divider {
+    color: #FFD700;
+    font-weight: 800;
+    font-size: 12px;
+    opacity: 0.8;
+    background: rgba(255, 215, 0, 0.1);
+    padding: 4px 10px;
+    border-radius: 6px;
+}
+.construction-scope-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+.scope-item {
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: 14px;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+.scope-item i {
+    font-size: 24px;
+    color: #FFD700;
+    margin-bottom: 10px;
+    display: block;
+}
+.scope-item h4 {
+    font-size: 15px;
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+.scope-item p {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+@media (max-width: 768px) {
+    .dimensions-grid { grid-template-columns: 1fr; }
+    .construction-summary-card { flex-direction: column; gap: 12px; align-items: stretch; text-align: center; }
+    .summary-divider { align-self: center; }
+    .construction-scope-grid { grid-template-columns: 1fr; }
+}
+

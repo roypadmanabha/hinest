@@ -1,7 +1,15 @@
-/* Hinest Interiors - Interactive Logic */
+/* Hinest Infrastructure - Interactive Logic */
 document.addEventListener('DOMContentLoaded', () => {
 
-    // 1. Preloader (Removed welcome loading screen)
+    // 1. Preloader
+    const preloader = document.querySelector('.preloader');
+    if (preloader) {
+        setTimeout(() => {
+            preloader.style.transition = 'opacity 0.4s ease';
+            preloader.style.opacity = '0';
+            setTimeout(() => preloader.remove(), 400);
+        }, 500);
+    }
     animateHero();
 
     // 2. Sticky Header
@@ -350,7 +358,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 last_name: lastName,
                 passcode: otpCode,
                 time: new Date(Date.now() + 15 * 60000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-                message: `Your verification code for Hinest Interiors estimate is: ${otpCode}`
+                message: `Your verification code for Hinest Infrastructure estimate is: ${otpCode}`
             });
         };
 
@@ -418,26 +426,51 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.textContent = 'Processing...';
             submitBtn.disabled = true;
 
-            const baseRate = 1200;
-            const roomRate = 85000;
-            let roomsTotal = Object.values(calcData.rooms).reduce((a, b) => a + b, 0) * roomRate;
-            let addonsTotal = calcData.addons.reduce((a, b) => a + b, 0);
-            let sizeBase = calcData.size * baseRate * calcData.multiplier;
-            let statusMultiplier = 1;
-            if (calcData.status === 'under-const') statusMultiplier = 1.1;
-            if (calcData.status === 'ready') statusMultiplier = 1.05;
-            const finalTotal = Math.round((sizeBase + roomsTotal + addonsTotal) * statusMultiplier);
+            let finalTotal = 0;
+            if (calcData.service === 'construction') {
+                const constAddonsTotal = calcData.constAddons.reduce((a, b) => a + b, 0);
+                finalTotal = Math.round((calcData.builtUpSqft * calcData.constructionRate) + constAddonsTotal);
+            } else {
+                const baseRate = 1200;
+                const roomRate = 85000;
+                let roomsTotal = Object.values(calcData.rooms).reduce((a, b) => a + b, 0) * roomRate;
+                let addonsTotal = calcData.addons.reduce((a, b) => a + b, 0);
+                let sizeBase = calcData.size * baseRate * calcData.multiplier;
+                let statusMultiplier = 1;
+                if (calcData.status === 'under-const') statusMultiplier = 1.1;
+                if (calcData.status === 'ready') statusMultiplier = 1.05;
+                finalTotal = Math.round((sizeBase + roomsTotal + addonsTotal) * statusMultiplier);
+            }
 
             if (formId === 'calc-final-form') {
+                const hiddenService = document.getElementById('hidden-service');
                 const hiddenSize = document.getElementById('hidden-size');
                 const hiddenTotal = document.getElementById('hidden-total');
                 const hiddenRooms = document.getElementById('hidden-rooms');
                 const hiddenAddons = document.getElementById('hidden-addons');
+                const hiddenConstType = document.getElementById('hidden-const-type');
+                const hiddenConstDim = document.getElementById('hidden-const-dimensions');
+                const hiddenConstBuiltup = document.getElementById('hidden-const-builtup');
 
-                if (hiddenSize) hiddenSize.value = `${calcData.size} sq ft`;
-                if (hiddenTotal) hiddenTotal.value = `₹${finalTotal.toLocaleString('en-IN')}`;
-                if (hiddenRooms) hiddenRooms.value = JSON.stringify(calcData.rooms);
-                if (hiddenAddons) hiddenAddons.value = `${calcData.addons.length} addons selected`;
+                if (hiddenService) hiddenService.value = calcData.service === 'construction' ? 'Construction' : 'Interior Design';
+                
+                if (calcData.service === 'construction') {
+                    if (hiddenSize) hiddenSize.value = `${calcData.sqft} sq ft plot`;
+                    if (hiddenTotal) hiddenTotal.value = `₹${finalTotal.toLocaleString('en-IN')}`;
+                    if (hiddenRooms) hiddenRooms.value = `Construction Scope (${calcData.constructionTypeLabel || 'Standard'})`;
+                    if (hiddenAddons) hiddenAddons.value = `${calcData.constAddons.length} construction add-ons selected`;
+                    if (hiddenConstType) hiddenConstType.value = calcData.constructionTypeLabel || 'G+1 Residential';
+                    if (hiddenConstDim) hiddenConstDim.value = `${calcData.length}m x ${calcData.breadth}m = ${calcData.sqm} sqm (${calcData.sqft} sq ft)`;
+                    if (hiddenConstBuiltup) hiddenConstBuiltup.value = `${calcData.builtUpSqft} sq ft (${calcData.floors} Floors)`;
+                } else {
+                    if (hiddenSize) hiddenSize.value = `${calcData.size} sq ft`;
+                    if (hiddenTotal) hiddenTotal.value = `₹${finalTotal.toLocaleString('en-IN')}`;
+                    if (hiddenRooms) hiddenRooms.value = JSON.stringify(calcData.rooms);
+                    if (hiddenAddons) hiddenAddons.value = `${calcData.addons.length} interior add-ons selected`;
+                    if (hiddenConstType) hiddenConstType.value = 'N/A';
+                    if (hiddenConstDim) hiddenConstDim.value = 'N/A';
+                    if (hiddenConstBuiltup) hiddenConstBuiltup.value = 'N/A';
+                }
             }
 
             // Prepare data for Google Sheets
@@ -596,12 +629,172 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentStep = 1;
     const totalSteps = 5;
     const calcData = {
+        service: '',
         size: null,
         status: 'ready',
         rooms: { living: 0, kitchen: 0, bedroom: 0, bathroom: 0, dining: 0 },
         addons: [],
-        multiplier: 1.5
+        multiplier: 1.5,
+
+        // Construction Specific Data
+        constructionType: '',
+        constructionTypeLabel: '',
+        length: 0,
+        breadth: 0,
+        sqm: 0,
+        sqft: 0,
+        floors: 2,
+        builtUpSqft: 0,
+        constructionRate: 2350,
+        constAddons: []
     };
+
+    const updateServiceFlowUI = () => {
+        const service = calcData.service;
+        const isConstruction = service === 'construction';
+        const isInterior = service === 'interior';
+
+        // Toggle step content wrappers
+        document.querySelectorAll('#interior-step-1-wrapper, #interior-step-2-wrapper, #interior-step-3-wrapper, #interior-step-4-wrapper').forEach(el => {
+            if (el) el.style.display = isInterior ? 'block' : 'none';
+        });
+        document.querySelectorAll('#construction-step-1-wrapper, #construction-step-2-wrapper, #construction-step-3-wrapper, #construction-step-4-wrapper').forEach(el => {
+            if (el) el.style.display = isConstruction ? 'block' : 'none';
+        });
+
+        // Update titles & stepper labels
+        const step1Label = document.querySelector('.step-item[data-step="1"] .step-label');
+        const step2Label = document.querySelector('.step-item[data-step="2"] .step-label');
+        const title1 = document.getElementById('calc-step1-title');
+        const title2 = document.getElementById('calc-step2-title');
+        const title3 = document.getElementById('calc-step3-title');
+        const title4 = document.getElementById('calc-step4-title');
+
+        if (isConstruction) {
+            if (step1Label) step1Label.textContent = 'Area';
+            if (step2Label) step2Label.textContent = 'Scope';
+            if (title1) title1.textContent = 'Structure & Plot Dimensions';
+            if (title2) title2.textContent = 'Included Construction Scope';
+            if (title3) title3.textContent = 'Select Construction Add-ons';
+            if (title4) title4.textContent = 'Select Construction Finish Level';
+        } else if (isInterior) {
+            if (step1Label) step1Label.textContent = 'Size';
+            if (step2Label) step2Label.textContent = 'Rooms';
+            if (title1) title1.textContent = 'Tell us about your home';
+            if (title2) title2.textContent = 'Configure your space';
+            if (title3) title3.textContent = 'Enhance your design';
+            if (title4) title4.textContent = 'Choose your finish level';
+        } else {
+            if (step1Label) step1Label.textContent = 'Service';
+            if (step2Label) step2Label.textContent = 'Details';
+            if (title1) title1.textContent = 'Tell us about your project';
+        }
+    };
+
+    // Service Selection Listener
+    const calcServiceSelect = document.getElementById('calc-service-type');
+    if (calcServiceSelect) {
+        calcServiceSelect.addEventListener('change', (e) => {
+            calcData.service = e.target.value;
+            updateServiceFlowUI();
+        });
+    }
+
+    // Construction Type Listener
+    const constTypeSelect = document.getElementById('calc-construction-type');
+    const floorMap = {
+        'g1-res': { floors: 2, label: 'G+1 Residential' },
+        'g2-res': { floors: 3, label: 'G+2 Residential' },
+        'g3-res': { floors: 4, label: 'G+3 Residential' },
+        'g4-res': { floors: 5, label: 'G+4 Residential' },
+        'g1-com': { floors: 2, label: 'G+1 Commercial' },
+        'g2-com': { floors: 3, label: 'G+2 Commercial' },
+        'g3-com': { floors: 4, label: 'G+3 Commercial' },
+        'g4-com': { floors: 5, label: 'G+4 Commercial' }
+    };
+
+    const updateConstructionAreaMath = () => {
+        const builtUp = Math.round(calcData.sqft * calcData.floors);
+        calcData.builtUpSqft = builtUp;
+
+        const sqmElem = document.getElementById('const-area-sqm-val');
+        const sqftElem = document.getElementById('const-area-sqft-val');
+        const builtupElem = document.getElementById('const-total-builtup-val');
+
+        if (sqmElem) sqmElem.textContent = `${calcData.sqm} sqm`;
+        if (sqftElem) sqftElem.textContent = `${calcData.sqft.toLocaleString('en-IN')} sq ft`;
+        if (builtupElem) builtupElem.textContent = `${builtUp.toLocaleString('en-IN')} sq ft`;
+    };
+
+    if (constTypeSelect) {
+        constTypeSelect.addEventListener('change', (e) => {
+            const val = e.target.value;
+            calcData.constructionType = val;
+            if (floorMap[val]) {
+                calcData.floors = floorMap[val].floors;
+                calcData.constructionTypeLabel = floorMap[val].label;
+            }
+            updateConstructionAreaMath();
+        });
+    }
+
+    // Dimension inputs formula logic (l x b = area [sqm] x 10.76 = sqfoot)
+    const constLenInput = document.getElementById('const-len');
+    const constBreadthInput = document.getElementById('const-breadth');
+    const constSqftInput = document.getElementById('const-sqft-direct');
+
+    const handleDimensionCalc = () => {
+        const l = parseFloat(constLenInput ? constLenInput.value : 0) || 0;
+        const b = parseFloat(constBreadthInput ? constBreadthInput.value : 0) || 0;
+
+        calcData.length = l;
+        calcData.breadth = b;
+
+        if (l > 0 && b > 0) {
+            const sqm = Math.round((l * b) * 100) / 100;
+            const sqft = Math.round(sqm * 10.76);
+            calcData.sqm = sqm;
+            calcData.sqft = sqft;
+            if (constSqftInput) constSqftInput.value = sqft;
+            updateConstructionAreaMath();
+        }
+    };
+
+    if (constLenInput) constLenInput.addEventListener('input', handleDimensionCalc);
+    if (constBreadthInput) constBreadthInput.addEventListener('input', handleDimensionCalc);
+
+    if (constSqftInput) {
+        constSqftInput.addEventListener('input', (e) => {
+            const sqft = parseFloat(e.target.value) || 0;
+            calcData.sqft = sqft;
+            const sqm = Math.round((sqft / 10.76) * 100) / 100;
+            calcData.sqm = sqm;
+            updateConstructionAreaMath();
+        });
+    }
+
+    // Construction Addon Cards
+    document.querySelectorAll('.addon-card.const-addon').forEach(card => {
+        card.addEventListener('click', () => {
+            card.classList.toggle('selected');
+            const price = parseInt(card.dataset.price);
+            const index = calcData.constAddons.indexOf(price);
+            if (index > -1) {
+                calcData.constAddons.splice(index, 1);
+            } else {
+                calcData.constAddons.push(price);
+            }
+        });
+    });
+
+    // Construction Package Cards
+    document.querySelectorAll('.package-card.const-package').forEach(card => {
+        card.addEventListener('click', () => {
+            document.querySelectorAll('.package-card.const-package').forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            calcData.constructionRate = parseFloat(card.dataset.rate);
+        });
+    });
 
     const updateStepUI = () => {
         // Content
@@ -686,7 +879,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Addons
-    document.querySelectorAll('.addon-card').forEach(card => {
+    document.querySelectorAll('.addon-card:not(.const-addon)').forEach(card => {
         card.addEventListener('click', () => {
             card.classList.toggle('selected');
             const price = parseInt(card.dataset.price);
@@ -700,9 +893,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Packages
-    document.querySelectorAll('.package-card').forEach(card => {
+    document.querySelectorAll('.package-card:not(.const-package)').forEach(card => {
         card.addEventListener('click', () => {
-            document.querySelectorAll('.package-card').forEach(c => c.classList.remove('selected'));
+            document.querySelectorAll('.package-card:not(.const-package)').forEach(c => c.classList.remove('selected'));
             card.classList.add('selected');
             calcData.multiplier = parseFloat(card.dataset.multiplier);
         });
@@ -713,22 +906,65 @@ document.addEventListener('DOMContentLoaded', () => {
     if (nextBtn) {
         nextBtn.addEventListener('click', () => {
             if (currentStep === 1) {
-                const sizeVal = document.getElementById('calc-size').value;
-                if (!sizeVal) {
-                    showCalcMessage("Please select your flat size first.");
+                const serviceSelect = document.getElementById('calc-service-type');
+                const serviceWrapper = document.getElementById('calc-service-type-wrapper');
+                if (!calcData.service || calcData.service === '') {
+                    showCalcMessage("Please select a Service Type (Construction or Interior Design) to proceed.");
+                    if (serviceWrapper) {
+                        serviceWrapper.classList.add('has-error');
+                        setTimeout(() => serviceWrapper.classList.remove('has-error'), 3000);
+                    }
                     return;
                 }
-                calcData.size = parseInt(sizeVal);
+
+                if (calcData.service === 'interior') {
+                    const sizeSelect = document.getElementById('calc-size');
+                    const sizeWrapper = document.getElementById('calc-size-wrapper');
+                    const sizeVal = sizeSelect ? sizeSelect.value : '';
+                    if (!sizeVal || sizeVal === "") {
+                        showCalcMessage("Please select your flat size first.");
+                        if (sizeWrapper) {
+                            sizeWrapper.classList.add('has-error');
+                            setTimeout(() => sizeWrapper.classList.remove('has-error'), 3000);
+                        }
+                        return;
+                    }
+                    calcData.size = parseInt(sizeVal);
+                } else if (calcData.service === 'construction') {
+                    const constTypeSelect = document.getElementById('calc-construction-type');
+                    const constTypeWrapper = document.getElementById('calc-construction-type-wrapper');
+                    const constTypeVal = constTypeSelect ? constTypeSelect.value : '';
+
+                    if (!constTypeVal || constTypeVal === "" || !calcData.constructionType) {
+                        showCalcMessage("Please select Building Type & Structure to proceed.");
+                        if (constTypeWrapper) {
+                            constTypeWrapper.classList.add('has-error');
+                            setTimeout(() => constTypeWrapper.classList.remove('has-error'), 3000);
+                        }
+                        return;
+                    }
+
+                    if (!calcData.sqft || calcData.sqft <= 0) {
+                        showCalcMessage("Please enter plot dimensions (l × b) or Sq Ft.");
+                        const lenInput = document.getElementById('const-len');
+                        if (lenInput) lenInput.focus();
+                        return;
+                    }
+                }
             } else if (currentStep === 2) {
-                const totalRooms = Object.values(calcData.rooms).reduce((a, b) => a + b, 0);
-                if (totalRooms === 0) {
-                    showCalcMessage("Please select at least one room to design.");
-                    return;
+                if (calcData.service === 'interior') {
+                    const totalRooms = Object.values(calcData.rooms).reduce((a, b) => a + b, 0);
+                    if (totalRooms === 0) {
+                        showCalcMessage("Please select at least one room to design.");
+                        return;
+                    }
                 }
             } else if (currentStep === 3) {
-                if (calcData.addons.length === 0) {
-                    showCalcMessage("Please select at least one add-on feature.");
-                    return;
+                if (calcData.service === 'interior') {
+                    if (calcData.addons.length === 0) {
+                        showCalcMessage("Please select at least one add-on feature.");
+                        return;
+                    }
                 }
             }
             
@@ -748,6 +984,90 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentStep--;
                 updateStepUI();
             }
+        });
+    }
+
+    // Reset Calculator Listener
+    const resetBtn = document.getElementById('calc-reset-btn');
+    if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+            currentStep = 1;
+            calcData.service = '';
+            calcData.size = null;
+            calcData.status = 'ready';
+            calcData.rooms = { living: 0, kitchen: 0, bedroom: 0, bathroom: 0, dining: 0 };
+            calcData.addons = [];
+            calcData.multiplier = 1.5;
+
+            calcData.constructionType = '';
+            calcData.constructionTypeLabel = '';
+            calcData.length = 0;
+            calcData.breadth = 0;
+            calcData.sqm = 0;
+            calcData.sqft = 0;
+            calcData.floors = 2;
+            calcData.builtUpSqft = 0;
+            calcData.constructionRate = 2350;
+            calcData.constAddons = [];
+
+            // Reset DOM Selects & Custom Dropdowns
+            const resetCustomDropdown = (id, placeholder) => {
+                const sel = document.getElementById(id);
+                if (sel) sel.value = '';
+                const wrapper = document.getElementById(`${id}-wrapper`);
+                if (wrapper) {
+                    const valSpan = wrapper.querySelector('.custom-select-value');
+                    const trigger = wrapper.querySelector('.custom-select-trigger');
+                    if (valSpan) valSpan.textContent = placeholder;
+                    if (trigger) trigger.classList.add('placeholder');
+                    wrapper.querySelectorAll('.custom-option').forEach(o => o.classList.remove('selected'));
+                }
+            };
+
+            resetCustomDropdown('calc-service-type', 'Select Service Type');
+            resetCustomDropdown('calc-size', 'Select Size');
+            resetCustomDropdown('calc-construction-type', 'Select Building Type');
+
+            // Reset Inputs & Cards
+            const constLen = document.getElementById('const-len');
+            const constBreadth = document.getElementById('const-breadth');
+            const constSqft = document.getElementById('const-sqft-direct');
+            if (constLen) constLen.value = '';
+            if (constBreadth) constBreadth.value = '';
+            if (constSqft) constSqft.value = '';
+
+            document.querySelectorAll('.room-count').forEach(span => span.textContent = '0');
+            document.querySelectorAll('.addon-card').forEach(card => card.classList.remove('selected'));
+            
+            // Reset Packages
+            document.querySelectorAll('.package-card').forEach(c => c.classList.remove('selected'));
+            const defaultInteriorPkg = document.querySelector('#interior-step-4-wrapper .package-card[data-multiplier="1.5"]');
+            const defaultConstPkg = document.querySelector('#construction-step-4-wrapper .package-card[data-rate="2350"]');
+            if (defaultInteriorPkg) defaultInteriorPkg.classList.add('selected');
+            if (defaultConstPkg) defaultConstPkg.classList.add('selected');
+
+            // Reset Status buttons
+            document.querySelectorAll('.status-btn').forEach(b => b.classList.remove('active'));
+            const defaultStatus = document.querySelector('.status-btn[data-status="ready"]');
+            if (defaultStatus) defaultStatus.classList.add('active');
+
+            // Reset final form
+            const finalForm = document.getElementById('calc-final-form');
+            if (finalForm) {
+                finalForm.reset();
+                finalForm.style.display = 'block';
+                const otpGroup = document.getElementById('calc-otp-group');
+                if (otpGroup) otpGroup.style.display = 'none';
+            }
+            const resultBox = document.getElementById('calc-result-box');
+            if (resultBox) resultBox.style.display = 'none';
+
+            updateConstructionAreaMath();
+            updateServiceFlowUI();
+            updateStepUI();
+
+            const quoteSection = document.getElementById('quote');
+            if (quoteSection) window.scrollTo({ top: quoteSection.offsetTop - 80, behavior: 'smooth' });
         });
     }
 
@@ -784,6 +1104,135 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'F12') {
             e.preventDefault();
             return false;
+        }
+    });
+
+    // 16. Custom Stylish Responsive Dropdown Generator
+    function setupCustomDropdowns() {
+        document.querySelectorAll('select').forEach(select => {
+            if (select.dataset.customized === 'true') return;
+            select.dataset.customized = 'true';
+            
+            // Hide native select element
+            select.style.display = 'none';
+
+            // Create wrapper element
+            const wrapper = document.createElement('div');
+            wrapper.className = 'custom-select-wrapper';
+            if (select.id) wrapper.id = `${select.id}-wrapper`;
+
+            // Trigger button
+            const trigger = document.createElement('div');
+            trigger.className = 'custom-select-trigger';
+            trigger.tabIndex = 0;
+
+            const valSpan = document.createElement('span');
+            valSpan.className = 'custom-select-value';
+            
+            const selectedOpt = select.options[select.selectedIndex];
+            if (selectedOpt && selectedOpt.value !== "") {
+                valSpan.textContent = selectedOpt.text;
+            } else {
+                valSpan.textContent = selectedOpt ? selectedOpt.text : 'Select Option';
+                trigger.classList.add('placeholder');
+            }
+
+            const arrow = document.createElement('i');
+            arrow.className = 'fas fa-chevron-down custom-select-arrow';
+
+            trigger.appendChild(valSpan);
+            trigger.appendChild(arrow);
+
+            // Options list
+            const optionsMenu = document.createElement('div');
+            optionsMenu.className = 'custom-select-options';
+
+            Array.from(select.options).forEach(opt => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'custom-option';
+                optionDiv.dataset.value = opt.value;
+                if (opt.selected && opt.value !== "") optionDiv.classList.add('selected');
+
+                const textSpan = document.createElement('span');
+                textSpan.textContent = opt.text;
+
+                const checkIcon = document.createElement('i');
+                checkIcon.className = 'fas fa-check custom-option-check';
+
+                optionDiv.appendChild(textSpan);
+                optionDiv.appendChild(checkIcon);
+
+                optionDiv.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (opt.disabled && opt.value === "") return;
+
+                    select.value = opt.value;
+                    valSpan.textContent = opt.text;
+                    trigger.classList.remove('placeholder');
+
+                    // Update selected class
+                    optionsMenu.querySelectorAll('.custom-option').forEach(o => o.classList.remove('selected'));
+                    optionDiv.classList.add('selected');
+
+                    // Close dropdown
+                    trigger.classList.remove('active');
+                    optionsMenu.classList.remove('active');
+
+                    // Dispatch change event to notify any JS listeners
+                    select.dispatchEvent(new Event('change', { bubbles: true }));
+                });
+
+                optionsMenu.appendChild(optionDiv);
+            });
+
+            // Toggle on click
+            trigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isOpen = optionsMenu.classList.contains('active');
+                
+                // Close any other open dropdowns
+                document.querySelectorAll('.custom-select-options.active').forEach(m => {
+                    if (m !== optionsMenu) {
+                        m.classList.remove('active');
+                        if (m.previousElementSibling) m.previousElementSibling.classList.remove('active');
+                    }
+                });
+
+                if (isOpen) {
+                    trigger.classList.remove('active');
+                    optionsMenu.classList.remove('active');
+                } else {
+                    trigger.classList.add('active');
+                    optionsMenu.classList.add('active');
+                }
+            });
+
+            // Keyboard accessibility
+            trigger.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    trigger.click();
+                } else if (e.key === 'Escape') {
+                    trigger.classList.remove('active');
+                    optionsMenu.classList.remove('active');
+                }
+            });
+
+            // Mount to DOM
+            select.parentNode.insertBefore(wrapper, select);
+            wrapper.appendChild(select);
+            wrapper.appendChild(trigger);
+            wrapper.appendChild(optionsMenu);
+        });
+    }
+
+    setupCustomDropdowns();
+
+    // Close open dropdowns when clicking anywhere outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.custom-select-wrapper')) {
+            document.querySelectorAll('.custom-select-trigger.active').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.custom-select-options.active').forEach(m => m.classList.remove('active'));
         }
     });
 

@@ -4,15 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Hinest Interiors</title>
+    <title>Hinest Infrastructure</title>
     <meta name="description"
-        content="Hinest Interiors — Bespoke architectural planning and luxury interior design for new buildings. Transform your vision into reality.">
+        content="Hinest Infrastructure — Bespoke architectural planning, construction, and luxury interior design for new buildings. Transform your vision into reality.">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&family=Nunito:wght@800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300..900;1,300..900&family=Nunito:ital,wght@0,300..900;1,300..900&display=swap"
         rel="stylesheet">
 
     <!-- Icons -->
@@ -23,18 +23,17 @@
     <link rel="stylesheet" href="calculator.css">
 </head>
 
-<body>
-
+<body id="home">
 
     <!-- Header -->
     <header class="header" id="header">
         <div class="container header-inner">
             <a href="#home" class="logo">
-                <img src="assets/logo-final.jpg" alt="Hinest Logo" class="mobile-brand-logo">
-                <svg class="logo-svg" viewBox="0 0 200 30" xmlns="http://www.w3.org/2000/svg">
-                    <text x="0" y="22" font-family="'Nunito', sans-serif" font-weight="800" font-size="24">
-                        <tspan fill="#FFD700">hinest</tspan>
-                        <tspan fill="white" font-weight="800">interiors</tspan>
+                <img src="assets/new-hinest-logo.png" alt="Hinest Logo" class="mobile-brand-logo">
+                <svg class="logo-svg" viewBox="0 0 290 30" xmlns="http://www.w3.org/2000/svg">
+                    <text x="0" y="22" font-family="'Nunito', sans-serif" font-weight="650" font-size="24">
+                        <tspan fill="#FFD700" font-weight="650">hinest</tspan>
+                        <tspan fill="white" font-weight="650" dx="5">infrastructure</tspan>
                     </text>
                 </svg>
             </a>
@@ -62,8 +61,8 @@
     <div class="mobile-menu" id="mobile-menu">
         <div class="mobile-menu-header">
             <div class="mobile-logo">
-                <img src="assets/logo-final.jpg" alt="Hinest Logo" class="mobile-brand-logo-inner">
-                <span class="logo-text">Hinest <span style="color: #fff; font-weight: 800;">Interiors</span></span>
+                <img src="assets/new-hinest-logo.png" alt="Hinest Logo" class="mobile-brand-logo-inner">
+                <span class="logo-text" style="font-weight: 650;">Hinest <span style="color: #fff; font-weight: 650;">Infrastructure</span></span>
             </div>
             <button class="mobile-close" id="mobile-close" aria-label="Close menu">
                 <i class="fas fa-times"></i>
@@ -154,9 +153,9 @@
         <section class="brand-intro" id="brand-intro">
             <div class="container">
                 <div class="brand-intro-card reveal">
-                    <img src="assets/brand-intro.jpg" alt="Hinest Interiors Luxury Emblem" class="brand-intro-img">
+                    <img src="assets/new-hinest-logo.png" alt="Hinest Luxury Logo" class="brand-intro-img">
                     <div class="brand-intro-text">
-                        <p>Welcome to Hinest Interiors, where architectural vision meets uncompromising luxury.<br
+                        <p>Welcome to Hinest Infrastructure, where architectural vision meets uncompromising luxury.<br
                                 class="desktop-break">We redefine modern living by designing bespoke spaces<br
                                 class="desktop-break">that reflect your ultimate legacy.</p>
                     </div>
@@ -344,7 +343,7 @@
                             <form id="book-form-static" class="consult-form"
                                 action="https://formsubmit.co/info.hinestinteriors@gmail.com" method="POST">
                                 <input type="hidden" name="_subject"
-                                    value="New Consultation Inquiry - Hinest Interiors (Section)">
+                                    value="New Consultation Inquiry - Hinest Infrastructure (Section)">
                                 <input type="hidden" name="_template" value="table">
                                 <input type="hidden" name="_captcha" value="false">
                                 <input type="hidden" name="_honey" style="display:none">
@@ -499,79 +498,179 @@
                                 </div>
                             </div>
 
-                            <!-- Step 1: Size & Status -->
+                            <!-- Step 1: Service Selection, Size & Status / Construction Dimensions -->
                             <div class="calc-step-content active" id="step-1">
-                                <h2 class="calc-title">Tell us about your home</h2>
+                                <h2 class="calc-title" id="calc-step1-title">Tell us about your project</h2>
 
-                                <div class="size-grid">
-                                    <div class="quote-form-group">
-                                        <label>Select Flat Size (Sq Ft)</label>
-                                        <select id="calc-size">
-                                            <option value="" disabled selected>Select Size</option>
-                                            <option value="800">Below 1000 sft</option>
-                                            <option value="1200">1000 - 1500 sft</option>
-                                            <option value="1800">1500 - 2000 sft</option>
-                                            <option value="2500">2000 - 3000 sft</option>
-                                            <option value="4000">Above 3000 sft</option>
-                                        </select>
+                                <!-- Service Selection Dropdown -->
+                                <div class="quote-form-group" style="margin-bottom: 25px;">
+                                    <label style="color: #FFD700; font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; display: block; margin-bottom: 8px;">Select Service Type</label>
+                                    <select id="calc-service-type">
+                                        <option value="" disabled selected>Select Service Type</option>
+                                        <option value="interior">Interior Design</option>
+                                        <option value="construction">Construction</option>
+                                    </select>
+                                </div>
+
+                                <!-- Interior Size & Status Wrapper -->
+                                <div id="interior-step-1-wrapper" class="service-flow-step" style="display: none;">
+                                    <div class="size-grid">
+                                        <div class="quote-form-group">
+                                            <label>Select Flat Size (Sq Ft)</label>
+                                            <select id="calc-size">
+                                                <option value="" disabled selected>Select Size</option>
+                                                <option value="800">Below 1000 sft</option>
+                                                <option value="1200">1000 - 1500 sft</option>
+                                                <option value="1800">1500 - 2000 sft</option>
+                                                <option value="2500">2000 - 3000 sft</option>
+                                                <option value="4000">Above 3000 sft</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="status-options">
+                                        <button class="status-btn active" data-status="ready">
+                                            <i class="fas fa-check-circle"></i> Ready for Interior
+                                        </button>
+                                        <button class="status-btn" data-status="not-ready">
+                                            <i class="fas fa-times-circle"></i> Not Ready
+                                        </button>
+                                        <button class="status-btn" data-status="under-const">
+                                            <i class="fas fa-building"></i> Under Construction
+                                        </button>
                                     </div>
                                 </div>
-                                <div class="status-options">
-                                    <button class="status-btn active" data-status="ready">
-                                        <i class="fas fa-check-circle"></i> Ready for Interior
-                                    </button>
-                                    <button class="status-btn" data-status="not-ready">
-                                        <i class="fas fa-times-circle"></i> Not Ready
-                                    </button>
-                                    <button class="status-btn" data-status="under-const">
-                                        <i class="fas fa-building"></i> Under Construction
-                                    </button>
+
+                                <!-- Construction Building Structure & Area Formula Wrapper -->
+                                <div id="construction-step-1-wrapper" class="service-flow-step" style="display: none;">
+                                    <div class="quote-form-group" style="margin-bottom: 25px;">
+                                        <label style="color: #FFD700; font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; display: block; margin-bottom: 8px;">Select Building Type & Structure</label>
+                                        <select id="calc-construction-type">
+                                            <option value="" disabled selected>Select Building Type</option>
+                                            <option value="g1-res">G+1 Residential</option>
+                                            <option value="g2-res">G+2 Residential</option>
+                                            <option value="g3-res">G+3 Residential</option>
+                                            <option value="g4-res">G+4 Residential</option>
+                                            <option value="g1-com">G+1 Commercial</option>
+                                            <option value="g2-com">G+2 Commercial</option>
+                                            <option value="g3-com">G+3 Commercial</option>
+                                            <option value="g4-com">G+4 Commercial</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Formula Display Card & Input Grid -->
+                                    <div class="construction-calc-box">
+                                        <div class="formula-badge">
+                                            <i class="fas fa-calculator"></i>
+                                            <span>Formula: <strong>Select size l × b = area [sqm] × 10.76 = sqfoot</strong></span>
+                                        </div>
+                                        <div class="dimensions-grid">
+                                            <div class="dim-group">
+                                                <label for="const-len">Length l (m)</label>
+                                                <input type="number" id="const-len" min="1" step="0.1" placeholder="e.g. 10">
+                                            </div>
+                                            <div class="dim-group">
+                                                <label for="const-breadth">Breadth b (m)</label>
+                                                <input type="number" id="const-breadth" min="1" step="0.1" placeholder="e.g. 15">
+                                            </div>
+                                            <div class="dim-group">
+                                                <label for="const-sqft-direct">Plot Sq Ft</label>
+                                                <input type="number" id="const-sqft-direct" min="100" placeholder="or enter Sq Ft">
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Live Calculation Summary -->
+                                        <div class="construction-summary-card">
+                                            <div class="summary-stat">
+                                                <span class="stat-lbl">Plot Area (sqm)</span>
+                                                <span class="stat-val" id="const-area-sqm-val">0 sqm</span>
+                                            </div>
+                                            <div class="summary-divider">× 10.76</div>
+                                            <div class="summary-stat">
+                                                <span class="stat-lbl">Plot Area (sq ft)</span>
+                                                <span class="stat-val" id="const-area-sqft-val">0 sq ft</span>
+                                            </div>
+                                            <div class="summary-divider">× Floors</div>
+                                            <div class="summary-stat highlight">
+                                                <span class="stat-lbl">Total Built-Up Area</span>
+                                                <span class="stat-val" id="const-total-builtup-val">0 sq ft</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
-                            <!-- Step 2: Select Rooms -->
+                            <!-- Step 2: Select Rooms / Construction Scope -->
                             <div class="calc-step-content" id="step-2">
-                                <h2 class="calc-title">Configure your space</h2>
+                                <h2 class="calc-title" id="calc-step2-title">Configure your space</h2>
 
-                                <div class="rooms-list">
-                                    <div class="room-item" data-room="living">
-                                        <span class="room-name">Living Room</span>
-                                        <div class="room-controls">
-                                            <button class="control-btn minus">-</button>
-                                            <span class="room-count">0</span>
-                                            <button class="control-btn plus">+</button>
+                                <!-- Interior Rooms List -->
+                                <div id="interior-step-2-wrapper" class="service-flow-step">
+                                    <div class="rooms-list">
+                                        <div class="room-item" data-room="living">
+                                            <span class="room-name">Living Room</span>
+                                            <div class="room-controls">
+                                                <button class="control-btn minus">-</button>
+                                                <span class="room-count">0</span>
+                                                <button class="control-btn plus">+</button>
+                                            </div>
+                                        </div>
+                                        <div class="room-item" data-room="kitchen">
+                                            <span class="room-name">Kitchen</span>
+                                            <div class="room-controls">
+                                                <button class="control-btn minus">-</button>
+                                                <span class="room-count">0</span>
+                                                <button class="control-btn plus">+</button>
+                                            </div>
+                                        </div>
+                                        <div class="room-item" data-room="bedroom">
+                                            <span class="room-name">Bedroom</span>
+                                            <div class="room-controls">
+                                                <button class="control-btn minus">-</button>
+                                                <span class="room-count">0</span>
+                                                <button class="control-btn plus">+</button>
+                                            </div>
+                                        </div>
+                                        <div class="room-item" data-room="bathroom">
+                                            <span class="room-name">Bathroom</span>
+                                            <div class="room-controls">
+                                                <button class="control-btn minus">-</button>
+                                                <span class="room-count">0</span>
+                                                <button class="control-btn plus">+</button>
+                                            </div>
+                                        </div>
+                                        <div class="room-item" data-room="dining">
+                                            <span class="room-name">Dining</span>
+                                            <div class="room-controls">
+                                                <button class="control-btn minus">-</button>
+                                                <span class="room-count">0</span>
+                                                <button class="control-btn plus">+</button>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="room-item" data-room="kitchen">
-                                        <span class="room-name">Kitchen</span>
-                                        <div class="room-controls">
-                                            <button class="control-btn minus">-</button>
-                                            <span class="room-count">0</span>
-                                            <button class="control-btn plus">+</button>
+                                </div>
+
+                                <!-- Construction Scope List -->
+                                <div id="construction-step-2-wrapper" class="service-flow-step" style="display: none;">
+                                    <div class="construction-scope-grid">
+                                        <div class="scope-item active">
+                                            <i class="fas fa-cubes"></i>
+                                            <h4>Civil & RCC Structure</h4>
+                                            <p>FE 550 TMT Steel, 53 Grade Cement, AAC/Flyash Brick Masonry</p>
                                         </div>
-                                    </div>
-                                    <div class="room-item" data-room="bedroom">
-                                        <span class="room-name">Bedroom</span>
-                                        <div class="room-controls">
-                                            <button class="control-btn minus">-</button>
-                                            <span class="room-count">0</span>
-                                            <button class="control-btn plus">+</button>
+                                        <div class="scope-item active">
+                                            <i class="fas fa-drafting-compass"></i>
+                                            <h4>Architectural Front Facade</h4>
+                                            <p>Modern Elevation Design with Weather-Proof Coating</p>
                                         </div>
-                                    </div>
-                                    <div class="room-item" data-room="bathroom">
-                                        <span class="room-name">Bathroom</span>
-                                        <div class="room-controls">
-                                            <button class="control-btn minus">-</button>
-                                            <span class="room-count">0</span>
-                                            <button class="control-btn plus">+</button>
+                                        <div class="scope-item active">
+                                            <i class="fas fa-faucet-drip"></i>
+                                            <h4>Plumbing & Electrical Piping</h4>
+                                            <p>Concealed Astral/Supreme Pipes & Polycab Wiring</p>
                                         </div>
-                                    </div>
-                                    <div class="room-item" data-room="dining">
-                                        <span class="room-name">Dining</span>
-                                        <div class="room-controls">
-                                            <button class="control-btn minus">-</button>
-                                            <span class="room-count">0</span>
-                                            <button class="control-btn plus">+</button>
+                                        <div class="scope-item active">
+                                            <i class="fas fa-paint-roller"></i>
+                                            <h4>Plastering & Painting</h4>
+                                            <p>Smooth Wall Putty + Asian Paints Apex Exterior & Interior</p>
                                         </div>
                                     </div>
                                 </div>
@@ -579,70 +678,139 @@
 
                             <!-- Step 3: Add-ons -->
                             <div class="calc-step-content" id="step-3">
-                                <h2 class="calc-title">Enhance your design</h2>
+                                <h2 class="calc-title" id="calc-step3-title">Enhance your design</h2>
 
-                                <div class="addons-grid">
-                                    <div class="addon-card" data-price="45000">
-                                        <div class="addon-checkbox"></div>
-                                        <span class="addon-text">Wooden Ceiling with Lighting</span>
+                                <!-- Interior Add-ons -->
+                                <div id="interior-step-3-wrapper" class="service-flow-step">
+                                    <div class="addons-grid">
+                                        <div class="addon-card" data-price="45000">
+                                            <div class="addon-checkbox"></div>
+                                            <span class="addon-text">Wooden Ceiling with Lighting</span>
+                                        </div>
+                                        <div class="addon-card" data-price="85000">
+                                            <div class="addon-checkbox"></div>
+                                            <span class="addon-text">Wall Cabinet with Dressing</span>
+                                        </div>
+                                        <div class="addon-card" data-price="35000">
+                                            <div class="addon-checkbox"></div>
+                                            <span class="addon-text">Modular Study Unit</span>
+                                        </div>
+                                        <div class="addon-card" data-price="55000">
+                                            <div class="addon-checkbox"></div>
+                                            <span class="addon-text">Premium Bed Head Panel</span>
+                                        </div>
+                                        <div class="addon-card" data-price="12000">
+                                            <div class="addon-checkbox"></div>
+                                            <span class="addon-text">Designer Wall Paint / Paper</span>
+                                        </div>
+                                        <div class="addon-card" data-price="25000">
+                                            <div class="addon-checkbox"></div>
+                                            <span class="addon-text">Custom Foyer Partition</span>
+                                        </div>
                                     </div>
-                                    <div class="addon-card" data-price="85000">
-                                        <div class="addon-checkbox"></div>
-                                        <span class="addon-text">Wall Cabinet with Dressing</span>
-                                    </div>
-                                    <div class="addon-card" data-price="35000">
-                                        <div class="addon-checkbox"></div>
-                                        <span class="addon-text">Modular Study Unit</span>
-                                    </div>
-                                    <div class="addon-card" data-price="55000">
-                                        <div class="addon-checkbox"></div>
-                                        <span class="addon-text">Premium Bed Head Panel</span>
-                                    </div>
-                                    <div class="addon-card" data-price="12000">
-                                        <div class="addon-checkbox"></div>
-                                        <span class="addon-text">Designer Wall Paint / Paper</span>
-                                    </div>
-                                    <div class="addon-card" data-price="25000">
-                                        <div class="addon-checkbox"></div>
-                                        <span class="addon-text">Custom Foyer Partition</span>
+                                </div>
+
+                                <!-- Construction Add-ons -->
+                                <div id="construction-step-3-wrapper" class="service-flow-step" style="display: none;">
+                                    <div class="addons-grid">
+                                        <div class="addon-card const-addon" data-price="85000">
+                                            <div class="addon-checkbox"></div>
+                                            <span class="addon-text">Underground RCC Sump (10k Ltrs)</span>
+                                        </div>
+                                        <div class="addon-card const-addon" data-price="95000">
+                                            <div class="addon-checkbox"></div>
+                                            <span class="addon-text">Compound Wall & Heavy MS Gate</span>
+                                        </div>
+                                        <div class="addon-card const-addon" data-price="45000">
+                                            <div class="addon-checkbox"></div>
+                                            <span class="addon-text">Terrace Waterproofing & Tiles</span>
+                                        </div>
+                                        <div class="addon-card const-addon" data-price="135000">
+                                            <div class="addon-checkbox"></div>
+                                            <span class="addon-text">3KW Solar On-Grid System</span>
+                                        </div>
+                                        <div class="addon-card const-addon" data-price="65000">
+                                            <div class="addon-checkbox"></div>
+                                            <span class="addon-text">Smart CCTV & Biometric Gate</span>
+                                        </div>
+                                        <div class="addon-card const-addon" data-price="75000">
+                                            <div class="addon-checkbox"></div>
+                                            <span class="addon-text">Borewell & Motor Pump Setup</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Step 4: Pick Package -->
                             <div class="calc-step-content" id="step-4">
-                                <h2 class="calc-title">Choose your finish level</h2>
+                                <h2 class="calc-title" id="calc-step4-title">Choose your finish level</h2>
 
-                                <div class="package-grid">
-                                    <div class="package-card" data-multiplier="1">
-                                        <div class="package-badge">POPULAR</div>
-                                        <h3 class="package-name">Standard</h3>
-
-                                        <ul class="package-features">
-                                            <li><i class="fas fa-check"></i> Quality Material</li>
-                                            <li><i class="fas fa-check"></i> Standard Designs</li>
-                                            <li><i class="fas fa-check"></i> 5 Years Warranty</li>
-                                        </ul>
+                                <!-- Interior Packages -->
+                                <div id="interior-step-4-wrapper" class="service-flow-step">
+                                    <div class="package-grid">
+                                        <div class="package-card" data-multiplier="1">
+                                            <div class="package-badge">POPULAR</div>
+                                            <h3 class="package-name">Standard</h3>
+                                            <ul class="package-features">
+                                                <li><i class="fas fa-check"></i> Quality Material</li>
+                                                <li><i class="fas fa-check"></i> Standard Designs</li>
+                                                <li><i class="fas fa-check"></i> 5 Years Warranty</li>
+                                            </ul>
+                                        </div>
+                                        <div class="package-card selected" data-multiplier="1.5">
+                                            <div class="package-badge">RECOMMENDED</div>
+                                            <h3 class="package-name">Superio</h3>
+                                            <ul class="package-features">
+                                                <li><i class="fas fa-check"></i> HDMR / Marine Ply</li>
+                                                <li><i class="fas fa-check"></i> Trendy PU Finish</li>
+                                                <li><i class="fas fa-check"></i> 10 Years Warranty</li>
+                                            </ul>
+                                        </div>
+                                        <div class="package-card" data-multiplier="2.2">
+                                            <div class="package-badge">LUXURY</div>
+                                            <h3 class="package-name">Signature</h3>
+                                            <ul class="package-features">
+                                                <li><i class="fas fa-check"></i> Italian Marble/Veneer</li>
+                                                <li><i class="fas fa-check"></i> Custom Smart Tech</li>
+                                                <li><i class="fas fa-check"></i> Lifetime Service</li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <div class="package-card selected" data-multiplier="1.5">
-                                        <div class="package-badge">RECOMMENDED</div>
-                                        <h3 class="package-name">Superio</h3>
+                                </div>
 
-                                        <ul class="package-features">
-                                            <li><i class="fas fa-check"></i> HDMR / Marine Ply</li>
-                                            <li><i class="fas fa-check"></i> Trendy PU Finish</li>
-                                            <li><i class="fas fa-check"></i> 10 Years Warranty</li>
-                                        </ul>
-                                    </div>
-                                    <div class="package-card" data-multiplier="2.2">
-                                        <div class="package-badge">LUXURY</div>
-                                        <h3 class="package-name">Signature</h3>
-
-                                        <ul class="package-features">
-                                            <li><i class="fas fa-check"></i> Italian Marble/Veneer</li>
-                                            <li><i class="fas fa-check"></i> Custom Smart Tech</li>
-                                            <li><i class="fas fa-check"></i> Lifetime Service</li>
-                                        </ul>
+                                <!-- Construction Packages -->
+                                <div id="construction-step-4-wrapper" class="service-flow-step" style="display: none;">
+                                    <div class="package-grid">
+                                        <div class="package-card const-package" data-rate="1850">
+                                            <div class="package-badge">POPULAR</div>
+                                            <h3 class="package-name">Classic Build</h3>
+                                            <ul class="package-features">
+                                                <li><i class="fas fa-check"></i> FE 550 Grade Steel</li>
+                                                <li><i class="fas fa-check"></i> 53 Grade Ultratech Cement</li>
+                                                <li><i class="fas fa-check"></i> Vitrified Tile Flooring</li>
+                                                <li><i class="fas fa-check"></i> 5 Years Warranty</li>
+                                            </ul>
+                                        </div>
+                                        <div class="package-card const-package selected" data-rate="2350">
+                                            <div class="package-badge">RECOMMENDED</div>
+                                            <h3 class="package-name">Premium Build</h3>
+                                            <ul class="package-features">
+                                                <li><i class="fas fa-check"></i> Tata Tiscon FE 550D Steel</li>
+                                                <li><i class="fas fa-check"></i> Teak Wood Main Door Frame</li>
+                                                <li><i class="fas fa-check"></i> Kohler/Jaquar Fittings</li>
+                                                <li><i class="fas fa-check"></i> 10 Years Warranty</li>
+                                            </ul>
+                                        </div>
+                                        <div class="package-card const-package" data-rate="3100">
+                                            <div class="package-badge">LUXURY</div>
+                                            <h3 class="package-name">Luxury Signature</h3>
+                                            <ul class="package-features">
+                                                <li><i class="fas fa-check"></i> Full Italian Marble Flooring</li>
+                                                <li><i class="fas fa-check"></i> Burma Teak Doors & Windows</li>
+                                                <li><i class="fas fa-check"></i> Grohe Smart Bath Fittings</li>
+                                                <li><i class="fas fa-check"></i> Lifetime Warranty</li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -655,7 +823,7 @@
                                     action="https://formsubmit.co/info.hinestinteriors@gmail.com" method="POST">
                                     <!-- FormSubmit Configuration -->
                                     <input type="hidden" name="_subject"
-                                        value="New Estimate Inquiry - Hinest Interiors">
+                                        value="New Estimate Inquiry - Hinest Infrastructure">
                                     <input type="hidden" name="_template" value="table">
                                     <input type="hidden" name="_captcha" value="false">
                                     <input type="hidden" name="_honey" style="display:none">
@@ -761,10 +929,14 @@
                                     </div>
 
                                     <!-- Hidden inputs for Estimate Data -->
+                                    <input type="hidden" name="service_type" id="hidden-service">
                                     <input type="hidden" name="project_size" id="hidden-size">
                                     <input type="hidden" name="project_estimate" id="hidden-total">
                                     <input type="hidden" name="rooms_config" id="hidden-rooms">
                                     <input type="hidden" name="addons_selected" id="hidden-addons">
+                                    <input type="hidden" name="construction_type" id="hidden-const-type">
+                                    <input type="hidden" name="construction_dimensions" id="hidden-const-dimensions">
+                                    <input type="hidden" name="builtup_area" id="hidden-const-builtup">
 
                                     <div id="calc-form-status" class="form-status-msg"
                                         style="display:none; margin-top:20px;"></div>
@@ -794,11 +966,16 @@
                                     style="visibility:hidden;">Back</button>
                                 <button class="btn-calc btn-next" id="calc-next">Proceed</button>
                             </div>
+
+                            <!-- Reset Button -->
+                            <div class="calc-reset-wrap">
+                                <button type="button" class="btn-calc-reset" id="calc-reset-btn">
+                                    <i class="fas fa-undo"></i> RESET
+                                </button>
+                            </div>
                         </div>
                     </div>
         </section>
-
-
 
     </main>
 
@@ -807,10 +984,10 @@
         <div class="container footer-new-grid">
             <div class="footer-new-col footer-new-brand">
                 <a href="#" class="logo">
-                    <svg class="logo-svg" viewBox="0 0 200 30" xmlns="http://www.w3.org/2000/svg">
-                        <text x="0" y="22" font-family="'Nunito', sans-serif" font-weight="800" font-size="24">
-                            <tspan fill="#FFD700">hinest</tspan>
-                            <tspan fill="white" font-weight="400" dx="5">interiors</tspan>
+                    <svg class="logo-svg" viewBox="0 0 290 30" xmlns="http://www.w3.org/2000/svg">
+                        <text x="0" y="22" font-family="'Nunito', sans-serif" font-weight="650" font-size="24">
+                            <tspan fill="#FFD700" font-weight="650">hinest</tspan>
+                            <tspan fill="white" font-weight="650" dx="5">infrastructure</tspan>
                         </text>
                     </svg>
                 </a>
@@ -854,7 +1031,7 @@
 
         <div class="footer-bottom-new">
             <div class="container">
-                <p>&copy; 2026 | Hinest Interiors <span class="hide-mobile">| All Rights Reserved </span>| Made with
+                <p>&copy; 2026 | Hinest Infrastructure <span class="hide-mobile">| All Rights Reserved </span>| Made with
                     Vignette</p>
             </div>
         </div>
@@ -887,7 +1064,7 @@
                 <form id="consultation-form" class="consult-form"
                     action="https://formsubmit.co/info.hinestinteriors@gmail.com" method="POST">
                     <!-- FormSubmit Configuration -->
-                    <input type="hidden" name="_subject" value="New Consultation Inquiry - Hinest Interiors">
+                    <input type="hidden" name="_subject" value="New Consultation Inquiry - Hinest Infrastructure">
                     <input type="hidden" name="_template" value="table">
                     <input type="hidden" name="_captcha" value="false">
                     <input type="hidden" name="_honey" style="display:none">
@@ -1001,7 +1178,7 @@
 
                     <div class="legal-section">
                         <h3>1. Services</h3>
-                        <p>Hinest Interiors provides interior design, renovation, consultation, space planning, and
+                        <p>Hinest Infrastructure provides interior design, renovation, consultation, space planning, and
                             related services for residential and commercial projects.</p>
                     </div>
 
@@ -1026,7 +1203,7 @@
 
                     <div class="legal-section">
                         <h3>5. Project Timelines</h3>
-                        <p>Estimated timelines are provided for reference only. Hinest Interiors is not responsible for
+                        <p>Estimated timelines are provided for reference only. Hinest Infrastructure is not responsible for
                             delays caused by suppliers, site conditions, client changes, or unforeseen circumstances.
                         </p>
                     </div>
@@ -1045,19 +1222,19 @@
 
                     <div class="legal-section">
                         <h3>8. Limitation of Liability</h3>
-                        <p>Hinest Interiors shall not be liable for any indirect, incidental, or consequential damages
+                        <p>Hinest Infrastructure shall not be liable for any indirect, incidental, or consequential damages
                             arising from the use of our website or services.</p>
                     </div>
 
                     <div class="legal-section">
                         <h3>9. Third-Party Links</h3>
-                        <p>This website may contain links to third-party websites. Hinest Interiors is not responsible
+                        <p>This website may contain links to third-party websites. Hinest Infrastructure is not responsible
                             for the content or policies of external websites.</p>
                     </div>
 
                     <div class="legal-section">
                         <h3>10. Changes to Terms</h3>
-                        <p>Hinest Interiors reserves the right to update or modify these Terms & Conditions at any time
+                        <p>Hinest Infrastructure reserves the right to update or modify these Terms & Conditions at any time
                             without prior notice.</p>
                     </div>
 
@@ -1086,7 +1263,7 @@
 
                     <div class="legal-section">
                         <h3>1. Introduction</h3>
-                        <p>Hinest Interiors values your privacy and is committed to protecting the personal information
+                        <p>Hinest Infrastructure values your privacy and is committed to protecting the personal information
                             you share with us through our website and services. By using our website, you agree to the
                             terms outlined in this Privacy Policy.</p>
                     </div>
@@ -1109,7 +1286,7 @@
 
                     <div class="legal-section">
                         <h3>4. Sharing of Information</h3>
-                        <p>Hinest Interiors does not sell, rent, or trade your personal information to third parties.
+                        <p>Hinest Infrastructure does not sell, rent, or trade your personal information to third parties.
                             Information may be shared with trusted contractors, vendors, suppliers, or service providers
                             involved in project execution or business operations. Information may also be disclosed if
                             required by law or necessary to protect our legal rights.</p>
@@ -1132,14 +1309,14 @@
                     <div class="legal-section">
                         <h3>7. Third-Party Links</h3>
                         <p>This website may contain links to external websites for additional information or
-                            convenience. Hinest Interiors is not responsible for the privacy practices or content of
+                            convenience. Hinest Infrastructure is not responsible for the privacy practices or content of
                             third-party websites.</p>
                     </div>
 
                     <div class="legal-section">
                         <h3>8. Intellectual Property</h3>
                         <p>All content on this website, including designs, images, graphics, logos, text, and branding
-                            materials, is the property of Hinest Interiors and may not be copied, reproduced, or used
+                            materials, is the property of Hinest Infrastructure and may not be copied, reproduced, or used
                             without prior written permission.</p>
                     </div>
 
@@ -1152,14 +1329,14 @@
 
                     <div class="legal-section">
                         <h3>10. Policy Updates</h3>
-                        <p>Hinest Interiors reserves the right to update or modify this Privacy Policy at any time
+                        <p>Hinest Infrastructure reserves the right to update or modify this Privacy Policy at any time
                             without prior notice. Any changes will be posted on this page.</p>
                     </div>
 
                     <div class="legal-section">
                         <h3>11. Contact Us</h3>
                         <p>If you have any questions regarding this Privacy Policy or the handling of your information,
-                            please contact Hinest Interiors through the contact information available on our website.
+                            please contact Hinest Infrastructure through the contact information available on our website.
                         </p>
                     </div>
                 </div>
