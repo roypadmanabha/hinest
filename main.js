@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Sticky Header
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => {
-        header.classList.toggle('scrolled', window.scrollY > 60);
+        if (header) header.classList.toggle('scrolled', window.scrollY > 60);
     });
 
     // 3. Mobile Menu
@@ -33,8 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
     }
 
-    hamburger.addEventListener('click', toggleMenu);
-    mobileClose.addEventListener('click', toggleMenu);
+    if (hamburger) hamburger.addEventListener('click', toggleMenu);
+    if (mobileClose) mobileClose.addEventListener('click', toggleMenu);
     if (mobileOverlay) {
         mobileOverlay.addEventListener('click', toggleMenu);
     }
@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 5. Hero Animation
     function animateHero() {
+        if (typeof gsap === 'undefined') return;
         gsap.registerPlugin(ScrollTrigger);
         const tl = gsap.timeline();
         tl.from('.hero-tag', { y: 30, opacity: 0, duration: 0.8 }, 0.2)
@@ -82,20 +83,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { threshold: 0.1 });
         reveals.forEach(el => observer.observe(el));
 
-        // Stats counter
-        document.querySelectorAll('.stat-num').forEach(stat => {
-            const target = +stat.dataset.target;
-            gsap.to(stat, {
-                scrollTrigger: { trigger: stat, start: 'top 90%' },
-                innerText: target, duration: 2.5, snap: { innerText: 1 }, ease: 'power2.out'
+        // Stats counter & Parallax hero
+        if (typeof gsap !== 'undefined') {
+            document.querySelectorAll('.stat-num').forEach(stat => {
+                const target = +stat.dataset.target;
+                gsap.to(stat, {
+                    scrollTrigger: { trigger: stat, start: 'top 90%' },
+                    innerText: target, duration: 2.5, snap: { innerText: 1 }, ease: 'power2.out'
+                });
             });
-        });
 
-        // Parallax hero
-        gsap.to('.hero-img', {
-            scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true },
-            y: 200, ease: 'none'
-        });
+            if (document.querySelector('.hero-img')) {
+                gsap.to('.hero-img', {
+                    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true },
+                    y: 200, ease: 'none'
+                });
+            }
+        }
     }
 
     // 7. Scroll Reveal - Re-initialized for all dynamic content
@@ -131,6 +135,23 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Toggle current
             if (!isActive) step.classList.add('active');
+        });
+    });
+
+    // How to Proceed 1s Lazy Load Navigation
+    const proceedButtons = document.querySelectorAll('.btn-proceed-standalone, a[href*="how-to-proceed.html"]');
+    proceedButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetUrl = btn.getAttribute('href') || 'how-to-proceed.html';
+
+            btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> LOADING...`;
+            btn.style.pointerEvents = 'none';
+            btn.style.opacity = '0.85';
+
+            setTimeout(() => {
+                window.location.href = targetUrl;
+            }, 1000);
         });
     });
 
@@ -198,9 +219,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Preload Brochure for "no-delay" experience
     window.addEventListener('load', () => {
-        const iframe = exploreModal.querySelector('iframe');
-        if (iframe) {
-            iframe.src = `https://drive.google.com/file/d/1rdcTvUjjd7KASs3S6nMB8dAOLa_eCSUa/preview`;
+        if (exploreModal) {
+            const iframe = exploreModal.querySelector('iframe');
+            if (iframe) {
+                iframe.src = `https://drive.google.com/file/d/1rdcTvUjjd7KASs3S6nMB8dAOLa_eCSUa/preview`;
+            }
         }
     });
 
@@ -622,6 +645,184 @@ document.addEventListener('DOMContentLoaded', () => {
     if (privacyTrigger) privacyTrigger.addEventListener('click', openPrivacy);
     if (privacyCloseBtn) privacyCloseBtn.addEventListener('click', closePrivacy);
     if (privacyOverlay) privacyOverlay.addEventListener('click', closePrivacy);
+
+    // ==========================================
+    // RULES MODAL (TRIPURA AMC BYE-LAWS) LOGIC
+    // ==========================================
+    const rulesModal = document.getElementById('rules-modal');
+    const rulesTriggers = document.querySelectorAll('.rules-trigger');
+    const rulesCloseBtn = document.getElementById('rules-modal-close');
+    const rulesOverlay = document.getElementById('rules-modal-overlay');
+
+    const openRules = (e) => {
+        if (e) e.preventDefault();
+        if (rulesModal) {
+            rulesModal.style.display = 'flex';
+            setTimeout(() => rulesModal.classList.add('active'), 10);
+            document.body.style.overflow = 'hidden';
+            // Close mobile menu if open
+            if (mobileMenu && mobileMenu.classList.contains('active')) {
+                mobileMenu.classList.remove('active');
+                if (hamburger) hamburger.classList.remove('active');
+            }
+        }
+    };
+
+    const closeRules = () => {
+        if (rulesModal) {
+            rulesModal.classList.remove('active');
+            setTimeout(() => {
+                rulesModal.style.display = 'none';
+                document.body.style.overflow = '';
+            }, 400);
+        }
+    };
+
+    rulesTriggers.forEach(btn => btn.addEventListener('click', openRules));
+    if (rulesCloseBtn) rulesCloseBtn.addEventListener('click', closeRules);
+    if (rulesOverlay) rulesOverlay.addEventListener('click', closeRules);
+
+    // Auto open if hash is #rules
+    if (window.location.hash === '#rules') {
+        openRules();
+    }
+
+    // Rules TOC Smooth Scroll & Active State
+    const rulesTocLinks = document.querySelectorAll('.rules-toc-link');
+    const rulesScrollContainer = document.getElementById('rules-scroll-content');
+
+    rulesTocLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            if (targetSection && rulesScrollContainer) {
+                rulesScrollContainer.scrollTo({
+                    top: targetSection.offsetTop - 20,
+                    behavior: 'smooth'
+                });
+                rulesTocLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+            }
+        });
+    });
+
+    // Update active TOC link on scroll
+    if (rulesScrollContainer) {
+        rulesScrollContainer.addEventListener('scroll', () => {
+            const sections = rulesScrollContainer.querySelectorAll('.rules-card');
+            let current = '';
+            sections.forEach(sec => {
+                const sectionTop = sec.offsetTop - rulesScrollContainer.offsetTop - 50;
+                if (rulesScrollContainer.scrollTop >= sectionTop) {
+                    current = sec.getAttribute('id');
+                }
+            });
+            if (current) {
+                rulesTocLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }
+
+    // Rules Live Search Filter
+    const rulesSearchInput = document.getElementById('rules-search-input');
+    const rulesSearchClear = document.getElementById('rules-search-clear');
+
+    if (rulesSearchInput) {
+        rulesSearchInput.addEventListener('input', () => {
+            const query = rulesSearchInput.value.toLowerCase().trim();
+            if (rulesSearchClear) rulesSearchClear.style.display = query ? 'block' : 'none';
+
+            const cards = rulesScrollContainer ? rulesScrollContainer.querySelectorAll('.rules-card') : [];
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (!query || text.includes(query)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    }
+
+    if (rulesSearchClear) {
+        rulesSearchClear.addEventListener('click', () => {
+            if (rulesSearchInput) {
+                rulesSearchInput.value = '';
+                rulesSearchInput.dispatchEvent(new Event('input'));
+            }
+        });
+    }
+
+    // AMC Sanction Fee Calculator inside Rules Modal
+    window.calculateRulesAMCFee = function() {
+        const typeEl = document.getElementById('rules-calc-type');
+        const measEl = document.getElementById('rules-calc-measurement');
+        if (!typeEl || !measEl) return;
+
+        const type = typeEl.value;
+        const measurement = parseFloat(measEl.value) || 0;
+        const measurementContainer = document.getElementById('rules-measurement-container');
+        const unitLabel = document.getElementById('rules-unit-label');
+
+        let newRate = 0;
+        let oldRate = 0;
+        let isFixed = false;
+
+        if (type.includes('sanitary')) {
+            if (measurementContainer) measurementContainer.style.display = 'none';
+            isFixed = true;
+        } else {
+            if (measurementContainer) measurementContainer.style.display = 'block';
+            if (unitLabel) unitLabel.innerText = type === 'boundary_wall' ? 'Total Length (Running ft)' : 'Total Covered Area (Sq. mtr)';
+        }
+
+        if (type === 'residential_load_bearing') {
+            if (measurement <= 100) { newRate = 80; oldRate = 60; }
+            else if (measurement <= 300) { newRate = 100; oldRate = 70; }
+            else { newRate = 200; oldRate = 140; }
+        } else if (type === 'residential_rcc') {
+            if (measurement < 140) { newRate = 130; oldRate = 90; }
+            else if (measurement <= 300) { newRate = 160; oldRate = 120; }
+            else { newRate = 200; oldRate = 150; }
+        } else if (type === 'commercial_rcc') {
+            newRate = 300; oldRate = 200;
+        } else if (type === 'boundary_wall') {
+            newRate = 55; oldRate = 35;
+        } else if (type === 'sanitary_residential') {
+            newRate = 120; oldRate = 120;
+        } else if (type === 'sanitary_commercial') {
+            newRate = 250; oldRate = 250;
+        }
+
+        let totalNew = isFixed ? newRate : newRate * measurement;
+        let totalOld = isFixed ? oldRate : oldRate * measurement;
+        let diff = totalNew - totalOld;
+
+        if (!isFixed && measurement <= 0) {
+            totalNew = 0; totalOld = 0; diff = 0;
+        }
+
+        const formatINR = num => '₹' + Math.round(num).toLocaleString('en-IN');
+
+        const resNew = document.getElementById('rules-res-new');
+        const resOld = document.getElementById('rules-res-old');
+        const resDiff = document.getElementById('rules-res-diff');
+
+        if (resNew) resNew.innerText = formatINR(totalNew);
+        if (resOld) resOld.innerText = formatINR(totalOld);
+        if (resDiff) resDiff.innerText = '+ ' + formatINR(diff);
+    };
+
+    // Run calculator on initial load
+    if (document.getElementById('rules-calc-type')) {
+        window.calculateRulesAMCFee();
+    }
 
     // ==========================================
     // Multi-Step Cost Calculator Logic
@@ -1235,5 +1436,91 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.custom-select-options.active').forEach(m => m.classList.remove('active'));
         }
     });
+
+    // Content Protection & Toast Notification
+    (function initContentProtection() {
+        let toastTimeout = null;
+
+        function createToastElement() {
+            let toast = document.getElementById('content-protection-toast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'content-protection-toast';
+                toast.className = 'content-protection-toast';
+                toast.innerHTML = `
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="8" x2="12" y2="12"/>
+                        <line x1="12" y1="16" x2="12.01" y2="16"/>
+                    </svg>
+                    <span>Not allowed. Content protection enabled.</span>
+                `;
+                document.body.appendChild(toast);
+            }
+            return toast;
+        }
+
+        function showProtectionToast() {
+            const toast = createToastElement();
+            
+            if (toastTimeout) {
+                clearTimeout(toastTimeout);
+            }
+
+            toast.classList.remove('show');
+            void toast.offsetWidth;
+            toast.classList.add('show');
+
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // 1. Right Click Protection (All Devices)
+        document.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            showProtectionToast();
+        });
+
+        // 2. Text Selection Protection (Phones & Desktop)
+        document.addEventListener('selectstart', (e) => {
+            const targetTag = e.target.tagName ? e.target.tagName.toLowerCase() : '';
+            if (targetTag === 'input' || targetTag === 'textarea') return;
+            
+            e.preventDefault();
+            showProtectionToast();
+        });
+
+        // 3. Copy / Cut Protection
+        document.addEventListener('copy', (e) => {
+            const targetTag = e.target.tagName ? e.target.tagName.toLowerCase() : '';
+            if (targetTag === 'input' || targetTag === 'textarea') return;
+            
+            e.preventDefault();
+            showProtectionToast();
+        });
+
+        document.addEventListener('cut', (e) => {
+            const targetTag = e.target.tagName ? e.target.tagName.toLowerCase() : '';
+            if (targetTag === 'input' || targetTag === 'textarea') return;
+            
+            e.preventDefault();
+            showProtectionToast();
+        });
+
+        // 4. Print Protection (Ctrl+P / Cmd+P & Print Events)
+        window.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && (e.key === 'p' || e.key === 'P' || e.keyCode === 80)) {
+                e.preventDefault();
+                e.stopPropagation();
+                showProtectionToast();
+                return false;
+            }
+        }, true);
+
+        window.addEventListener('beforeprint', () => {
+            showProtectionToast();
+        });
+    })();
 
 });

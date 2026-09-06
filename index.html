@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 
 <head>
+    <script>document.documentElement.classList.remove('no-js');</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Hinest Infrastructure</title>
@@ -25,6 +26,75 @@
 
 <body id="home">
 
+    <!-- No-JS Fallback / Disabled Screen -->
+    <noscript>
+        <style>
+            body>* {
+                display: none !important;
+            }
+
+            .no-js-screen {
+                display: flex !important;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background-color: #080B10;
+                color: #FFFFFF;
+                font-family: 'Nunito', 'Mulish', system-ui, -apple-system, sans-serif;
+                text-align: center;
+                z-index: 999999999;
+                padding: 30px;
+                box-sizing: border-box;
+            }
+
+            .no-js-card {
+                background: rgba(20, 28, 38, 0.95);
+                border: 1px solid rgba(255, 215, 0, 0.35);
+                border-radius: 16px;
+                padding: 40px 32px;
+                max-width: 460px;
+                box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            }
+
+            .no-js-title {
+                color: #FFD700;
+                font-size: 24px;
+                font-weight: 800;
+                margin-top: 0;
+                margin-bottom: 12px;
+                letter-spacing: 0.5px;
+            }
+
+            .no-js-desc {
+                color: #CBD5E1;
+                font-size: 15px;
+                line-height: 1.6;
+                margin: 0;
+            }
+        </style>
+        <div class="no-js-screen">
+            <div class="no-js-card">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px;">
+                    <path
+                        d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                    <line x1="12" y1="9" x2="12" y2="13" />
+                    <line x1="12" y1="17" x2="12.01" y2="17" />
+                </svg>
+                <h1 class="no-js-title">JavaScript Required</h1>
+                <p class="no-js-desc">
+                    This webpage is disabled without JavaScript. Please enable JavaScript in your browser settings to
+                    access Hinest Infrastructure.
+                </p>
+            </div>
+        </div>
+    </noscript>
+
     <!-- Header -->
     <header class="header" id="header">
         <div class="container header-inner">
@@ -42,6 +112,7 @@
                 <a href="#home" class="nav-link active">Home</a>
                 <a href="#services" class="nav-link">Services</a>
                 <a href="#projects" class="nav-link">Projects</a>
+                <a href="javascript:void(0)" class="nav-link rules-trigger">Rules</a>
                 <a href="javascript:void(0)" class="nav-link consult-trigger">Consult</a>
                 <a href="javascript:void(0)" class="nav-link explore-trigger">Brochure</a>
 
@@ -62,7 +133,8 @@
         <div class="mobile-menu-header">
             <div class="mobile-logo">
                 <img src="assets/new-hinest-logo.png" alt="Hinest Logo" class="mobile-brand-logo-inner">
-                <span class="logo-text" style="font-weight: 650;">Hinest <span style="color: #fff; font-weight: 650;">Infrastructure</span></span>
+                <span class="logo-text" style="font-weight: 650;">Hinest <span
+                        style="color: #fff; font-weight: 650;">Infrastructure</span></span>
             </div>
             <button class="mobile-close" id="mobile-close" aria-label="Close menu">
                 <i class="fas fa-times"></i>
@@ -77,6 +149,10 @@
                 <a href="#projects" class="mobile-link">
                     <span class="mobile-icon"><i class="fas fa-drafting-compass"></i></span>
                     <span class="mobile-text">Projects</span>
+                </a>
+                <a href="javascript:void(0)" class="mobile-link rules-trigger">
+                    <span class="mobile-icon"><i class="fas fa-gavel"></i></span>
+                    <span class="mobile-text">Rules</span>
                 </a>
                 <a href="javascript:void(0)" class="mobile-link explore-trigger">
                     <span class="mobile-icon"><i class="fas fa-file-pdf"></i></span>
@@ -127,24 +203,24 @@
         <section class="stats">
             <div class="container stats-grid">
                 <div class="stat-item">
-                    <span class="stat-num" data-target="15">0</span>
+                    <span class="stat-num" data-target="5">0</span>
                     <span class="stat-plus">+</span>
                     <span class="stat-label">Years Experience</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-num" data-target="350">0</span>
+                    <span class="stat-num" data-target="100">0</span>
                     <span class="stat-plus">+</span>
                     <span class="stat-label">Projects Delivered</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-num" data-target="45">0</span>
+                    <span class="stat-num" data-target="15">0</span>
                     <span class="stat-plus">+</span>
                     <span class="stat-label">Expert Designers</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-num" data-target="12">0</span>
+                    <span class="stat-num" data-target="100">0</span>
                     <span class="stat-plus">+</span>
-                    <span class="stat-label">Design Awards</span>
+                    <span class="stat-label">Happy Clients</span>
                 </div>
             </div>
         </section>
@@ -222,43 +298,44 @@
                 <div class="section-header text-center reveal">
                     <span class="section-tag"><span class="tag-line"></span>Portfolio<span
                             class="tag-line"></span></span>
-                    <h2 class="section-title">Signature Projects</h2>
+                    <h2 class="section-title">Our Projects</h2>
                 </div>
                 <div class="projects-grid">
                     <!-- Project 1 -->
                     <div class="project-card reveal">
-                        <img src="assets/project-cafe.jpg" alt="Luxury Cafe Interior" class="project-card-img">
-                        <h3 class="project-card-title"><span class="project-card-num">01.</span>The Culinary Pavilion
-                        </h3>
-                        <p class="project-card-desc">A premium bistro interior featuring minimalist Scandinavian design,
-                            custom pendant lighting, and an open-concept dining experience.</p>
-
+                        <img src="assets/project-bordowali.jpg" alt="Bordowali G+1 Commercial Polyclinic Interior"
+                            class="project-card-img">
+                        <h3 class="project-card-title"><span class="project-card-num">01.</span>Bardowali</h3>
+                        <p class="project-card-desc">Ongoing G+1 commercial interior design for a modern polyclinic,
+                            featuring expansive open layouts, optimized spatial flow, and specialized healthcare
+                            infrastructure.</p>
                     </div>
                     <!-- Project 2 -->
                     <div class="project-card reveal">
-                        <img src="assets/project-villa-single.jpg" alt="Modern Single Story Villa"
+                        <img src="assets/project-chanmari.jpg" alt="Chanmari Modern Residential Living Room Interior"
                             class="project-card-img">
-                        <h3 class="project-card-title"><span class="project-card-num">02.</span>Veranda Vista Villa</h3>
-                        <p class="project-card-desc">A sleek, single-story luxury residence that masterfully integrates
-                            warm wood accents with expansive glass for a seamless indoor-outdoor flow.</p>
-
+                        <h3 class="project-card-title"><span class="project-card-num">02.</span>Chandmari</h3>
+                        <p class="project-card-desc">Bespoke residential interior design featuring a modern TV console
+                            wall unit, custom false ceiling with ambient LED cove lighting, and tailored wardrobe
+                            storage solutions.</p>
                     </div>
                     <!-- Project 3 -->
                     <div class="project-card reveal">
-                        <img src="assets/project-villa-multi.jpg" alt="Luxury Multi Story Villa"
-                            class="project-card-img">
-                        <h3 class="project-card-title"><span class="project-card-num">03.</span>The Celestial Manor</h3>
-                        <p class="project-card-desc">An architectural marvel of multi-level living, boasting integrated
-                            smart lighting and premium stone cladding for a grand, modern presence.</p>
-
+                        <img src="assets/project-lake-choumuhani.jpg"
+                            alt="Lake Choumuhani Ongoing Luxury Residential Interior" class="project-card-img">
+                        <h3 class="project-card-title"><span class="project-card-num">03.</span>Lake Chowmuhani</h3>
+                        <p class="project-card-desc">Ongoing luxury residential interior project featuring double-height
+                            ceiling architecture, custom false ceiling design, integrated cove lighting, and tailored
+                            wood paneling.</p>
                     </div>
                     <!-- Project 4 -->
                     <div class="project-card reveal">
-                        <img src="assets/project-office.jpg" alt="Executive Office Suite" class="project-card-img">
-                        <h3 class="project-card-title"><span class="project-card-num">04.</span>Metropolis Nexus Suite
-                        </h3>
-                        <p class="project-card-desc">A state-of-the-art executive boardroom featuring dark marble
-                            finishes, integrated tech solutions, and panoramic city views.</p>
+                        <img src="assets/project-shal-baagan.jpg" alt="Shal Baagan Proposed G+1 Residential Building"
+                            class="project-card-img">
+                        <h3 class="project-card-title"><span class="project-card-num">04.</span>Salbagan</h3>
+                        <p class="project-card-desc">Proposed G+1 modern residential building design, featuring modern
+                            exterior elevation architecture, warm wood accent cladding, spacious balcony terraces, and
+                            integrated boundary perimeter styling.</p>
 
                     </div>
                 </div>
@@ -318,6 +395,15 @@
             </div>
         </div>
 
+        <!-- Standalone How to Proceed Section -->
+        <div class="proceed-banner-section reveal">
+            <div class="container text-center">
+                <a href="how-to-proceed.html" class="btn-proceed-standalone">
+                    <i class="fas fa-route"></i> HOW TO PROCEED
+                </a>
+            </div>
+        </div>
+
         <!-- Book Consultation -->
         <section class="book-section" id="book">
             <div class="container">
@@ -338,8 +424,10 @@
                     </div>
                     <div class="book-form-wrap reveal blue-glow-form" style="padding: 40px;">
                         <div class="consult-form-container">
-                            <h2 class="form-title">Consult with Us</h2>
-                            <p class="form-subtitle">Let's build your dream space together</p>
+                            <div class="consult-header">
+                                <h2 class="form-title">Consult with Us</h2>
+                                <p class="form-subtitle">Let's build your dream space together</p>
+                            </div>
                             <form id="book-form-static" class="consult-form"
                                 action="https://formsubmit.co/info.hinestinteriors@gmail.com" method="POST">
                                 <input type="hidden" name="_subject"
@@ -504,7 +592,9 @@
 
                                 <!-- Service Selection Dropdown -->
                                 <div class="quote-form-group" style="margin-bottom: 25px;">
-                                    <label style="color: #FFD700; font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; display: block; margin-bottom: 8px;">Select Service Type</label>
+                                    <label
+                                        style="color: #FFD700; font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; display: block; margin-bottom: 8px;">Select
+                                        Service Type</label>
                                     <select id="calc-service-type">
                                         <option value="" disabled selected>Select Service Type</option>
                                         <option value="interior">Interior Design</option>
@@ -543,7 +633,9 @@
                                 <!-- Construction Building Structure & Area Formula Wrapper -->
                                 <div id="construction-step-1-wrapper" class="service-flow-step" style="display: none;">
                                     <div class="quote-form-group" style="margin-bottom: 25px;">
-                                        <label style="color: #FFD700; font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; display: block; margin-bottom: 8px;">Select Building Type & Structure</label>
+                                        <label
+                                            style="color: #FFD700; font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; display: block; margin-bottom: 8px;">Select
+                                            Building Type & Structure</label>
                                         <select id="calc-construction-type">
                                             <option value="" disabled selected>Select Building Type</option>
                                             <option value="g1-res">G+1 Residential</option>
@@ -561,23 +653,27 @@
                                     <div class="construction-calc-box">
                                         <div class="formula-badge">
                                             <i class="fas fa-calculator"></i>
-                                            <span>Formula: <strong>Select size l × b = area [sqm] × 10.76 = sqfoot</strong></span>
+                                            <span>Formula: <strong>Select size l × b = area [sqm] × 10.76 =
+                                                    sqfoot</strong></span>
                                         </div>
                                         <div class="dimensions-grid">
                                             <div class="dim-group">
                                                 <label for="const-len">Length l (m)</label>
-                                                <input type="number" id="const-len" min="1" step="0.1" placeholder="e.g. 10">
+                                                <input type="number" id="const-len" min="1" step="0.1"
+                                                    placeholder="e.g. 10">
                                             </div>
                                             <div class="dim-group">
                                                 <label for="const-breadth">Breadth b (m)</label>
-                                                <input type="number" id="const-breadth" min="1" step="0.1" placeholder="e.g. 15">
+                                                <input type="number" id="const-breadth" min="1" step="0.1"
+                                                    placeholder="e.g. 15">
                                             </div>
                                             <div class="dim-group">
                                                 <label for="const-sqft-direct">Plot Sq Ft</label>
-                                                <input type="number" id="const-sqft-direct" min="100" placeholder="or enter Sq Ft">
+                                                <input type="number" id="const-sqft-direct" min="100"
+                                                    placeholder="or enter Sq Ft">
                                             </div>
                                         </div>
-                                        
+
                                         <!-- Live Calculation Summary -->
                                         <div class="construction-summary-card">
                                             <div class="summary-stat">
@@ -975,6 +1071,192 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quality Ensured Section (Brand Partners Marquee) -->
+        <section class="quality-section" id="quality">
+            <div class="container">
+                <div class="section-header text-center reveal">
+                    <span class="section-tag"><span class="tag-line"></span>Premium Materials<span
+                            class="tag-line"></span></span>
+                    <h2 class="section-title">Quality Ensured</h2>
+                    <p class="quality-subtext">We use only genuine branded materials to ensure structural strength and durability of your building.</p>
+                </div>
+            </div>
+
+            <div class="quality-marquee-wrapper">
+                <div class="quality-marquee-track">
+                    <!-- Set 1 -->
+                    <div class="quality-logo-card"><img src="quality/srmb.png" alt="SRMB TMT Bar" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/tata.jpg" alt="Tata Steel" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/asianpaints.png" alt="Asian Paints" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/starcement.png" alt="Star Cement" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/berger.png" alt="Berger Paints" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/polycab.jpg" alt="Polycab" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/centuryply.png" alt="CenturyPly" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/finolex.png" alt="Finolex" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/greenply.jpg" alt="Greenply" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/gyproc.webp" alt="Gyproc" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/hafele.png" alt="Hafele" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/hettich.png" alt="Hettich" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/jaguar.jpg" alt="Jaquar" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/johnson.png" alt="Johnson Tiles" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/kajaria.png" alt="Kajaria" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/merino.png" alt="Merino Laminates" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/plystory.jpg" alt="Ply Story" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/images.png" alt="Branded Construction Materials" class="quality-logo-img"></div>
+
+                    <!-- Set 2 (Duplicate for Seamless Infinite Marquee) -->
+                    <div class="quality-logo-card"><img src="quality/srmb.png" alt="SRMB TMT Bar" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/tata.jpg" alt="Tata Steel" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/asianpaints.png" alt="Asian Paints" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/starcement.png" alt="Star Cement" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/berger.png" alt="Berger Paints" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/polycab.jpg" alt="Polycab" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/centuryply.png" alt="CenturyPly" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/finolex.png" alt="Finolex" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/greenply.jpg" alt="Greenply" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/gyproc.webp" alt="Gyproc" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/hafele.png" alt="Hafele" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/hettich.png" alt="Hettich" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/jaguar.jpg" alt="Jaquar" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/johnson.png" alt="Johnson Tiles" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/kajaria.png" alt="Kajaria" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/merino.png" alt="Merino Laminates" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/plystory.jpg" alt="Ply Story" class="quality-logo-img"></div>
+                    <div class="quality-logo-card"><img src="quality/images.png" alt="Branded Construction Materials" class="quality-logo-img"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Client Reviews / Testimonials Section -->
+        <section class="reviews-section" id="reviews">
+            <div class="container">
+                <div class="section-header text-center reveal">
+                    <span class="section-tag"><span class="tag-line"></span>Client Experiences<span
+                            class="tag-line"></span></span>
+                    <h2 class="section-title">What Our Clients Say</h2>
+                    <p class="reviews-subtext">Real feedback from homeowners and clients across Agartala & Tripura on our interior planning, design demos, and construction services.</p>
+                </div>
+
+                <div class="reviews-grid">
+                    <!-- Review 1 -->
+                    <div class="review-card reveal">
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="review-text">"Hinest Infrastructure is hands down the best consultant in Agartala! Their interior planning and 3D design demo gave us complete clarity before work started. Very cost-effective and highly professional execution."</p>
+                        <div class="review-author-wrap">
+                            <div class="author-avatar">AK</div>
+                            <div class="author-info">
+                                <h4 class="author-name">Abhijit Karmakar</h4>
+                                <span class="author-role">Homeowner, Agartala</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="review-card reveal">
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="review-text">"The owner is extremely polite, supportive, and attentive to every requirement. They guided us step-by-step through space planning and structural design. Truly the best construction team in Tripura!"</p>
+                        <div class="review-author-wrap">
+                            <div class="author-avatar">SR</div>
+                            <div class="author-info">
+                                <h4 class="author-name">Subham Roy</h4>
+                                <span class="author-role">Residential Client, Tripura</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="review-card reveal">
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="review-text">"Remarkable experience from 3D layout demonstration to final handover. They used 100% genuine branded materials within our budget. Highly cost-effective and reliable architects!"</p>
+                        <div class="review-author-wrap">
+                            <div class="author-avatar">NS</div>
+                            <div class="author-info">
+                                <h4 class="author-name">Niloy Saha</h4>
+                                <span class="author-role">Villa Owner, Agartala</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 4 -->
+                    <div class="review-card reveal">
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="review-text">"Loved their modern interior planning and false ceiling designs! The team is super supportive, transparent with pricing, and completed our home interior right on schedule. Exceptional quality work."</p>
+                        <div class="review-author-wrap">
+                            <div class="author-avatar">MD</div>
+                            <div class="author-info">
+                                <h4 class="author-name">Mitali Deb</h4>
+                                <span class="author-role">Interior Client, Agartala</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 5 -->
+                    <div class="review-card reveal">
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="review-text">"Professional, prompt, and top-tier service. The owner is very polite and always reachable. Their 3D design demos made visualization effortless. Best architectural & interior consultancy in Agartala!"</p>
+                        <div class="review-author-wrap">
+                            <div class="author-avatar">SP</div>
+                            <div class="author-info">
+                                <h4 class="author-name">Swastik Paul</h4>
+                                <span class="author-role">Commercial Client, Tripura</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 6 -->
+                    <div class="review-card reveal">
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="review-text">"Outstanding structural planning and interior coordination! Transparent cost estimation with zero hidden charges. I strongly recommend Hinest Infrastructure to anyone building in Tripura."</p>
+                        <div class="review-author-wrap">
+                            <div class="author-avatar">PD</div>
+                            <div class="author-info">
+                                <h4 class="author-name">Priyabrata Das</h4>
+                                <span class="author-role">Homeowner, Tripura</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
     </main>
@@ -985,7 +1267,8 @@
             <div class="footer-new-col footer-new-brand">
                 <a href="#" class="logo">
                     <svg class="logo-svg" viewBox="0 0 290 30" xmlns="http://www.w3.org/2000/svg">
-                        <text x="0" y="22" font-family="'Nunito', sans-serif" font-weight="650" font-size="24">
+                        <text x="50%" y="22" text-anchor="middle" font-family="'Nunito', sans-serif" font-weight="650"
+                            font-size="24">
                             <tspan fill="#FFD700" font-weight="650">hinest</tspan>
                             <tspan fill="white" font-weight="650" dx="5">infrastructure</tspan>
                         </text>
@@ -1031,8 +1314,9 @@
 
         <div class="footer-bottom-new">
             <div class="container">
-                <p>&copy; 2026 | Hinest Infrastructure <span class="hide-mobile">| All Rights Reserved </span>| Made with
-                    Vignette</p>
+                <p>&copy; 2026 | Hinest Infrastructure <span class="hide-mobile">| All Rights Reserved </span>| Made
+                    with <a href="https://vignette-beta-version.netlify.app/" target="_blank" rel="noopener noreferrer"
+                        class="vignette-link">Vignette</a></p>
             </div>
         </div>
     </footer>
@@ -1059,8 +1343,10 @@
         <div class="explore-modal-content consult-modal-content blue-glow-form">
             <button class="explore-modal-close" id="consult-modal-close">&times;</button>
             <div class="consult-form-container">
-                <h2 class="form-title">Consult with Us</h2>
-                <p class="form-subtitle">Let's build your dream space together</p>
+                <div class="consult-header">
+                    <h2 class="form-title">Consult with Us</h2>
+                    <p class="form-subtitle">Let's build your dream space together</p>
+                </div>
                 <form id="consultation-form" class="consult-form"
                     action="https://formsubmit.co/info.hinestinteriors@gmail.com" method="POST">
                     <!-- FormSubmit Configuration -->
@@ -1167,6 +1453,824 @@
         </div>
     </div>
 
+    <!-- Rules Modal (Tripura AMC Building Plan Rules) -->
+    <div id="rules-modal" class="rules-modal">
+        <div id="rules-modal-overlay" class="rules-modal-overlay"></div>
+        <div class="rules-modal-content">
+            <button id="rules-modal-close" class="rules-modal-close" aria-label="Close Rules Modal">&times;</button>
+
+            <!-- Header -->
+            <div class="rules-modal-header">
+                <div class="rules-modal-header-main">
+                    <div class="rules-title-group">
+                        <span class="rules-badge"><i class="fas fa-landmark"></i> Official Building Bye-Laws</span>
+                        <h2 class="rules-title">Tripura Building Rules 2017 — Agartala (AMC) Guide</h2>
+                        <p class="rules-subtitle">Comprehensive Building Regulations, Height & FAR Limits, Setbacks,
+                            Parking, Basements, Accessibility & Plan Approval Standards (Updated to 4th Amendment, 2025)
+                        </p>
+                    </div>
+                </div>
+                <div class="rules-search-wrapper">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="rules-search-input"
+                        placeholder="Search rules (e.g., setback, FAR, height, parking, basement, coverage, room size, fee)...">
+                    <button id="rules-search-clear" class="rules-search-clear" style="display:none;">&times;</button>
+                </div>
+            </div>
+
+            <div class="rules-modal-body">
+                <!-- Sidebar TOC -->
+                <aside class="rules-sidebar">
+                    <div class="rules-sidebar-header">
+                        <i class="fas fa-list-ul"></i> Table of Contents
+                    </div>
+                    <nav class="rules-toc" id="rules-toc">
+                        <a href="#r-overview" class="rules-toc-link active"><i class="fas fa-info-circle"></i> 1.
+                            Overview</a>
+                        <a href="#r-process" class="rules-toc-link"><i class="fas fa-tasks"></i> 2. Approval Process</a>
+                        <a href="#r-personnel" class="rules-toc-link"><i class="fas fa-user-tie"></i> 3. Technical
+                            Personnel</a>
+                        <a href="#r-coverage" class="rules-toc-link"><i class="fas fa-chart-pie"></i> 4. Ground
+                            Coverage</a>
+                        <a href="#r-height-far" class="rules-toc-link"><i class="fas fa-ruler-vertical"></i> 5. Height &
+                            FAR</a>
+                        <a href="#r-setbacks" class="rules-toc-link"><i class="fas fa-arrows-alt"></i> 6. Setbacks</a>
+                        <a href="#r-parking" class="rules-toc-link"><i class="fas fa-parking"></i> 7. Parking Norms</a>
+                        <a href="#r-rooms" class="rules-toc-link"><i class="fas fa-door-closed"></i> 8. Room Sizes</a>
+                        <a href="#r-fire" class="rules-toc-link"><i class="fas fa-fire-extinguisher"></i> 9. Fire
+                            Safety</a>
+                        <a href="#r-structural" class="rules-toc-link"><i class="fas fa-shield-alt"></i> 10. Structural
+                            Safety</a>
+                        <a href="#r-basement" class="rules-toc-link"><i class="fas fa-warehouse"></i> 11. Basement
+                            Rules</a>
+                        <a href="#r-tall" class="rules-toc-link"><i class="fas fa-building"></i> 12. Tall Buildings</a>
+                        <a href="#r-accessibility" class="rules-toc-link"><i class="fas fa-wheelchair"></i> 13.
+                            Accessibility</a>
+                        <a href="#r-green" class="rules-toc-link"><i class="fas fa-leaf"></i> 14. Green Building</a>
+                        <a href="#r-occupancy" class="rules-toc-link"><i class="fas fa-file-contract"></i> 15. Occupancy
+                            Cert.</a>
+                        <a href="#r-violations" class="rules-toc-link"><i class="fas fa-exclamation-triangle"></i> 16.
+                            Deviations & Penalties</a>
+                        <a href="#r-calc" class="rules-toc-link"><i class="fas fa-calculator"></i> 17. Sanction Fee
+                            Calc</a>
+                    </nav>
+                </aside>
+
+                <!-- Scroll Content -->
+                <div class="rules-scroll-content" id="rules-scroll-content">
+
+                    <!-- SECTION 1: OVERVIEW -->
+                    <div id="r-overview" class="rules-card">
+                        <div class="rules-card-header">
+                            <div class="rules-card-icon"><i class="fas fa-info-circle"></i></div>
+                            <h3 class="rules-card-title">1. Overview & Applicability</h3>
+                        </div>
+                        <p>The <strong>Tripura Building Rules, 2017</strong> (updated up to the 4th Amendment,
+                            17.01.2025) provide the complete regulatory framework followed by all Urban Local Bodies
+                            (ULBs) in Tripura — including the <strong>Agartala Municipal Corporation (AMC)</strong> —
+                            for reviewing and approving building plans.</p>
+
+                        <div class="rules-grid-3">
+                            <div class="rules-subbox">
+                                <h4><i class="fas fa-building"></i> Who It Applies To</h4>
+                                <p style="font-size:13px; margin:0; color:rgba(255,255,255,0.8);">Anyone erecting,
+                                    re-erecting, adding to, or altering a building inside a Tripura ULB area —
+                                    residential, commercial, institutional, or industrial.</p>
+                            </div>
+                            <div class="rules-subbox">
+                                <h4><i class="fas fa-file-signature"></i> What You'll Need</h4>
+                                <p style="font-size:13px; margin:0; color:rgba(255,255,255,0.8);">A sanctioned site plan
+                                    (Form A), a building plan (Form B) prepared by empanelled
+                                    architects/engineers/planners, tax clearance, and applicable fees.</p>
+                            </div>
+                            <div class="rules-subbox">
+                                <h4><i class="fas fa-shield-alt"></i> Why It Matters</h4>
+                                <p style="font-size:13px; margin:0; color:rgba(255,255,255,0.8);">Building outside these
+                                    limits leads to plan rejection, stop-work orders, or demolition of unauthorised
+                                    portions at the owner's cost.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 2: APPROVAL PROCESS -->
+                    <div id="r-process" class="rules-card">
+                        <div class="rules-card-header">
+                            <div class="rules-card-icon"><i class="fas fa-tasks"></i></div>
+                            <h3 class="rules-card-title">2. Step-by-Step Building Plan Approval Process</h3>
+                        </div>
+                        <p>Here is the exact journey a building plan undergoes in Agartala (AMC), from plot verification
+                            to obtaining your occupancy certificate:</p>
+
+                        <div class="rules-step">
+                            <div class="rules-step-num">1</div>
+                            <div class="rules-step-content">
+                                <h4>Get your site approved first (Form A)</h4>
+                                <p>Before applying for a building plan, your plot needs a sanctioned site plan. The ULB
+                                    verifies plot access road width, drainage, neighboring structures, and site boundary
+                                    conditions.</p>
+                            </div>
+                        </div>
+                        <div class="rules-step">
+                            <div class="rules-step-num">2</div>
+                            <div class="rules-step-content">
+                                <h4>Submit the building plan (Form B)</h4>
+                                <p>Must be prepared by the required combination of Architect, Structural Engineer,
+                                    Geo-technical Engineer, or Licensed Building Planner along with tax clearance,
+                                    ownership proof, and FAR calculations.</p>
+                            </div>
+                        </div>
+                        <div class="rules-step">
+                            <div class="rules-step-num">3</div>
+                            <div class="rules-step-content">
+                                <h4>ULB reviews within 30 days</h4>
+                                <p>The ULB may request missing details within 15 working days. Once complete, it must
+                                    sanction, refuse, or conditionally sanction within 30 days. If unaddressed after a
+                                    follow-up representation for another 30 days, the plan is deemed approved by
+                                    default.</p>
+                            </div>
+                        </div>
+                        <div class="rules-step">
+                            <div class="rules-step-num">4</div>
+                            <div class="rules-step-content">
+                                <h4>Pay the fee & receive building permit</h4>
+                                <p>Building permits are issued upon fee payment. Sanctioned plans remain valid for 3
+                                    years, renewable for 2 years (extending up to 5 years if partly built with partial
+                                    occupancy).</p>
+                            </div>
+                        </div>
+                        <div class="rules-step">
+                            <div class="rules-step-num">5</div>
+                            <div class="rules-step-content">
+                                <h4>Notice before work (Form E) & Plinth notice (Form F)</h4>
+                                <p>Inform the ULB in writing (Form E) at least 7 days before construction begins, and
+                                    again (Form F) when construction reaches plinth level for inspection.</p>
+                            </div>
+                        </div>
+                        <div class="rules-step">
+                            <div class="rules-step-num">6</div>
+                            <div class="rules-step-content">
+                                <h4>Completion notice (Form G) & Occupancy Certificate</h4>
+                                <p>Submit completion notice once work ends. No building may be legally occupied until
+                                    full or partial occupancy certificate is issued.</p>
+                            </div>
+                        </div>
+
+                        <div class="rules-note">
+                            <i class="fas fa-info-circle"></i> <strong>Appeal Process:</strong> If your plan is refused,
+                            you can appeal directly to the Local Body for reconsideration without starting from scratch.
+                        </div>
+                    </div>
+
+                    <!-- SECTION 3: TECHNICAL PERSONNEL -->
+                    <div id="r-personnel" class="rules-card">
+                        <div class="rules-card-header">
+                            <div class="rules-card-icon"><i class="fas fa-user-tie"></i></div>
+                            <h3 class="rules-card-title">3. Technical Personnel Required by Building Height</h3>
+                        </div>
+                        <p>The taller or more complex your proposed building, the higher the qualification required for
+                            signing professionals:</p>
+
+                        <div class="rules-table-wrapper">
+                            <table class="rules-table">
+                                <thead>
+                                    <tr>
+                                        <th>Building Height / Type</th>
+                                        <th>Professionals Required to Sign</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Up to 4.5 metres</strong></td>
+                                        <td>Licensed Building Planner (min. diploma holder with 2+ years experience)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Above 4.5 m up to 8.0 m</strong> (or basements/deep foundations)
+                                        </td>
+                                        <td>Degree-holder Building Planner and/or Architect + Structural Engineer</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Above 8.0 m up to 14.0 m</strong> (or piling/deep
+                                            foundation/basement)</td>
+                                        <td>Building Planner + Architect + Structural Engineer + Geo-technical Engineer
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Above 14.0 m</strong> (Tall Building)</td>
+                                        <td>Same team as above + State Government approval via ULB and Technical
+                                            Appraisal Committee (TAC)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="rules-note">
+                            <i class="fas fa-certificate"></i> <strong>Empanelment Mandatory:</strong> All Structural
+                            Engineers, Geo-technical Engineers, and Licensed Building Planners must be empanelled with
+                            the ULB to sign building plans.
+                        </div>
+                    </div>
+
+                    <!-- SECTION 4: GROUND COVERAGE -->
+                    <div id="r-coverage" class="rules-card">
+                        <div class="rules-card-header">
+                            <div class="rules-card-icon"><i class="fas fa-chart-pie"></i></div>
+                            <h3 class="rules-card-title">4. Maximum Permissible Ground Coverage</h3>
+                        </div>
+                        <p>Ground coverage represents the maximum percentage of your total plot area that the building
+                            footprint is permitted to occupy for a single building on a plot.</p>
+
+                        <div class="rules-table-wrapper">
+                            <table class="rules-table">
+                                <thead>
+                                    <tr>
+                                        <th>Plot Size</th>
+                                        <th>Building Use Type</th>
+                                        <th>Max Ground Coverage</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td rowspan="2"><strong>Up to 200 sq. mtr</strong></td>
+                                        <td>Residential</td>
+                                        <td><strong style="color:#FFD700; font-size:15px;">70%</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Other than residential</td>
+                                        <td><strong style="color:#FFD700; font-size:15px;">50%</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Above 200 sq. mtr</strong></td>
+                                        <td>All building types</td>
+                                        <td><strong style="color:#FFD700; font-size:15px;">60%</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p style="font-size:12.5px; color:rgba(255,255,255,0.65);">* For plots containing more than one
+                            building, coverage is evaluated under multi-building rules by the ULB.</p>
+                    </div>
+
+                    <!-- SECTION 5: HEIGHT & FAR -->
+                    <div id="r-height-far" class="rules-card">
+                        <div class="rules-card-header">
+                            <div class="rules-card-icon"><i class="fas fa-ruler-vertical"></i></div>
+                            <h3 class="rules-card-title">5. Permissible Building Height & Floor Area Ratio (FAR)</h3>
+                        </div>
+                        <p>Maximum building height is directly governed by the width of the access road or passage in
+                            front of your plot:</p>
+
+                        <div class="rules-table-wrapper">
+                            <table class="rules-table">
+                                <thead>
+                                    <tr>
+                                        <th>Width of Means of Access (Road Width)</th>
+                                        <th>Maximum Building Height Allowed</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1.80 m – 2.40 m</td>
+                                        <td>Up to <strong>8.00 m</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Above 2.40 m – 5.00 m</td>
+                                        <td>Up to <strong>10.00 m</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Above 5.00 m – 8.00 m</td>
+                                        <td>Up to <strong>12.50 m</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Above 8.00 m – 15.00 m</td>
+                                        <td>Up to <strong>14.50 m</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Above 15.00 m</td>
+                                        <td><strong>Tall Building</strong> — Special State Govt & TAC rules apply</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="rules-note">
+                            <i class="fas fa-ruler"></i> <strong>Height Measurement:</strong> Height is measured from
+                            the road's centre-line level to the highest structural point. Excluded from height: stair
+                            covers (&le;2.40m), lift machine rooms, roof tanks (&le;1.80m), chimneys, and parapets
+                            (&le;1.50m) provided they cover &le; 1/3 of roof area.
+                        </div>
+
+                        <h4 style="color:#FFD700; font-size:15px; margin:20px 0 10px 0;">Floor Area Ratio (FAR) for
+                            Buildings >14.5 m Height:</h4>
+                        <div class="rules-table-wrapper">
+                            <table class="rules-table">
+                                <thead>
+                                    <tr>
+                                        <th>Access Road Width</th>
+                                        <th>Residential (Commercial Zone)</th>
+                                        <th>Residential (Other Zone)</th>
+                                        <th>Institutional / Business / Others</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Above 14.5 m – 20.00 m</td>
+                                        <td>2.50</td>
+                                        <td>2.75</td>
+                                        <td>2.50</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Above 20.00 m</td>
+                                        <td>2.75</td>
+                                        <td>3.00</td>
+                                        <td>2.75</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p style="font-size:12.5px; color:rgba(255,255,255,0.65);">* Excluded from FAR calculation:
+                            Covered car parking (calculated at 20 sqm per car), stair covers, lift machine rooms, roof
+                            water tanks, and chimneys.</p>
+                    </div>
+
+                    <!-- SECTION 6: SETBACKS -->
+                    <div id="r-setbacks" class="rules-card">
+                        <div class="rules-card-header">
+                            <div class="rules-card-icon"><i class="fas fa-arrows-alt"></i></div>
+                            <h3 class="rules-card-title">6. Front, Rear & Side Open Spaces (Setbacks)</h3>
+                        </div>
+                        <p>Minimum open spaces required around the building at ground level for light, ventilation, and
+                            emergency access:</p>
+
+                        <div class="rules-grid-3">
+                            <div class="rules-subbox">
+                                <h4><i class="fas fa-arrow-up"></i> Front Open Space</h4>
+                                <ul>
+                                    <td>Residential: <strong>1.80 m</strong></td>
+                                    <td>Assembly / Inst. / Educational / Club: <strong>3.00 m</strong></td>
+                                    <td>Commercial (built-up >100 sqm): <strong>4.00 m</strong></td>
+                                    <td>Industrial / Wholesale / Storage: <strong>5.00 m</strong></td>
+                                    <td>Small plots (&le;165 sqm, &le;8m ht): <strong>1.20 m</strong></td>
+                                </ul>
+                                <p style="font-size:11.5px; color:rgba(255,255,255,0.6); margin-top:8px;">* Mixed-use
+                                    buildings adopt the highest front setback among the building's proposed uses.</p>
+                            </div>
+
+                            <div class="rules-subbox">
+                                <h4><i class="fas fa-arrow-down"></i> Rear Open Space</h4>
+                                <ul>
+                                    <td>Up to 8.00 m height: <strong>1.00 m</strong></td>
+                                    <td>Above 8.00 – 10.00 m: <strong>1.20 m</strong></td>
+                                    <td>Above 10.00 – 12.50 m: <strong>2.00 m</strong></td>
+                                    <td>Above 12.50 – 14.50 m: <strong>2.50 m</strong></td>
+                                </ul>
+                            </div>
+
+                            <div class="rules-subbox">
+                                <h4><i class="fas fa-arrows-alt-h"></i> Side Open Space</h4>
+                                <ul>
+                                    <td>Up to 8.00 m (G+1): <strong>1.00 m each side</strong></td>
+                                    <td>Above 8.00 – 14.50 m: <strong>1.20 m each side</strong></td>
+                                    <td>Facing existing door/window: <strong>1.80 m min.</strong></td>
+                                    <td>Industrial / Storage: <strong>3.50 m min.</strong></td>
+                                </ul>
+                                <p style="font-size:11.5px; color:rgba(255,255,255,0.6); margin-top:8px;">* Plots deeper
+                                    than 24 m require a 4.0 m passage full depth on one side.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 7: PARKING -->
+                    <div id="r-parking" class="rules-card">
+                        <div class="rules-card-header">
+                            <div class="rules-card-icon"><i class="fas fa-parking"></i></div>
+                            <h3 class="rules-card-title">7. Parking Space Requirements</h3>
+                        </div>
+                        <p>Standard car parking dimension is <strong>2.40 m × 4.50 m</strong>; truck/bus space is
+                            <strong>3.75 m × 10.00 m</strong> (excluding driveways and circulation aisles):
+                        </p>
+
+                        <div class="rules-table-wrapper">
+                            <table class="rules-table">
+                                <thead>
+                                    <tr>
+                                        <th>Building Occupancy Use</th>
+                                        <th>Covered Area Threshold</th>
+                                        <th>Mandatory Parking Required</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Residential</strong></td>
+                                        <td>Up to 70 sqm: None</td>
+                                        <td><strong>1 car space / additional 100 sqm</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Commercial / Business</strong></td>
+                                        <td>Up to 50 sqm: None</td>
+                                        <td><strong>1 car space / additional 75 sqm</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Restaurants, Bars, Clubs</strong></td>
+                                        <td>—</td>
+                                        <td><strong>1 car space / 100 sqm</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Hotels & Lodges</strong></td>
+                                        <td>—</td>
+                                        <td><strong>1 car space / 200 sqm</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Theatres, Auditoria, Cinemas</strong></td>
+                                        <td>—</td>
+                                        <td><strong>1 car space / 100 sqm</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Hospitals & Healthcare</strong></td>
+                                        <td>—</td>
+                                        <td><strong>1 car space / 100 sqm</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Educational Institutions</strong></td>
+                                        <td>—</td>
+                                        <td><strong>1 car / 400 sqm + 1 bus / 1000 sqm</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Industrial & Storage</strong></td>
+                                        <td>—</td>
+                                        <td><strong>1 car / 400 sqm + 1 truck / 1000 sqm</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="rules-note">
+                            <i class="fas fa-car"></i> <strong>Parking Notes:</strong> Residential buildings up to 14 m
+                            height do not require direct driveway access to every individual car space. Access roads
+                            narrower than 2.40 m may be granted parking waivers. Stilt parking must be constructed with
+                            shear walls or cross-bracing.
+                        </div>
+                    </div>
+
+                    <!-- SECTION 8: ROOM SIZES -->
+                    <div id="r-rooms" class="rules-card">
+                        <div class="rules-card-header">
+                            <div class="rules-card-icon"><i class="fas fa-door-closed"></i></div>
+                            <h3 class="rules-card-title">8. Minimum Room Sizes & Interior Heights</h3>
+                        </div>
+                        <p>Every internal room and utility space must meet mandatory floor area and clear height
+                            minimums:</p>
+
+                        <div class="rules-table-wrapper">
+                            <table class="rules-table">
+                                <thead>
+                                    <tr>
+                                        <th>Room / Space Type</th>
+                                        <th>Minimum Floor Area</th>
+                                        <th>Minimum Clear Height</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Habitable Single Room</strong></td>
+                                        <td>9.50 sqm (min width 2.40 m)</td>
+                                        <td>2.75 m</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Additional Habitable Rooms</strong></td>
+                                        <td>7.50 sqm (min width 2.10 m)</td>
+                                        <td>2.75 m</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Kitchen</strong></td>
+                                        <td>4.50 sqm (min width 1.80 m; 9.5 sqm if with dining)</td>
+                                        <td>2.50 m</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Pantry</strong></td>
+                                        <td>3.00 sqm (min width 1.40 m)</td>
+                                        <td>—</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Bathroom</strong></td>
+                                        <td>1.80 sqm (min width 1.20 m; 2.6 sqm with WC)</td>
+                                        <td>2.20 m</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Water Closet (WC)</strong></td>
+                                        <td>1.10 sqm (min width 0.90 m)</td>
+                                        <td>—</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Store Room</strong></td>
+                                        <td>1.50 sqm</td>
+                                        <td>2.10 m</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Car Garage</strong></td>
+                                        <td>2.50 m × 5.00 m</td>
+                                        <td>2.10 m</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Retail Shop</strong></td>
+                                        <td>—</td>
+                                        <td>2.30 m</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="rules-grid-3">
+                            <div class="rules-subbox">
+                                <h4><i class="fas fa-layer-group"></i> Loft & Mezzanine</h4>
+                                <p style="font-size:12px; margin:0; color:rgba(255,255,255,0.75);">Lofts: Max 25% area
+                                    of non-habitable rooms (100% over corridors), min 2.10m clear height. Mezzanine: Max
+                                    25% ground floor covered area, ground-to-first floor only, no kitchen use.</p>
+                            </div>
+                            <div class="rules-subbox">
+                                <h4><i class="fas fa-border-all"></i> Boundary Wall</h4>
+                                <p style="font-size:12px; margin:0; color:rgba(255,255,255,0.75);">Max 2.0 m height
+                                    above road center-line, solid portion capped at 1.5 m. Foundations must not intrude
+                                    onto adjacent plots.</p>
+                            </div>
+                            <div class="rules-subbox">
+                                <h4><i class="fas fa-grip-lines"></i> Parapet Wall</h4>
+                                <p style="font-size:12px; margin:0; color:rgba(255,255,255,0.75);">Mandatory on roof
+                                    terraces and balcony edges. Capped at 1.5 m (excess height counts toward overall
+                                    building height).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 9: FIRE SAFETY -->
+                    <div id="r-fire" class="rules-card">
+                        <div class="rules-card-header">
+                            <div class="rules-card-icon"><i class="fas fa-fire-extinguisher"></i></div>
+                            <h3 class="rules-card-title">9. Fire Safety & Exit Regulations</h3>
+                        </div>
+                        <p>Mandatory for buildings taller than <strong>12.50 m</strong> or exceeding <strong>500
+                                sqm</strong> covered area — requires formal NOC approval from the Director of Fire
+                            Services:</p>
+
+                        <div class="rules-grid-2">
+                            <div class="rules-subbox">
+                                <h4><i class="fas fa-door-open"></i> Exit Requirements</h4>
+                                <ul>
+                                    <td>Exits must remain unobstructed, lit, and clearly marked.</td>
+                                    <td>Lifts and escalators <strong>never</strong> qualify as fire exits.</td>
+                                    <td>Basements require at least 2 independent fire exits.</td>
+                                </ul>
+                            </div>
+                            <div class="rules-subbox">
+                                <h4><i class="fas fa-ruler-combined"></i> Maximum Exit Travel Distance</h4>
+                                <ul>
+                                    <td>Residential/Educational/Institutional: <strong>22.5 m max</strong></td>
+                                    <td>Assembly/Commercial/Business/Industrial: <strong>30.0 m max</strong></td>
+                                    <td>Travel limits increase by 50% for fully sprinklered floors.</td>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="rules-note">
+                            <i class="fas fa-shield-alt"></i> <strong>Staircase Rules:</strong> Buildings over 14.0 m
+                            height require at least 2 staircases (one positioned on an external wall). Minimum stair
+                            width ranges from 0.90 m up to 2.00 m+ for high-occupancy assembly buildings. All electrical
+                            installations follow the National Electrical Code.
+                        </div>
+                    </div>
+
+                    <!-- SECTION 10: STRUCTURAL SAFETY -->
+                    <div id="r-structural" class="rules-card">
+                        <div class="rules-card-header">
+                            <div class="rules-card-icon"><i class="fas fa-shield-alt"></i></div>
+                            <h3 class="rules-card-title">10. Structural Design & Safety Standards</h3>
+                        </div>
+                        <p>All structural designs and retrofitting must strictly comply with National Building Code
+                            (NBC) structural provisions and relevant Indian Standards (IS codes):</p>
+                        <ul style="padding-left:20px; font-size:13.5px; line-height:1.7; color:rgba(255,255,255,0.85);">
+                            <li>Designs must be performed and signed exclusively by a <strong>ULB-empanelled Structural
+                                    Engineer</strong>.</li>
+                            <li>Complies with IS codes for seismic resistance, foundations, concrete, steel, masonry,
+                                and timber.</li>
+                            <li>Proof-checking of structural calculations by competent authorities for designated
+                                high-risk or tall structures.</li>
+                            <li>Mandatory soil testing and geotechnical reports required prior to foundation approval.
+                            </li>
+                            <li>Alternative building materials permitted only upon official laboratory certification of
+                                structural equivalence.</li>
+                        </ul>
+                    </div>
+
+                    <!-- SECTION 11: BASEMENT RULES -->
+                    <div id="r-basement" class="rules-card">
+                        <div class="rules-card-header">
+                            <div class="rules-card-icon"><i class="fas fa-warehouse"></i></div>
+                            <h3 class="rules-card-title">11. Basement Construction Rules</h3>
+                        </div>
+                        <p>Where basements are permitted by the ULB, the following strict regulations apply:</p>
+
+                        <div class="rules-grid-2">
+                            <div class="rules-subbox">
+                                <h4><i class="fas fa-check-circle"></i> Allowed Uses</h4>
+                                <ul>
+                                    <td>Car parking & vehicle storage</td>
+                                    <td>AC plant rooms, generators, electrical panels</td>
+                                    <td>Storage for non-combustible goods</td>
+                                    <td>Bank strong rooms, libraries, dark rooms</td>
+                                    <td>Air-conditioned retail, office, or assembly space</td>
+                                </ul>
+                            </div>
+                            <div class="rules-subbox">
+                                <h4><i class="fas fa-times-circle"></i> Prohibited Uses & Specs</h4>
+                                <ul>
+                                    <td><strong>No residential occupancy</strong> of any kind</td>
+                                    <td>No kitchen, bathroom, or WC (unless sewer clear)</td>
+                                    <td>Minimum 2.4 m floor-to-ceiling clear height</td>
+                                    <td>Must have 2 ramps (&ge;3.5m wide, max slope 1:6) + separate stairs</td>
+                                    <td>Damp-proofing & mechanical ventilation (1 fan/50sqm)</td>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 12: TALL BUILDINGS -->
+                    <div id="r-tall" class="rules-card">
+                        <div class="rules-card-header">
+                            <div class="rules-card-icon"><i class="fas fa-building"></i></div>
+                            <h3 class="rules-card-title">12. Tall Building Rules (Exceeding 14.5m)</h3>
+                        </div>
+                        <p>Buildings taller than 14.50 m are treated as special cases requiring formal State Government
+                            clearance and Technical Appraisal Committee (TAC) sanction:</p>
+                        <div class="rules-warn">
+                            <i class="fas fa-exclamation-triangle"></i> <strong>Key Conditions for Tall
+                                Buildings:</strong>
+                            <ul style="margin-top:6px; padding-left:18px;">
+                                <li>Not permitted on streets narrower than <strong>15.00 m</strong> width.</li>
+                                <li>Front setback: 20% of building height or 6.0 m (whichever is less).</li>
+                                <li>Rear setback: 5.0 m min (up to 18m ht), 20% ht beyond 18m.</li>
+                                <li>Side setback: 3.5 m min (up to 18m ht), 20% ht beyond 18m.</li>
+                                <li>Mechanical ventilation mandatory for all interior shafts.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 13: ACCESSIBILITY -->
+                    <div id="r-accessibility" class="rules-card">
+                        <div class="rules-card-header">
+                            <div class="rules-card-icon"><i class="fas fa-wheelchair"></i></div>
+                            <h3 class="rules-card-title">13. Accessibility (Barrier-Free Provisions)</h3>
+                        </div>
+                        <p>Applies to public-use buildings (educational, commercial, institutional, assembly, group
+                            housing) on plots larger than <strong>2,000 sqm</strong>:</p>
+                        <div class="rules-grid-2">
+                            <div class="rules-subbox">
+                                <h4><i class="fas fa-universal-access"></i> Mandatory Features</h4>
+                                <ul>
+                                    <td>Barrier-free non-slip access pathway from plot entrance to building lobby.</td>
+                                    <td>Reserved accessible parking spaces near main entrances.</td>
+                                    <td>Ramp entrance alongside steps with handrails on both sides.</td>
+                                    <td>Wheelchair-accessible doors, corridors, and at least 1 accessible toilet on
+                                        ground floor (or every floor with a lift).</td>
+                                </ul>
+                            </div>
+                            <div class="rules-subbox">
+                                <h4><i class="fas fa-sign-language"></i> Signage & Refuge Areas</h4>
+                                <ul>
+                                    <td>Wheelchair-sized lifts with auditory & Braille indicators.</td>
+                                    <td>Tactile floor guidance paths for visually impaired visitors.</td>
+                                    <td>Designated fire refuge areas near fireproof stairwells on every floor.</td>
+                                    <td>Complies with Govt. of India Harmonized Guidelines.</td>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 14: GREEN BUILDING -->
+                    <div id="r-green" class="rules-card">
+                        <div class="rules-card-header">
+                            <div class="rules-card-icon"><i class="fas fa-leaf"></i></div>
+                            <h3 class="rules-card-title">14. Green Building & Sustainability Requirements</h3>
+                        </div>
+                        <div class="rules-grid-2">
+                            <div class="rules-subbox">
+                                <h4><i class="fas fa-tint"></i> Rainwater Harvesting</h4>
+                                <p style="font-size:12.5px; color:rgba(255,255,255,0.8);">Mandatory for residential
+                                    plots &ge;200 sqm plinth area, all group housing/public buildings, and
+                                    commercial/industrial plots &ge;50 sqm. Full rainwater proposal required at plan
+                                    submission.</p>
+                            </div>
+                            <div class="rules-subbox">
+                                <h4><i class="fas fa-solar-panel"></i> Solar & Energy</h4>
+                                <p style="font-size:12.5px; color:rgba(255,255,255,0.8);">Rooftop Solar mandatory for
+                                    plots &ge;500 sqm (generating 5% connected load or 20W/sqft roof). Solar Water
+                                    Heating mandatory for hotels, hospitals, lodges, homes >150 sqm plinth.</p>
+                            </div>
+                        </div>
+                        <div class="rules-note">
+                            <i class="fas fa-recycle"></i> <strong>STP & Building Insurance:</strong> Buildings >10,000
+                            sqm (or &ge;10,000 L/day wastewater) must install on-site Sewage Treatment Plants (STP).
+                            Building insurance against fire and natural disasters is mandatory for residential buildings
+                            >300 sqm / 3+ storeys and non-residential buildings of 2+ storeys.
+                        </div>
+                    </div>
+
+                    <!-- SECTION 15: OCCUPANCY CERTIFICATE -->
+                    <div id="r-occupancy" class="rules-card">
+                        <div class="rules-card-header">
+                            <div class="rules-card-icon"><i class="fas fa-file-contract"></i></div>
+                            <h3 class="rules-card-title">15. Occupancy Certificate Regulations</h3>
+                        </div>
+                        <ul style="padding-left:20px; font-size:13.5px; line-height:1.7; color:rgba(255,255,255,0.85);">
+                            <li>Submit completion notice (Form G) upon construction finish; ULB inspects within 7
+                                working days.</li>
+                            <li>Occupancy certificate issued within 10 working days of inspection if compliant with
+                                sanctioned plan.</li>
+                            <li><strong>Unlawful Occupation:</strong> No building may be legally occupied or used
+                                without a valid occupancy certificate.</li>
+                            <li>Partial occupancy certificates permitted for completed sections with an indemnity bond.
+                            </li>
+                            <li>Water and sewerage connections will not be released by authorities prior to occupancy
+                                certificate issuance.</li>
+                        </ul>
+                    </div>
+
+                    <!-- SECTION 16: DEVIATIONS & PENALTIES -->
+                    <div id="r-violations" class="rules-card">
+                        <div class="rules-card-header">
+                            <div class="rules-card-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                            <h3 class="rules-card-title">16. Deviations, Violations & Demolition Orders</h3>
+                        </div>
+                        <div class="rules-grid-2">
+                            <div class="rules-subbox">
+                                <h4><i class="fas fa-pen-ruler"></i> Internal Deviations</h4>
+                                <p style="font-size:12.5px; color:rgba(255,255,255,0.8);">Minor internal modifications
+                                    that do not violate rules or increase covered area are permissible by giving 15 days
+                                    written notice with architect certification before work.</p>
+                            </div>
+                            <div class="rules-subbox">
+                                <h4><i class="fas fa-drafting-compass"></i> Major Additions</h4>
+                                <p style="font-size:12.5px; color:rgba(255,255,255,0.8);">Any work exceeding sanctioned
+                                    covered area requires a revised plan and fresh sanction prior to construction.
+                                    Post-construction regularization is not permitted.</p>
+                            </div>
+                        </div>
+                        <div class="rules-warn">
+                            <i class="fas fa-hammer"></i> <strong>Unauthorised Construction:</strong> Construction
+                            without sanction or departing from approved plans is subject to demolition orders. If the
+                            owner fails to demolish within notice period, the ULB executes demolition and recovers total
+                            costs from the owner.
+                        </div>
+                    </div>
+
+                    <!-- SECTION 17: SANCTION FEE CALCULATOR -->
+                    <div id="r-calc" class="rules-card">
+                        <div class="rules-card-header">
+                            <div class="rules-card-icon"><i class="fas fa-calculator"></i></div>
+                            <h3 class="rules-card-title">17. Interactive AMC Plan Sanction Fee Calculator</h3>
+                        </div>
+                        <p>Calculate your estimated Agartala Municipal Corporation (AMC) plan sanction fees based on
+                            official rates:</p>
+
+                        <div class="rules-calc-box">
+                            <div class="rules-calc-grid">
+                                <div class="rules-calc-field">
+                                    <label>Building / Application Type</label>
+                                    <select id="rules-calc-type" onchange="window.calculateRulesAMCFee()">
+                                        <option value="residential_load_bearing">Residential (Load Bearing Structure)
+                                        </option>
+                                        <option value="residential_rcc">Residential (RCC Framed Structure)</option>
+                                        <option value="commercial_rcc">Commercial / Non-Residential (RCC)</option>
+                                        <option value="boundary_wall">Boundary Wall Construction</option>
+                                        <option value="sanitary_residential">Sanitary Plan Fee (Residential)</option>
+                                        <option value="sanitary_commercial">Sanitary Plan Fee (Commercial)</option>
+                                    </select>
+                                </div>
+                                <div class="rules-calc-field" id="rules-measurement-container">
+                                    <label id="rules-unit-label">Total Covered Area (Sq. mtr)</label>
+                                    <input type="number" id="rules-calc-measurement" value="120"
+                                        placeholder="Enter area/length" oninput="window.calculateRulesAMCFee()">
+                                </div>
+                            </div>
+
+                            <div class="rules-calc-results">
+                                <div class="rules-calc-res-item">
+                                    <span>Revised Official Fee</span>
+                                    <strong id="rules-res-new">₹15,600</strong>
+                                </div>
+                                <div class="rules-calc-res-item">
+                                    <span>Pre-Revision Fee</span>
+                                    <strong id="rules-res-old" style="color:rgba(255,255,255,0.7);">₹10,800</strong>
+                                </div>
+                                <div class="rules-calc-res-item">
+                                    <span>Fee Difference</span>
+                                    <strong id="rules-res-diff" style="color:#10B981;">+ ₹4,800</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div><!-- /rules-scroll-content -->
+            </div><!-- /rules-modal-body -->
+        </div><!-- /rules-modal-content -->
+    </div><!-- /rules-modal -->
+
     <!-- Terms & Conditions Modal -->
     <div id="terms-modal" class="legal-modal">
         <div id="terms-modal-overlay" class="legal-modal-overlay"></div>
@@ -1203,7 +2307,8 @@
 
                     <div class="legal-section">
                         <h3>5. Project Timelines</h3>
-                        <p>Estimated timelines are provided for reference only. Hinest Infrastructure is not responsible for
+                        <p>Estimated timelines are provided for reference only. Hinest Infrastructure is not responsible
+                            for
                             delays caused by suppliers, site conditions, client changes, or unforeseen circumstances.
                         </p>
                     </div>
@@ -1222,19 +2327,22 @@
 
                     <div class="legal-section">
                         <h3>8. Limitation of Liability</h3>
-                        <p>Hinest Infrastructure shall not be liable for any indirect, incidental, or consequential damages
+                        <p>Hinest Infrastructure shall not be liable for any indirect, incidental, or consequential
+                            damages
                             arising from the use of our website or services.</p>
                     </div>
 
                     <div class="legal-section">
                         <h3>9. Third-Party Links</h3>
-                        <p>This website may contain links to third-party websites. Hinest Infrastructure is not responsible
+                        <p>This website may contain links to third-party websites. Hinest Infrastructure is not
+                            responsible
                             for the content or policies of external websites.</p>
                     </div>
 
                     <div class="legal-section">
                         <h3>10. Changes to Terms</h3>
-                        <p>Hinest Infrastructure reserves the right to update or modify these Terms & Conditions at any time
+                        <p>Hinest Infrastructure reserves the right to update or modify these Terms & Conditions at any
+                            time
                             without prior notice.</p>
                     </div>
 
@@ -1263,7 +2371,8 @@
 
                     <div class="legal-section">
                         <h3>1. Introduction</h3>
-                        <p>Hinest Infrastructure values your privacy and is committed to protecting the personal information
+                        <p>Hinest Infrastructure values your privacy and is committed to protecting the personal
+                            information
                             you share with us through our website and services. By using our website, you agree to the
                             terms outlined in this Privacy Policy.</p>
                     </div>
@@ -1286,7 +2395,8 @@
 
                     <div class="legal-section">
                         <h3>4. Sharing of Information</h3>
-                        <p>Hinest Infrastructure does not sell, rent, or trade your personal information to third parties.
+                        <p>Hinest Infrastructure does not sell, rent, or trade your personal information to third
+                            parties.
                             Information may be shared with trusted contractors, vendors, suppliers, or service providers
                             involved in project execution or business operations. Information may also be disclosed if
                             required by law or necessary to protect our legal rights.</p>
@@ -1309,14 +2419,16 @@
                     <div class="legal-section">
                         <h3>7. Third-Party Links</h3>
                         <p>This website may contain links to external websites for additional information or
-                            convenience. Hinest Infrastructure is not responsible for the privacy practices or content of
+                            convenience. Hinest Infrastructure is not responsible for the privacy practices or content
+                            of
                             third-party websites.</p>
                     </div>
 
                     <div class="legal-section">
                         <h3>8. Intellectual Property</h3>
                         <p>All content on this website, including designs, images, graphics, logos, text, and branding
-                            materials, is the property of Hinest Infrastructure and may not be copied, reproduced, or used
+                            materials, is the property of Hinest Infrastructure and may not be copied, reproduced, or
+                            used
                             without prior written permission.</p>
                     </div>
 
@@ -1336,7 +2448,8 @@
                     <div class="legal-section">
                         <h3>11. Contact Us</h3>
                         <p>If you have any questions regarding this Privacy Policy or the handling of your information,
-                            please contact Hinest Infrastructure through the contact information available on our website.
+                            please contact Hinest Infrastructure through the contact information available on our
+                            website.
                         </p>
                     </div>
                 </div>
